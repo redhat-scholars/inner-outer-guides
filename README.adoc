@@ -1,0 +1,19 @@
+# Vote App Lab Guides
+
+## Local development
+
+[source,bash]
+----
+podman build -t localhost/vote-app-guides .
+podman run --rm -d -p 4000:8080 localhost/vote-app-guides
+----
+
+## Deploy to OpenShift
+
+[source,bash]
+----
+oc new-app https://github.com/blues-man/vote-app-guides.git --strategy=docker
+ oc create route edge vote-app-guides --service=vote-app-guides
+# To rebuild after changes pushed to git
+oc start-build vote-app-guides --follow
+----
