@@ -5,7 +5,7 @@
 [source,bash]
 ----
 podman build -t localhost/vote-app-guides .
-podman run --rm -d -p 4000:8080 localhost/vote-app-guides
+podman run --rm --name guides -d -p 4000:8080 localhost/vote-app-guides
 ----
 
 ## Deploy to OpenShift
