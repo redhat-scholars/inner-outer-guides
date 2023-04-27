@@ -1,4 +1,4 @@
-.Module Two
+.Module Two: Demo
 * xref:intro.adoc[Introduction]
 * xref:walkthrough.adoc[Walkthrough]
 * xref:finish.adoc[Finish]

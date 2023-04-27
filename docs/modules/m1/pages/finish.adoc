@@ -1,5 +1,7 @@
-# Title I
-# Red Hat Summit 2023
+# Red Hat Summit 2023: Vote App Lab Overview - Finish
 
-## Congratulations on completing this module!
+Congratulations! Your environment is successfully set up for the Vote App lab, complete with the required OpenShift operators, ArgoCD, and DevSpaces ready to go.
 
+## Next Steps
+
+You, lets proceed to the Demo section to create the new pipeline, create the application from ArgoCD, then modify the app Vote App using OpenShift DevSpaces and finally deploy it to your OpenShift cluster.
