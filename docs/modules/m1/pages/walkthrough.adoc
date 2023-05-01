@@ -24,7 +24,7 @@ OpenShift via the OperatorHub:
 then click to *OpenShift Pipelines Operator*:
 
 .OperatorHub
-image::../assets/images/prerequisites_operatorhub.png[OperatorHub]
+image::assets/images/prerequisites_operatorhub.png[OperatorHub]
 
 - From the description view, click _Install_ to review all installation
 settings.
@@ -94,6 +94,8 @@ button.
 
 .OpenShift DevSpaces
 image::https://github.com/blues-man/vote-app-gitops/raw/main/images/codeready-installation.png[CRW]
+
+// Add in web terminal operator
 
 ### Lab overview
 

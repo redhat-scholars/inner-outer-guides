@@ -5,3 +5,7 @@ Congratulations! Your environment is successfully set up for the Vote App lab, c
 ## Next Steps
 
 You, lets proceed to the Demo section to create the new pipeline, create the application from ArgoCD, then modify the app Vote App using OpenShift DevSpaces and finally deploy it to your OpenShift cluster.
+
+// You have your own project, go to project x, ex. go to your project `vote-app-%USER%` and continue with the next steps.
+
+// Do operator screenshots as a user
