@@ -8,15 +8,15 @@ You, lets proceed to the Demo section to create the new pipeline, create the app
 
 Head to the _Developer_ perspective, and under _Topology_, click *create a Project* from the top area.
 
-image::images/create-project.png[Create Project]
+image::create-project.png[Create Project]
 
 Here, create a project called `vote-app`. This is where we'll be deploying our application.
 
-image::images/create-project-2.png[Create Project]
+image::create-project-2.png[Create Project]
 
 Once the project is created, you'll be taken to the project topology page. Here, you can see the project name in the top left corner.
 
-image::images/ocp-project.png[OpenShift Web Console]
+image::ocp-project.png[OpenShift Web Console]
 
 Now, let's begin the workshop!
 

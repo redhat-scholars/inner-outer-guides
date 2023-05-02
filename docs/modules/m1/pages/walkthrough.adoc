@@ -34,7 +34,7 @@ Pipelines]
 start installing the Operator.
 
 .Install Operator
-image::../assets/images/prerequisites_operatorhub_install_operator.png[Install
+image::prerequisites_operatorhub_install_operator.png[Install
 Operator]
 
 - After few seconds, the installation should be completed with success and
@@ -42,7 +42,7 @@ you can verify it looking at _Status_ column, check if the status is
 _Succeeded_.
 
 .Pipelines Installed
-image::../assets/images/prerequisites_operatorhub_pipelines_installed.png[Pipelines
+image::prerequisites_operatorhub_pipelines_installed.png[Pipelines
 Installed]
 
 ### Operator: OpenShift GitOps 
