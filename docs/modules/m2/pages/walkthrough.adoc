@@ -1,2 +1,178 @@
-## LAB WALKTHROUGH
+# Red Hat Summit 2023: Vote App Lab Demo - Walkthrough
 
+Let's get started! This walkthrough will guide you through the process of deploying the Vote App to OpenShift using OpenShift Pipelines.
+
+The main objective of this demo is to illustrate how OpenShift can help to create and connect the CI/CD parts using Tekton and ArgoCD, which in turn can be integrated with OpenShift DevSpaces and Quay.io for the Inner and Outer Loop.
+
+## OpenShift Pipelines
+
+### Creating a Pipeline
+
+To create a pipeline from the OpenShift Web Console, follow these steps:
+
+1. From the left-side menu under the _Developer_ perspective, go to _Pipelines_. Click *Create Pipeline* from the top right corner.
+
+image::pipelines.png[Pipelines]
+
+Here, we can view the interactive Pipeline builder. We can add tasks to the pipeline by clicking on the *Add task* button. We can also add parameters to the pipeline by clicking on the created tasks. 
+
+image::pipeline-builder.png[Pipeline Builder]
+
+2. To save time here, we'll use the *YAML view* to create the pipeline. 
+
+image::pipeline-yaml-view.png[YAML View]
+
+3. We can copy the below Tekton Pipeline in the YAML text area. 
+
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
+----
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: vote-api
+spec:
+  params:
+  - default: pipelines-vote-api
+    name: APP_NAME
+    type: string
+  - default: https://github.com/blues-man/pipelines-vote-api.git
+    name: GIT_REPO
+    type: string
+  - default: master
+    name: GIT_REVISION
+    type: string
+  - default: quay.io/bluesman/vote-api
+    name: IMAGE_NAME
+    type: string
+  - default: .
+    name: PATH_CONTEXT
+    type: string
+  - default: 'https://github.com/blues-man/vote-app-gitops.git'
+    name: CONFIG_GIT_REPO
+    type: string
+  - default: develop
+    name: CONFIG_GIT_REVISION
+    type: string
+  tasks:
+  - name: fetch-repository
+    params:
+    - name: url
+      value: $(params.GIT_REPO)
+    - name: revision
+      value: $(params.GIT_REVISION)
+    - name: deleteExisting
+      value: "true"
+    taskRef:
+      kind: ClusterTask
+      name: git-clone
+    workspaces:
+    - name: output
+      workspace: workspace
+  - name: build-and-push
+    params:
+    - name: IMAGE
+      value: $(params.IMAGE_NAME)
+    - name: TLSVERIFY
+      value: "false"
+    - name: CONTEXT
+      value: $(params.PATH_CONTEXT)
+    runAfter:
+    - fetch-repository
+    taskRef:
+      kind: ClusterTask
+      name: buildah
+    workspaces:
+    - name: source
+      workspace: workspace
+  - name: git-update-deployment
+    params:
+    - name: GIT_REPOSITORY
+      value: $(params.CONFIG_GIT_REPO)
+    - name: CURRENT_IMAGE
+      value: $(params.IMAGE_NAME)
+    - name: NEW_IMAGE
+      value: $(params.IMAGE_NAME)
+    - name: NEW_DIGEST
+      value: $(tasks.build-and-push.results.IMAGE_DIGEST)
+    - name: KUSTOMIZATION_PATH
+      value: environments/dev
+    - name: GIT_REF
+      value: $(params.CONFIG_GIT_REVISION)
+    runAfter:
+      - build-and-push
+    taskRef:
+      kind: Task
+      name: git-update-deployment
+    workspaces:
+    - name: workspace
+      workspace: workspace 
+  workspaces:
+  - name: workspace
+----
+
+image::pipeline-builder-yaml.png[Pipeline Builder]
+
+4. Now, let's head back to the *Pipeline builder* view to see it visually.
+
+image::pipeline-builder-finished.png[Pipeline Builder]
+
+This pipeline will clone the source code from GitHub, build and push the application, and update the Github deployments.
+
+5. Finally, hit *Create* to create the pipeline.
+
+image::create-pipeline.png[Create Pipeline]
+
+### Starting the Pipeline
+
+Now that we have created the pipeline, let's start it.
+
+1. From the `vote-api` pipeline, select _Actions_, and click on *Start*.
+
+image::start-pipeline-action.png[Start Pipeline]
+
+A new form will appear with the following fields:
+
+* **GIT_REPO**: Use your vote-api repository.
+* **IMAGE_NAME**: Put the name of your vote-api container image from Quay.io. 
+
+Leave all other settings as default.
+
+image::start-pipelinerun.png[Start Pipeline]
+
+3. Select _PVC_ under the _workspace_ section and choose the _vote-api-pvc_ persistent volume claim.
+// Need to create vote-api-pvc ^
+// image::create-pvc.png[Create PVC]
+5. Click _Start_ to start the pipeline.
+
+image::start-pipeline-final.png[Start Pipeline]
+
+The pipeline will then begin running, and you will see the status of each step in the pipeline as it progresses. Once the pipeline has completed, you should see a successful message in the pipeline log.
+
+Congratulations, you have successfully started the vote-api pipeline!
+
+## Start `vote-ui` with a Webhook
+
+Tekton supports *Tekton Triggers* to enable automation and web hooks to Pipelines. This enables you to easily integrate with your code repositories and trigger pipelines on events such as code commits and merges. All the necessary settings for Tekton Triggers have already been installed by the previous command, and both pipelines support web hooks.
+
+1. First, navigate to the OpenShift web console and from the Topology view, click on the el-vote-ui Deployment. From there, navigate to the Routes section and copy the el-vote-ui Route URL.
+
+image::trigger-vote-ui.png.png[Trigger Vote UI]
+
+Once you have the URL copied to your clipboard, navigate to the code repository fork that you have on Gitea. From your fork page, click on the Settings menu in the top-right corner. From the top right-side menu, click on *Settings*, then *Webhooks*. Then, click on Add webhook from the right-side menu.
+
+image::add-webhook.png[Add Webhook]
+
+In the next screen, paste the copied Route URL into the Payload URL field. You can leave the secret token field blank. Change the Content Type to application/json.
+
+Finally, click on Add webhook to create the webhook.
+
+image::create-webhook.png[Create Webhook]
+
+To verify that everything is working, let's make some changes to the source code and push the changes to your forked repository. This should trigger the pipeline to start automatically.
+
+## OpenShift DevSpaces
+
+Here, we'll use OpenShift DevSpaces to make some changes to our application's source code and see how it works.
+
+1. From the OpenShift Web Console, navigate to the *Developer* perspective. From the left-side menu, click on *DevSpaces*.

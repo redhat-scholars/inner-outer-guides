@@ -1,11 +1,23 @@
 # Red Hat Summit 2023: Vote App Lab Overview - Finish
 
-Congratulations! Your environment is successfully set up for the Vote App lab, complete with the required OpenShift operators, ArgoCD, and DevSpaces ready to go.
+Congratulations! Your environment is successfully set up for the Vote App lab, complete with the required OpenShift operators, and repositories ready to go.
 
 ## Next Steps
 
 You, lets proceed to the Demo section to create the new pipeline, create the application from ArgoCD, then modify the app Vote App using OpenShift DevSpaces and finally deploy it to your OpenShift cluster.
 
-// You have your own project, go to project x, ex. go to your project `vote-app-%USER%` and continue with the next steps.
+Head to the _Developer_ perspective, and under _Topology_, click *create a Project* from the top area.
 
-// Do operator screenshots as a user
+image::images/create-project.png[Create Project]
+
+Here, create a project called `vote-app`. This is where we'll be deploying our application.
+
+image::images/create-project-2.png[Create Project]
+
+Once the project is created, you'll be taken to the project topology page. Here, you can see the project name in the top left corner.
+
+image::images/ocp-project.png[OpenShift Web Console]
+
+Now, let's begin the workshop!
+
+// Which project should they be using?

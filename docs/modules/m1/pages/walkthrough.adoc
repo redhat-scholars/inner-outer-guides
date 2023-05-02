@@ -2,8 +2,8 @@
 
 In this section, we'll take a look at the architecture that this lab will be using.
 
-.Architecture
-image::https://github.com/cedricclyburn/vote-app-gitops/raw/main/images/demo-architecture.png[Architecture]
+.Lab Architecture
+image::demo-architecture.png[Architecture]
 
 NOTE: Everything has already been pre-installed on your cluster, so there's no need to do anything here. This is just for reference.
 
@@ -11,13 +11,10 @@ NOTE: Everything has already been pre-installed on your cluster, so there's no n
 
 To run this lab, we're using an OpenShift 4.12 cluster. This cluster has been pre-configured with the following:
 
-### Operators
-
-#### OpenShift Pipelines 
+### Operator: OpenShift Pipelines 
 *OpenShift Pipelines* is a cloud-native, continuous integration and delivery (CI/CD) solution for building pipelines using Tekton. Tekton is a flexible, Kubernetes-native, open-source CI/CD framework that enables automating deployments across multiple platforms (Kubernetes, serverless, VMs, etc) by abstracting away the underlying implementation details.
 
-Follow these instructions in order to install OpenShift Pipelines on
-OpenShift via the OperatorHub:
+Follow these instructions in order to install OpenShift Pipelines on OpenShift via the OperatorHub:
 
 - From the left-side menu under *Administrator* perspective, go to
 *Operators*-> *OperatorHub*. In the search box, search for _pipelines_,
@@ -30,7 +27,7 @@ image::prerequisites_operatorhub.png[OperatorHub]
 settings.
 
 .Install Pipelines
-image::../assets/images/prerequisites_operatorhub_install_pipelines.png[Install
+image::prerequisites_operatorhub_install_pipelines.png[Install
 Pipelines]
 
 - Ensure _Update Channel_ is set to _stable_ , and click _Install_ to
@@ -48,12 +45,10 @@ _Succeeded_.
 image::../assets/images/prerequisites_operatorhub_pipelines_installed.png[Pipelines
 Installed]
 
-#### OpenShift GitOps
-
+### Operator: OpenShift GitOps 
 *OpenShift GitOps* is a GitOps operator for OpenShift that provides a declarative, GitOps oriented approach to managing applications and their delivery. It provides a set of core GitOps operators and APIs for declaratively managing your cluster configuration and application delivery using Git as the source of truth.
 
-Follow these instructions in order to install OpenShift GitOps on
-OpenShift via the OperatorHub.
+Follow these instructions in order to install OpenShift GitOps on OpenShift via the OperatorHub.
 
 - Log into OpenShift Web Console as a cluster admin and navigate to the
 *Administrator* perspective and then *Operators* → *OperatorHub*.
@@ -77,11 +72,10 @@ _Succeeded_.
 image::https://raw.githubusercontent.com/siamaksade/openshift-gitops-getting-started/1.1/images/gitops-03.png[OpenShift
 GitOps Operator]
 
-#### Openshift Dev Spaces
+### Operator: OpenShift Dev Spaces
 *Openshift Dev Spaces* is a cloud-native, developer workspace server and IDE for OpenShift. It allows developers to quickly create cloud-native applications by allowing them to focus on coding while the tooling takes care of the rest.
 
-Follow these instructions in order to install OpenShift GitOps on
-OpenShift via the OperatorHub.
+Follow these instructions in order to install OpenShift GitOps on OpenShift via the OperatorHub.
 
 Log into OpenShift Web Console as a cluster admin and navigate to the
 *Administrator* perspective and then *Operators* → *OperatorHub*.
@@ -95,8 +89,38 @@ button.
 .OpenShift DevSpaces
 image::https://github.com/blues-man/vote-app-gitops/raw/main/images/codeready-installation.png[CRW]
 
-// Add in web terminal operator
+### Operator: OpenShift Web Terminal
+The *Web Terminal* is a web-based terminal for OpenShift. It allows users to access a terminal in a pod from the OpenShift Web Console.
 
-### Lab overview
+Follow these instructions in order to install OpenShift GitOps on OpenShift via the OperatorHub.
+
+Log into OpenShift Web Console as a cluster admin and navigate to the
+*Administrator* perspective and then *Operators* → *OperatorHub*.
+
+In the *OperatorHub*, search for _Web Terminal_ and follow the
+operator install flow to install it.
+
+.OpenShift Web Terminal
+image::https://github.com/blues-man/vote-app-gitops/raw/main/images/codeready-installation.png[OpenShift Web Terminal]
+
+## Lab Checks
+
+### ArgoCD
+
+*ArgoCD* is a declarative, GitOps continuous delivery tool for Kubernetes provided in the OpenShift GitOps Operator. From your OpenShift cluster, you can acess the ArgoCD dashboard.
+
+image::argocd-button.png[ArgoCD]
+
+You'll be able to access the ArgoCD UI using the credentials provided to you.
+
+image::argocd.png[ArgoCD]
+
+### Vote App Repository
+
+You'll also have access to a Gitea repository that contains the Vote App source code. This repository is located back at the *Lab Guides*, and you'll be able to access this repository using the credentials provided to you.
+
+image::gitea.png[Gitea]
+
+## Lab overview
 
 Your cluster is already configured with the appropriate OpenShift project, configured secrets and service accounts, and necessary Git repositories. From here, we can wrap up the overview and begin our lab!
