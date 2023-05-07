@@ -4,7 +4,11 @@ Now, the next step is to deploy the Vote App to the dev enviroment using ArgoCD.
 
 ## Creating a new application using ArgoCD
 
-Let's use the ArgoCD CLI to create a new application. From the OpenShift web console, click on the menu icon on the top right corner and select `ArgoCD`. Then, click on the `Login with OpenShift` button.
+Let's use the ArgoCD CLI to create a new application. From the OpenShift web console, click on the menu icon on the top right corner and select `ArgoCD`.
+
+image::argocd-button.png[ArgoCD Button]
+
+Then, click on the `Login with OpenShift` button.
 
 image::argocd-login.png[ArgoCD Login]
 
@@ -12,17 +16,44 @@ Within the ArgoCD web console, click on the `+ New App` button.
 
 image::argocd-new-app.png[ArgoCD New App]
 
-Fill in the following information:
+Fill in the following information, many of which may auto-fill when selected:
 
-* Application Name: `vote-app`
+* Application Name: `vote-app-dev-%USERID%`
 * Project: `default`
 * Sync Policy: `Automatic`
-* Repository URL: `
+* Self-Healing: `Disabled`
+* Auto-create Namespace: `Enabled`
+* Repository URL: `http://gitea.gitea.svc:3000/%USERID%/vote-app-gitops`
+* Revision: `main`
+* Path: `environments/dev`
+* Cluster URL: `https://kubernetes.default.svc`
+* Namespace: `vote-app-dev-%USERID%`
 
 image::argocd-new-app-form.png[ArgoCD New App Form]
+image::argocd-new-app-form-2.png[ArgoCD New App Form Continued]
 
 Click on the `CREATE` button.
 
-## Deploying the Vote App to the dev environment
+## Viewing the application in ArgoCD
 
-TODO!
+Now, let's view the application in ArgoCD. After creating the application, you should be redirected to the application details page. Click on the application's name to view the application details.
+
+image::argocd-app-details.png[ArgoCD App Details]
+
+Here, you see the `vote-app-dev-%USERID%` application's status, resources, and history. Currently, the application is syncing, so the status is `OutOfSync`. Once the application is synced, the status will change to `Synced`.
+
+image::argocd-app-details-2.png[ArgoCD App Details Continued]
+
+## Viewing the application in the OpenShift web console
+
+Now, let's view the application in the OpenShift web console. From the OpenShift web console in the `vote-app-dev-%USERID%` project, click on the `Topology` tab.
+
+image::dev-topology.png[OpenShift Topology]
+
+To access the application, click on the `vote-app` route icon, which will open the application in a new tab.
+
+image::vote-app-access.png[Voting App Access]
+
+## Next Steps
+
+Now that you have deployed the Vote App to the dev environment using ArgoCD, we can use OpenShift DevSpaces to develop and test the application locally before moving to the `prod` environment.

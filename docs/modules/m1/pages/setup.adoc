@@ -1,4 +1,4 @@
-# Red Hat Summit 2023: Vote App Lab Overview - Walkthrough
+# Red Hat Summit 2023: Vote App Lab Overview - Setup
 
 In this section, we'll take a look at the architecture that this lab will be using.
 
@@ -111,23 +111,40 @@ image::https://github.com/blues-man/vote-app-gitops/raw/main/images/codeready-in
 
 ### ArgoCD
 
-*ArgoCD* is a declarative, GitOps continuous delivery tool for Kubernetes provided in the OpenShift GitOps Operator. From your OpenShift cluster, you can acess the ArgoCD dashboard.
+link:https://argocd-server-argocd-%USERID%.%SUBDOMAIN%[*ArgoCD*] is a declarative, GitOps continuous delivery tool for Kubernetes provided in the OpenShift GitOps Operator. From your OpenShift cluster, you can acess the ArgoCD dashboard.
 
 image::argocd-button.png[ArgoCD]
 
-You'll be able to access the ArgoCD UI using the credentials provided to you.
+You'll be able to access the ArgoCD UI via OpenShift using the following credentials:
+
+- Username: `%USERID%`
+- Password: `openshift`
+
+You'll need to authorize the ArgoCD application to access your OpenShift cluster. Click on the *Allow selected permissions* button to authorize ArgoCD to access your OpenShift cluster. Finally, you'll be at the ArgoCD dashboard.
 
 image::argocd.png[ArgoCD]
 
 ### Vote App Repository
 
-You'll also have access to a Gitea repository that contains the Vote App source code. This repository is located back at the *Lab Guides*, and you'll be able to access this repository using the credentials provided to you.
+You'll also have access to a link:http://gitea.%SUBDOMAIN%[*Gitea*] repository that contains the Vote App source code. This repository can also be located back at the *Lab Guides*, and you'll be able to access this repository using following credentials:
+
+- Username: `%USERID%`
+- Password: `openshift`
 
 image::gitea.png[Gitea]
 
+Once logged in, you can access the following Vote App source repositories:
+
+- link:https://gitea.%SUBDOMAIN%/%USERID%/pipelines-vote-ui[Gitea Vote App UI Frontend]
+- link:https://gitea.%SUBDOMAIN%/%USERID%/pipelines-vote-api[Gitea Vote App API Backend]
+
+We also have a repository that contains the ArgoCD application manifests for the Vote App.
+
+- link:https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops[Vote App GitOps]
+
 ## Lab overview
 
-Your cluster is already configured with the appropriate OpenShift project, configured secrets and service accounts, and necessary Git repositories. From here, we can wrap up the overview and begin our lab!
+Your cluster is already configured with the appropriate OpenShift project, configured secrets and service accounts, and necessary Git repositories. From here, we can wrap up the introduction and begin our lab!
 
 // For Pipelines: Using gitea-gitops secret to login to the Gitea repository
 // When you use 

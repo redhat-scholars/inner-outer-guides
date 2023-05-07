@@ -1,4 +1,3 @@
 .Module One: Overview
 * xref:intro.adoc[Introduction]
-* xref:walkthrough.adoc[Walkthrough]
-* xref:finish.adoc[Finish]
+* xref:setup.adoc[Setup]
