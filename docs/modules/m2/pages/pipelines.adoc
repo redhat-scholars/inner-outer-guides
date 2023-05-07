@@ -1,0 +1,96 @@
+# Red Hat Summit 2023: Vote App Lab Demo - Pipelines
+
+While the actual Tekton pipelines has been created for you, you will need to create a pipeline resource and trigger the pipeline to run. Before we begin, ensure you've switched to the *Developer* perspective.
+
+## Starting the `vote-app-api` pipeline
+
+Firstly, ensure that you're currently using the `vote-app-ci-%USERID%` project. This is where the pipeline manifests have been created, and where we'll be running the pipeline from.
+
+image::images/switch-project.png[]
+
+Within this Pipelines dashboard, you will see a list of pipelines.  Click on the `vote-app-pipeline` pipeline to see the details of the pipeline.
+
+image::images/pipeline-list.png[]
+
+Here, you can go through the pipeline steps and see what each step is doing.  You can also see the pipeline resources that are being used. In addition, you can see the pipeline parameters that are being used.  These parameters are used to pass in the name of the image that will be built, and the name of the image that will be pushed to the registry.
+
+For reference, here's the pipeline steps:
+
+- `git-clone`: This step clones the local Gitea repository that contains the source code for the application. We're able to do so because of a `gitea-gitops` secret that was created for you. This secret contains the username and password to access the Gitea repository.
+- `build-and-push`: This step builds the image and pushes it to the internal OpenShift registry.  The image name is passed in as a parameter.
+- `git-update-deployment`: This final step updates the deployment manifests in the Github repository.
+
+image::images/pipeline-details.png[]
+
+Now, let's start the pipeline.  Click on the top-right `Start` button to start the pipeline. You will be prompted to enter the values for the pipeline parameters, however the default values are already set for you.  Click on the `Start` button to start the pipeline. You'll still need to select a workspace, so select *Persistent Volume Claim* and choose the `workspace-app-api-source` PVC.
+
+image::images/pipeline-start.png[]
+
+Now that the `vote-app-api` pipeline has been started, let's start the `vote-app-ui` pipeline.
+
+## Starting the `vote-app-ui` pipeline
+
+Let's repeat the same steps for the `vote-app-ui` pipeline.  Click on the `vote-app-ui-pipeline` pipeline from the *Pipelines* left-hand tab to see the details of the pipeline.
+
+image::images/pipeline-ui-list.png[]
+
+Here, we can go ahead and start the Pipeline. Click on the top-right `Start` button to start the pipeline. The steps are the same as the `vote-app-api` pipeline, so we won't go through them again.
+
+image::images/pipeline-ui-start.png[]
+
+You will be prompted to enter the values for the pipeline parameters, however the default values are already set for you. You'll still need to select a workspace, so select *Persistent Volume Claim* and choose the `workspace-ui-app-source` PVC.
+
+image::images/pipeline-ui-start-2.png[]
+
+Now that the `vote-app-ui` pipeline has been started, let's go ahead and check the status of the pipelines.
+
+## Checking the status of the pipelines
+
+To check the status of the pipelines, click on the *Pipelines* left-hand tab. You will see the list of pipelines that are currently running. You can click on the pipeline to see the details of the pipeline.
+
+image::images/pipeline-status.png[]
+
+You can also click on the *PipelineRuns* left-hand tab to see the list of PipelineRuns that have been created.  You can click on the PipelineRun to see the details of the PipelineRun.
+
+image::images/pipelinerun-status.png[]
+
+You can also click on the *Tasks* left-hand tab to see the list of Tasks that have been created.  You can click on the Task to see the details of the Task.
+
+image::images/task-status.png[]
+
+## Checking the status of the applications
+
+Now that the pipelines have been started, let's check the status of the deployments. Click on the *Topology* left-hand tab to see the list of deployments that have been created. You can click on the deployment to see the details of the deployment.
+
+image::images/deployment-status.png[]
+
+Perfect, the deployments are now running. Let's go ahead and check the status of the application.
+
+image::images/application-status.png[]
+
+## Start `vote-ui` with a Webhook
+
+
+Tekton supports Tekton Triggers to enable automation and web hooks to Pipelines. All settings have been already installed from previous command, and both pipelines support web hooks.
+
+Now that the `vote-ui` application is running, let's add a webhook to the application.  This webhook will be used to trigger a new build of the application when a change is made to the Github repository.
+
+From the Topology view, click on the `el-vote-ui` Deployment. From there, navigate to the Routes section and copy the `el-vote-ui` Route URL.
+
+image::trigger-vote-ui.png.png[Trigger Vote UI]
+
+Once you have the URL copied to your clipboard, navigate to the code repository fork that you have on Gitea. From your fork page, click on the Settings menu in the top-right corner. From the top right-side menu, click on *Settings*, then *Webhooks*. Then, click on Add webhook from the right-side menu.
+
+image::add-webhook.png[Add Webhook]
+
+In the next screen, paste the copied Route URL into the Payload URL field. You can leave the secret token field blank. Change the Content Type to application/json.
+
+Finally, click on Add webhook to create the webhook.
+
+image::create-webhook.png[Create Webhook]
+
+To verify that everything is working, let's make some changes to the source code and push the changes to your forked repository. This should trigger the pipeline to start automatically.
+
+## Next Steps
+
+Congratulations! You've successfully deployed the `vote-app` application using Tekton Pipelines. You've also added a webhook to the `vote-ui` application to trigger a new build when changes are made to the Github repository. Now, let's move on to the next lab to learn how to deploy the application using ArgoCD.

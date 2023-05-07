@@ -1,4 +1,5 @@
-.Module Two
+.Module Two: Demo
 * xref:intro.adoc[Introduction]
-* xref:walkthrough.adoc[Walkthrough]
+* xref:pipelines.adoc[Pipelines]
+* xref:argocd.adoc[ArgoCD]
 * xref:finish.adoc[Finish]

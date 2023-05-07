@@ -1,4 +1,3 @@
-.Module Three
-* xref:intro.adoc[Introduction]
-* xref:walkthrough.adoc[Walkthrough]
+.Module Three: Conclusion
 * xref:finish.adoc[Finish]
+* xref:resources.adoc[Resources]

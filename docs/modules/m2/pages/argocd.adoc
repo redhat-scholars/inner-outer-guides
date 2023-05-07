@@ -1,0 +1,28 @@
+# Red Hat Summit 2023: Vote App Lab Demo - ArgoCD
+
+Now, the next step is to deploy the Vote App to the dev enviroment using ArgoCD.
+
+## Creating a new application using ArgoCD
+
+Let's use the ArgoCD CLI to create a new application. From the OpenShift web console, click on the menu icon on the top right corner and select `ArgoCD`. Then, click on the `Login with OpenShift` button.
+
+image::argocd-login.png[ArgoCD Login]
+
+Within the ArgoCD web console, click on the `+ New App` button.
+
+image::argocd-new-app.png[ArgoCD New App]
+
+Fill in the following information:
+
+* Application Name: `vote-app`
+* Project: `default`
+* Sync Policy: `Automatic`
+* Repository URL: `
+
+image::argocd-new-app-form.png[ArgoCD New App Form]
+
+Click on the `CREATE` button.
+
+## Deploying the Vote App to the dev environment
+
+TODO!

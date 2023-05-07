@@ -1,5 +1,12 @@
-# Title I
-# Red Hat Summit 2023
+# Red Hat Summit 2023: Vote App Lab Demo - Finish
 
-## Congratulations on completing this module!
+Congratulations on completing this lab! Throughout this hands-on experience, you've learned how to:
 
+- Set up a GitOps workflow using OpenShift, Tekton, and ArgoCD.
+- Deploy applications using Tekton pipelines and synchronize environments with ArgoCD.
+- Utilize OpenShift DevSpaces for a cloud-native development environment.
+- Manage application drifts and synchronization with ArgoCD.
+
+## Next Steps
+
+As you move forward, be sure to visit the next section for a summary of the lab and to discover additional resources that will support your GitOps journey. Continue to explore and enhance your skills with OpenShift, Tekton, ArgoCD, and DevSpaces.
