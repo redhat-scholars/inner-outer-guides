@@ -17,8 +17,8 @@ To run this lab, we're using an OpenShift 4.12 cluster. This cluster has been pr
 Follow these instructions in order to install OpenShift Pipelines on OpenShift via the OperatorHub:
 
 - From the left-side menu under *Administrator* perspective, go to
-*Operators*-> *OperatorHub*. In the search box, search for _pipelines_,
-then click to *OpenShift Pipelines Operator*:
+*Operators*-> *OperatorHub*. In the search box, search for _OpenShift Pipelines_,
+then click to *OpenShift Pipelines*:
 
 .OperatorHub
 image::prerequisites_operatorhub.png[OperatorHub]
@@ -30,7 +30,7 @@ settings.
 image::prerequisites_operatorhub_install_pipelines.png[Install
 Pipelines]
 
-- Ensure _Update Channel_ is set to _stable_ , and click _Install_ to
+- Ensure _Update Channel_ is set to _latest_ , and click _Install_ to
 start installing the Operator.
 
 .Install Operator
@@ -50,44 +50,48 @@ Installed]
 
 Follow these instructions in order to install OpenShift GitOps on OpenShift via the OperatorHub.
 
-- Log into OpenShift Web Console as a cluster admin and navigate to the
-*Administrator* perspective and then *Operators* → *OperatorHub*.
+- From the left-side menu under *Administrator* perspective, go to
+*Operators*-> *OperatorHub*. In the search box, search for _OpenShift GitOps_,
+then click to *OpenShift GitOps*:
 
 .OpenShift GitOps Operator
-image::https://raw.githubusercontent.com/siamaksade/openshift-gitops-getting-started/1.1/images/gitops-01.png[OpenShift
-GitOps Operator]
+image::openshift-gitops-operator.png[OpenShift GitOps Operator]
 
 - From the description view, click _Install_ to review all installation
 settings.
 
 .OpenShift GitOps operator
-image::https://raw.githubusercontent.com/siamaksade/openshift-gitops-getting-started/1.1/images/gitops-02.png[OpenShift
-GitOps Operator]
+image::openshift-gitops-operator-install.png[OpenShift GitOps operator]
 
 - After few seconds, the installation should be completed with success and
 you can verify it looking at _Status_ column, check if the status is
 _Succeeded_.
 
 .OpenShift GitOps Operator
-image::https://raw.githubusercontent.com/siamaksade/openshift-gitops-getting-started/1.1/images/gitops-03.png[OpenShift
-GitOps Operator]
+image::openshift-gitops-operator-installed.png[OpenShift GitOps Operator]
 
 ### Operator: OpenShift Dev Spaces
 *Openshift Dev Spaces* is a cloud-native, developer workspace server and IDE for OpenShift. It allows developers to quickly create cloud-native applications by allowing them to focus on coding while the tooling takes care of the rest.
 
-Follow these instructions in order to install OpenShift GitOps on OpenShift via the OperatorHub.
+Follow these instructions in order to install OpenShift GitOps on OpenShift via the OperatorHub:
 
-Log into OpenShift Web Console as a cluster admin and navigate to the
-*Administrator* perspective and then *Operators* → *OperatorHub*.
+- From the left-side menu under *Administrator* perspective, go to
+*Operators*-> *OperatorHub*. In the search box, search for _OpenShift DevSpaces_,
+then click to *OpenShift DevSpaces*:
 
-In the *OperatorHub*, search for _Openshift Dev Spaces_ and follow the
-operator install flow to install it.
+.OpenShift GitOps Operator
+image::openshift-devspaces-operator.png[OpenShift DevSpaces Operator]
 
-In the Red Hat Openshift Dev Spaces pop-up window, click the *Install*
-button.
+- From the description view, click _Install_ to review all installation
+settings.
 
-.OpenShift DevSpaces
-image::https://github.com/blues-man/vote-app-gitops/raw/main/images/codeready-installation.png[CRW]
+image::openshift-devspaces-operator-install.png[OpenShift DevSpaces operator]
+
+- After few seconds, the installation should be completed with success and
+you can verify it looking at _Status_ column, check if the status is
+_Succeeded_.
+
+image::openshift-devspaces-operator-installed.png[OpenShift DevSpaces Operator]
 
 ### Operator: OpenShift Web Terminal
 The *Web Terminal* is a web-based terminal for OpenShift. It allows users to access a terminal in a pod from the OpenShift Web Console.
@@ -124,3 +128,10 @@ image::gitea.png[Gitea]
 ## Lab overview
 
 Your cluster is already configured with the appropriate OpenShift project, configured secrets and service accounts, and necessary Git repositories. From here, we can wrap up the overview and begin our lab!
+
+// For Pipelines: Using gitea-gitops secret to login to the Gitea repository
+// When you use 
+
+// First user starts the pipeline, then deploys app in the dev namespace by using argoCD within argocd namespace or by using link from Lab Guides, user will login to argocd and create a new app `vote-app-dev-user`, sync automatic, no self heal, repository is vote-app-gitops on gitea, 
+
+// Create pipeline, add webhook, create argo app, edit in devspaces locally then commit push, pipeline will redeploy, use promote to prod pipeline

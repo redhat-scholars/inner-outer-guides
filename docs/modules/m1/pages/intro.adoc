@@ -19,10 +19,10 @@ This repo, used to store Kubernetes manifests and Argo application:
 
 The Vote App is a simple application that allows users to vote for their favorite option and view the results. In this lab, you will be working with two main components: the vote-api and the vote-ui.
 
-The goal of this lab is to demonstrate how to create a seamless CI/CD pipeline using OpenShift, Tekton, ArgoCD, Quay.io, and CodeReady Workspaces. By the end of this lab, you will have a better understanding of:
+The goal of this lab is to demonstrate how to create a seamless CI/CD pipeline using OpenShift, Tekton, ArgoCD, Quay.io, and OpenShift DevSpaces. By the end of this lab, you will have a better understanding of:
 
 - Creating Tekton pipeline manifests
 - Setting up webhooks for pipeline automation
 - Deploying applications using ArgoCD
 - Managing application drifts and syncing
-Collaborating on code using CodeReady Workspaces
+- Collaborating on code using CodeReady Workspaces
