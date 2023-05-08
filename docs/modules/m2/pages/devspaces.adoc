@@ -1,4 +1,4 @@
-# Red Hat Summit 2023: Vote App Lab Demo - Dev Spaces
+# Red Hat Summit 2023: Vote App Lab Development - Dev Spaces
 
 With the Vote Application deployed to our `vote-app-dev-%USERID%` project, we can now use Dev Spaces to develop and test our application. Dev Spaces is a browser-based IDE that allows you to develop in the cloud. It provides a ready-to-use development stack with a web-based IDE, terminal, and version control support. It also provides pre-built developer workspaces that allow you to start coding immediately.
 

@@ -1,7 +1,7 @@
-# Red Hat Summit 2023: Vote App Lab Demo - Introduction
+# Red Hat Summit 2023: Vote App Lab Development - Introduction
 
 ## Introduction
 
-In this module, we'll start by creating a basic CI/CD pipeline using Tekton and OpenShift. We'll then deploy our application to a development environment using ArgoCD, and finally, we'll create a production environment and demonstrate how ArgoCD can detect and automatically fix any configuration drifts.
+In this module, we'll start by creating a basic CI/CD pipeline using Tekton and OpenShift. We'll then deploy our application to a development environment using ArgoCD. Next, we'll make changes to the code and push them to the repository. We'll see how Tekton automatically detects the changes and triggers a new build. We'll then deploy the new version of the application to the development environment
 
 Let's begin!
