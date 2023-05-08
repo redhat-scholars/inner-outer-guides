@@ -30,20 +30,9 @@ settings.
 image::prerequisites_operatorhub_install_pipelines.png[Install
 Pipelines]
 
-- Ensure _Update Channel_ is set to _latest_ , and click _Install_ to
-start installing the Operator.
-
-.Install Operator
-image::prerequisites_operatorhub_install_operator.png[Install
-Operator]
-
 - After few seconds, the installation should be completed with success and
 you can verify it looking at _Status_ column, check if the status is
 _Succeeded_.
-
-.Pipelines Installed
-image::prerequisites_operatorhub_pipelines_installed.png[Pipelines
-Installed]
 
 ### Operator: OpenShift GitOps 
 *OpenShift GitOps* is a GitOps operator for OpenShift that provides a declarative, GitOps oriented approach to managing applications and their delivery. It provides a set of core GitOps operators and APIs for declaratively managing your cluster configuration and application delivery using Git as the source of truth.
@@ -67,31 +56,27 @@ image::openshift-gitops-operator-install.png[OpenShift GitOps operator]
 you can verify it looking at _Status_ column, check if the status is
 _Succeeded_.
 
-.OpenShift GitOps Operator
-image::openshift-gitops-operator-installed.png[OpenShift GitOps Operator]
-
 ### Operator: OpenShift Dev Spaces
 *Openshift Dev Spaces* is a cloud-native, developer workspace server and IDE for OpenShift. It allows developers to quickly create cloud-native applications by allowing them to focus on coding while the tooling takes care of the rest.
 
-Follow these instructions in order to install OpenShift GitOps on OpenShift via the OperatorHub:
+Follow these instructions in order to install OpenShift Dev Spaces on OpenShift via the OperatorHub:
 
 - From the left-side menu under *Administrator* perspective, go to
-*Operators*-> *OperatorHub*. In the search box, search for _OpenShift DevSpaces_,
-then click to *OpenShift DevSpaces*:
+*Operators*-> *OperatorHub*. In the search box, search for _OpenShift Dev Spaces_,
+then click to *OpenShift Dev Spaces*:
 
-.OpenShift GitOps Operator
+.OpenShift Dev Spaces Operator
 image::openshift-devspaces-operator.png[OpenShift DevSpaces Operator]
 
 - From the description view, click _Install_ to review all installation
 settings.
 
+.OpenShift Dev Spaces Operator Install
 image::openshift-devspaces-operator-install.png[OpenShift DevSpaces operator]
 
 - After few seconds, the installation should be completed with success and
 you can verify it looking at _Status_ column, check if the status is
 _Succeeded_.
-
-image::openshift-devspaces-operator-installed.png[OpenShift DevSpaces Operator]
 
 ### Operator: OpenShift Web Terminal
 The *Web Terminal* is a web-based terminal for OpenShift. It allows users to access a terminal in a pod from the OpenShift Web Console.
@@ -105,7 +90,17 @@ In the *OperatorHub*, search for _Web Terminal_ and follow the
 operator install flow to install it.
 
 .OpenShift Web Terminal
-image::https://github.com/blues-man/vote-app-gitops/raw/main/images/codeready-installation.png[OpenShift Web Terminal]
+image::web-terminal-operator.png[OpenShift Web Terminal]
+
+- From the description view, click _Install_ to review all installation
+settings.
+
+.OpenShift Web Terminal
+image::web-terminal-operator-install.png[OpenShift Web Terminal]
+
+- After few seconds, the installation should be completed with success and
+you can verify it looking at _Status_ column, check if the status is
+_Succeeded_.
 
 ## Lab Checks
 
