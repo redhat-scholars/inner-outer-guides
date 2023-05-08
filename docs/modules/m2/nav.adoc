@@ -1,4 +1,4 @@
-.Module Two: Demo
+.Module Two: Development
 * xref:intro.adoc[Introduction]
 * xref:pipelines.adoc[Pipelines]
 * xref:argocd.adoc[ArgoCD]

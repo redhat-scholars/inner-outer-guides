@@ -2,16 +2,23 @@
 
 ## About this lab
 
-This lab will guide you through the process of creating a CI/CD pipeline for a sample Vote App using OpenShift, Tekton, ArgoCD, Quay.io, and CodeReady Workspaces. You will learn how to set up and manage the entire application lifecycle, from development to production.
+This lab will guide you through the process of creating a CI/CD pipeline for a sample Vote App using OpenShift, Tekton, ArgoCD, and OpenShift Dev Spaces. You will learn how to set up and manage the entire application lifecycle, from development to production.
+
+.Lab Architecture
+image::demo-architecture.png[Architecture]
 
 ## Introduction
 
 The Vote App is a simple application that allows users to vote for their favorite option and view the results. In this lab, you will be working with two main components: the vote-api and the vote-ui.
 
-The goal of this lab is to demonstrate how to create a seamless CI/CD pipeline using OpenShift, Tekton, ArgoCD, Quay.io, and OpenShift DevSpaces. By the end of this lab, you will have a better understanding of:
+.Vote App
+image::vote-app.png[Vote App]
+
+The goal of this lab is to demonstrate how to create a seamless CI/CD pipeline using OpenShift, Tekton, ArgoCD, and OpenShift Dev Spaces. By the end of this lab, you will have a better understanding of:
 
 - Creating Tekton pipeline manifests
 - Setting up webhooks for pipeline automation
 - Deploying applications using ArgoCD
+- Development and testing of code locally using Dev Spaces
 - Managing application drifts and syncing
-- Collaborating on code using CodeReady Workspaces
+

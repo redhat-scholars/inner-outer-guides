@@ -1,9 +1,36 @@
 # Red Hat Summit 2023: Vote App Lab Overview - Setup
 
-In this section, we'll take a look at the architecture that this lab will be using.
+In this section, we'll take a look at the setup that this lab will be using. Before we begin, we can take a look at the developer flow that Red Hat Developer Tools provides.
 
-.Lab Architecture
-image::demo-architecture.png[Architecture]
+.Developer Flow
+image::developer-flow.png[Developer Flow]
+
+Red Hat Developer Tools provides a set of tools that help developers to build, test, deploy, and run applications. These tools are integrated and work together to provide a seamless developer experience. The tools we'll be using in this lab are:
+
+[tabs, subs="attributes+,+macros"]
+====
+OpenShift Dev Spaces::
++
+--
+link:https://developers.redhat.com/products/openshift-dev-spaces/overview[*OpenShift Dev Spaces*] is a cloud and container-native development environment that provides a fast, secure, and zero-configuration development environment for Kubernetes and OpenShift. It allows developers to quickly bootstrap their development environment and start coding.
+
+image::devspaces-interface.png[OpenShift Dev Spaces]
+--
+OpenShift Pipelines::
++
+--
+link:https://catalog.redhat.com/software/container-stacks/detail/5ec54a4628834587a6b85ca5[*OpenShift Pipelines*] is a cloud-native, continuous integration and delivery (CI/CD) solution for building pipelines using Tekton. Tekton is a flexible, Kubernetes-native, open-source CI/CD framework that enables automating deployments across multiple platforms (Kubernetes, serverless, VMs, etc) by abstracting away the underlying implementation details.
+
+image::pipeline-status.png[OpenShift Pipelines]
+--
+OpenShift GitOps::
++
+--
+link:https://www.redhat.com/en/technologies/cloud-computing/openshift/gitops[*OpenShift GitOps*] OpenShift GitOps is a declarative application continuous delivery tool for Kubernetes based on ArgoCD project. Application definitions, configurations, and environments are declarative and version controlled in Git.
+
+image::argocd-app-details-2.png[OpenShift GitOps]
+--
+====
 
 NOTE: Everything has already been pre-installed on your cluster, so there's no need to do anything here. This is just for reference.
 
@@ -12,9 +39,7 @@ NOTE: Everything has already been pre-installed on your cluster, so there's no n
 To run this lab, we're using an OpenShift 4.12 cluster. This cluster has been pre-configured with the following:
 
 ### Operator: OpenShift Pipelines 
-*OpenShift Pipelines* is a cloud-native, continuous integration and delivery (CI/CD) solution for building pipelines using Tekton. Tekton is a flexible, Kubernetes-native, open-source CI/CD framework that enables automating deployments across multiple platforms (Kubernetes, serverless, VMs, etc) by abstracting away the underlying implementation details.
-
-Follow these instructions in order to install OpenShift Pipelines on OpenShift via the OperatorHub:
+We'll be using link:https://console-openshift-console.%SUBDOMAIN%[*OpenShift Pipelines*] to pull our code from Gitea, build it, and update the Gitea repository with the new image tag. Follow these instructions in order to install OpenShift Pipelines on OpenShift via the OperatorHub:
 
 - From the left-side menu under *Administrator* perspective, go to
 *Operators*-> *OperatorHub*. In the search box, search for _OpenShift Pipelines_,
@@ -35,9 +60,7 @@ you can verify it looking at _Status_ column, check if the status is
 _Succeeded_.
 
 ### Operator: OpenShift GitOps 
-*OpenShift GitOps* is a GitOps operator for OpenShift that provides a declarative, GitOps oriented approach to managing applications and their delivery. It provides a set of core GitOps operators and APIs for declaratively managing your cluster configuration and application delivery using Git as the source of truth.
-
-Follow these instructions in order to install OpenShift GitOps on OpenShift via the OperatorHub.
+We'll be using link:https://openshift-gitops-server-openshift-gitops.%SUBDOMAIN%[*OpenShift GitOps*] to deploy our application to the cluster, and to manage the application lifecycle. Our two projects, `vote-app-dev-%USERID%` and `vote-app-prod-%USERID%`, will be managed by ArgoCD, and we'll be able to demonstrate high-availability using GitOps. Follow these instructions in order to install OpenShift GitOps on OpenShift via the OperatorHub.
 
 - From the left-side menu under *Administrator* perspective, go to
 *Operators*-> *OperatorHub*. In the search box, search for _OpenShift GitOps_,
@@ -57,9 +80,7 @@ you can verify it looking at _Status_ column, check if the status is
 _Succeeded_.
 
 ### Operator: OpenShift Dev Spaces
-*Openshift Dev Spaces* is a cloud-native, developer workspace server and IDE for OpenShift. It allows developers to quickly create cloud-native applications by allowing them to focus on coding while the tooling takes care of the rest.
-
-Follow these instructions in order to install OpenShift Dev Spaces on OpenShift via the OperatorHub:
+We'll use link:https://devspaces.%SUBDOMAIN%[*OpenShift Dev Spaces*] to develop our application locally, commit our changes using Git, and then deploy our changes to the cluster. Follow these instructions in order to install OpenShift Dev Spaces on OpenShift via the OperatorHub:
 
 - From the left-side menu under *Administrator* perspective, go to
 *Operators*-> *OperatorHub*. In the search box, search for _OpenShift Dev Spaces_,
@@ -79,9 +100,7 @@ you can verify it looking at _Status_ column, check if the status is
 _Succeeded_.
 
 ### Operator: OpenShift Web Terminal
-The *Web Terminal* is a web-based terminal for OpenShift. It allows users to access a terminal in a pod from the OpenShift Web Console.
-
-Follow these instructions in order to install OpenShift GitOps on OpenShift via the OperatorHub.
+Finally, the *Web Terminal* is a web-based terminal for OpenShift. It allows users to access a terminal in a pod from the OpenShift Web Console. Follow these instructions in order to install OpenShift GitOps on OpenShift via the OperatorHub.
 
 Log into OpenShift Web Console as a cluster admin and navigate to the
 *Administrator* perspective and then *Operators* → *OperatorHub*.
@@ -104,9 +123,9 @@ _Succeeded_.
 
 ## Lab Checks
 
-### ArgoCD
+### Argo CD
 
-link:https://argocd-server-argocd-%USERID%.%SUBDOMAIN%[*ArgoCD*] is a declarative, GitOps continuous delivery tool for Kubernetes provided in the OpenShift GitOps Operator. From your OpenShift cluster, you can acess the ArgoCD dashboard.
+link:https://argocd-server-argocd-%USERID%.%SUBDOMAIN%[*Argo CD*] is a declarative, GitOps continuous delivery tool for Kubernetes provided in the OpenShift GitOps Operator. From your OpenShift cluster, you can access the ArgoCD dashboard.
 
 image::argocd-button.png[ArgoCD]
 

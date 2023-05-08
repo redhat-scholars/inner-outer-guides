@@ -1,3 +1,2 @@
-.Module Three: Conclusion
-* xref:finish.adoc[Finish]
-* xref:resources.adoc[Resources]
+.Module Three: Production
+* xref:production.adoc[Pushing to Production]

@@ -1,4 +1,4 @@
-# Red Hat Summit 2023: Vote App Lab Demo - Walkthrough
+# Red Hat Summit 2023: Vote App Lab Development - Walkthrough
 
 Let's get started! The main objective of this demo is to illustrate how OpenShift can help to create and connect the CI/CD parts using Tekton and ArgoCD, which in turn can be integrated with OpenShift DevSpaces for the Inner and Outer Loop.
 
