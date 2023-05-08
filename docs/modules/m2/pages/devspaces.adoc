@@ -1,82 +1,90 @@
-# Red Hat Summit 2023: Vote App Lab Demo - CodeReady Workspaces
+# Red Hat Summit 2023: Vote App Lab Demo - Dev Spaces
 
-With the Vote Application deployed to our `vote-app-dev-%USERID` project, we can now use CodeReady Workspaces to develop and test our application. CodeReady Workspaces is a browser-based IDE that allows you to develop in the cloud. It provides a ready-to-use development stack with a web-based IDE, terminal, and version control support. It also provides pre-built developer workspaces that allow you to start coding immediately.
+With the Vote Application deployed to our `vote-app-dev-%USERID%` project, we can now use Dev Spaces to develop and test our application. Dev Spaces is a browser-based IDE that allows you to develop in the cloud. It provides a ready-to-use development stack with a web-based IDE, terminal, and version control support. It also provides pre-built developer workspaces that allow you to start coding immediately.
 
-## Getting setup with CodeReady Workspaces
+## Getting setup with Dev Spaces
 
-Let's start out with getting more familiar with the CodeReady Workspaces interface. To do this, we can begin with navigating to CodeReady Workspaces from the OpenShift Console. To do this, click on the menu icon on the top right corner and select `CodeReady Workspaces`.
+Let's start out with getting more familiar with the Dev Spaces interface. To do this, we can begin with navigating to Dev Spaces from the OpenShift Console. To do this, click on the menu icon on the top right corner and select `Dev Spaces`.
 
-image::devspaces-button.png[DevSpaces Button]
+image::devspaces-button.png[Dev Spaces Button]
 
-This will open up the CodeReady Workspaces interface. From here, we can begin to make our changes to the Vote Application. But first, let's get familiar with the powerful features of CodeReady Workspaces.
+This will open up the Dev Spaces interface. You'll need to firstly authorize Dev Spaces to access your OpenShift cluster. From here, we can begin to make our changes to the Vote Application. But first, let's get familiar with the powerful features of Dev Spaces.
 
-image::devspaces-interface.png[CodeReady Workspaces Interface]
+image::devspaces-interface.png[Dev Spaces Interface]
 
-Built from the open Eclipse Che project, CodeReady Workspaces provides support for Microsoft Visual Studio Code extensions and Language Server Protocol. This means that you can use your favorite Visual Studio Code extensions in CodeReady Workspaces. You can also use the Language Server Protocol to provide language features like auto-complete, go-to-definition, and hover support.
+Built from the open Eclipse Che project, Dev Spaces provides support for Microsoft Visual Studio Code extensions and Language Server Protocol. This means that you can use your favorite Visual Studio Code extensions in Dev Spaces. You can also use the Language Server Protocol to provide language features like auto-complete, go-to-definition, and hover support.
 
-image::devspaces-extensions.png[CodeReady Workspaces Extensions]
+image::devspaces-extensions.png[Dev Spaces Extensions]
 
-CodeReady Workspaces also provides a terminal that allows you to run commands in your workspace. This is useful for running commands like `mvn clean package` or `npm install` to build your application. You can also use the terminal to run commands like `oc login` to login to your OpenShift cluster.
+Dev Spaces also provides a terminal that allows you to run commands in your workspace. This is useful for running commands like `mvn clean package` or `npm install` to build your application. You can also use the terminal to run commands within your OpenShift cluster without needing to authenticate again.
 
-image::devspaces-terminal.png[CodeReady Workspaces Terminal]
+image::devspaces-terminal.png[Dev Spaces Terminal]
 
-CodeReady Workspaces also provides a built-in version control system. This allows you to commit and push your changes to a Git repository. You can also use the version control system to pull changes from a Git repository.
+Dev Spaces also provides a built-in version control system. This allows you to commit and push your changes to a Git repository. You can also use the version control system to pull changes from a Git repository.
 
-image::devspaces-git.png[CodeReady Workspaces Git]
+image::devspaces-git.png[Dev Spaces Git]
 
-## Editing the Vote Application in CodeReady Workspaces
+## Editing the Vote Application in Dev Spaces
 
-From the CodeReady Workspaces interface, we can now begin to make changes to the Vote Application. To do this, we can edit the `index.html` file in the `templates` directory. 
+From the Dev Spaces interface, we can now begin to make changes to the Vote Application. To do this, we can edit the `index.html` file in the `templates` directory. 
 
-image::devspaces-edit.png[CodeReady Workspaces Edit]
+image::devspaces-edit.png[Dev Spaces Edit]
 
 Here, on line 16, we can change the text from `{{option_a}} vs {{option_b}}!` to `{{option_a}} vs {{option_b}}! - Red Hat Summit 2023`. This will change the title of the Vote Application to `Vote App - Red Hat Summit 2023`.
 
-image::devspaces-edit-title.png[CodeReady Workspaces Edit Title]
+[.console-input]
+[source,python,subs="+attributes,macros+"]
+----
+{{option_a}} vs {{option_b}}! - Red Hat Summit 2023
+----
 
-Now before pushing our changes to the repository, we can test our changes by running the Vote Application locally. From the top right corner, we can select *Terminal* and then *Run Task*. From here, we can select *Show all tasks* and *devfile: Install dependencies*. This will install the dependencies for the Vote Application.
+image::devspaces-edit-title.png[Dev Spaces Edit Title]
 
-image::devspaces-run-task.png[CodeReady Workspaces Run Task]
+Now before pushing our changes to the repository, we can test our changes by running the Vote Application locally. From the top right corner, we can select *Terminal* and then *Run Task*. 
+
+image::devspaces-run-task.png[Dev Spaces Run Task]
+
+From here, we can select *Show all tasks* and *devfile: Install dependencies*. This will install the dependencies for the Vote Application.
+
+image::devspaces-run-task-2.png[Dev Spaces Run Task]
 
 Next, we can select *Terminal* and then *Run Task* again. From here, we can select *Show all tasks* and *devfile: Run Python App*. This will run the Vote Application in development.
 
-image::devspaces-run-app.png[CodeReady Workspaces Run App]
+image::devspaces-run-app.png[Dev Spaces Run App]
 
 You'll now see a pop-up in the lower right corner about a new process running on port 8080.
 
-image::devspaces-run-app-browser.png[CodeReady Workspaces Run App Browser]
+image::devspaces-run-app-browser.png[Dev Spaces Run App Browser]
 
 From here, we can click on the *Open* button to open the Vote Application in a new browser tab. It may take a few seconds, but you should see the Vote Application running.
 
-image::devspaces-run-app-browser.png[CodeReady Workspaces Run App Browser]
+image::devspaces-run-app-browser-2.png[Dev Spaces Run App Browser]
 
 ## Pushing changes to the Git repository
 
 Now that we've tested our changes, we can push our changes to the Git repository. To do this, we can select the *Source Control* tab from the left menu. From here, we can select the *✓ Commit* button to stage all of our changes. We can then enter a commit message and commit as well as push our changes to the Git repository.
 
-image::devspaces-commit.png[CodeReady Workspaces Commit]
+image::devspaces-commit.png[Dev Spaces Commit]
 
 Finally, you'll need to enter your credentials to push your changes to the Git repository. 
 
 - Username: `%USERID%`
 - Password: `openshift`
 
-image::devspaces-credentials.png[CodeReady Workspaces Credentials]
-
 ## Deploying changes to the Vote Application
 
-Now that we've pushed our changes to the Git repository, and with the webhook configured, our changes will be automatically deployed to the Vote Application. To see this, we can navigate to the OpenShift Console and select the `vote-app-ci-%USERID` project. From here, we can select *Pipelines* from the left menu. We should see the pipeline `vote-app-ci-pipeline` running and rebuilding the Vote Application.
+Now that we've pushed our changes to the Git repository, and with the webhook configured, our changes will be automatically deployed to the Vote Application. To see this, we can navigate to the OpenShift Console and select the `vote-app-ci-%USERID%` project. From here, we can select *Pipelines* from the left menu. We should see the pipeline `vote-app-ci-pipeline` running and rebuilding the Vote Application.
 
-image::devspaces-pipeline.png[CodeReady Workspaces Pipeline]
+image::devspaces-pipeline.png[Dev Spaces Pipeline]
 
-Once the pipeline has completed, in the `vote-app-gitops` repository, there will be a new commit from Tekton that will contain the new hash for the Vote Application image. 
+Once the pipeline has completed, in the link:https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops/[vote-app-gitops] repository, there will be a new commit from Tekton that will contain the new hash for the Vote Application image. 
 
-image::devspaces-gitops-commit.png[CodeReady Workspaces GitOps Commit]
+image::devspaces-gitops-commit.png[Dev Spaces GitOps Commit]
 
-This will trigger ArgoCD to deploy the new image to the `vote-app-dev-%USERID` project. To view this, head back to ArgoCD and select the `vote-app-dev-%USERID` application. You'll see that the application is now out of sync as we declared in our `Application` resource that we wanted didn't want _self-healing_ enabled. From the top menu, click on *Sync* and then *Synchronize*. This will deploy the new image to the `vote-app-dev-%USERID` project.
+This will trigger ArgoCD to deploy the new image to the `vote-app-dev-%USERID%` project. To view this, head back to ArgoCD and select the `vote-app-dev-%USERID%` application. You'll see that the application is now out of sync as we declared in our `Application` resource that we wanted didn't want _self-healing_ enabled. From the top menu, click on *Sync* and then *Synchronize*. This will deploy the new image to the `vote-app-dev-%USERID%` project.
 
-image::devspaces-argocd-sync.png[CodeReady Workspaces ArgoCD Sync]
+image::devspaces-argocd-sync.png[Dev Spaces ArgoCD Sync]
 
 ## Next steps
 
-This is satisfactory for our development environment, but let's push this application to production. For this, we can use a separate pipeline that will deploy the application to the `vote-app-prod-%USERID` project.
+This is satisfactory for our development environment, but let's push this application to production. For this, we can use a separate pipeline that will deploy the application to the `vote-app-prod-%USERID%` project.
