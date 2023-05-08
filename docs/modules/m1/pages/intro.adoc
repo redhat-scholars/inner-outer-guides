@@ -4,17 +4,6 @@
 
 This lab will guide you through the process of creating a CI/CD pipeline for a sample Vote App using OpenShift, Tekton, ArgoCD, Quay.io, and CodeReady Workspaces. You will learn how to set up and manage the entire application lifecycle, from development to production.
 
-## Lab assets
-
-Vote App source repositories:
-
-- https://github.com/blues-man/pipelines-vote-ui[Vote App UI Frontend]
-- https://github.com/blues-man/pipelines-vote-api[Vote App API Backend]
-
-This repo, used to store Kubernetes manifests and Argo application:
-
-- https://github.com/blues-man/vote-app-gitops[Vote App GitOps]
-
 ## Introduction
 
 The Vote App is a simple application that allows users to vote for their favorite option and view the results. In this lab, you will be working with two main components: the vote-api and the vote-ui.

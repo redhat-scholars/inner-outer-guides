@@ -1,3 +1,0 @@
-# Red Hat Summit 2023: Vote App Lab Overview - Finish
-
-Congratulations! Your environment is successfully set up for the Vote App lab, complete with the required OpenShift operators, and repositories ready to go.

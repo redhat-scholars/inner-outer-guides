@@ -8,7 +8,7 @@ Firstly, ensure that you're currently using the `vote-app-ci-%USERID%` project. 
 
 image::images/switch-project.png[]
 
-Within this Pipelines dashboard, you will see a list of pipelines.  Click on the `vote-app-pipeline` pipeline to see the details of the pipeline.
+Within this Pipelines dashboard, you will see a list of pipelines.  Click on the `vote-app-api-pipeline` pipeline to see the details of the pipeline.
 
 image::images/pipeline-list.png[]
 
@@ -30,7 +30,7 @@ Now that the `vote-app-api` pipeline has been started, let's start the `vote-app
 
 ## Starting the `vote-app-ui` pipeline
 
-Let's repeat the same steps for the `vote-app-ui` pipeline.  Click on the `vote-app-ui-pipeline` pipeline from the *Pipelines* left-hand tab to see the details of the pipeline.
+Let's repeat the same steps for the `vote-app-ui-pipeline` pipeline.  Click on the `vote-app-ui-pipeline` pipeline from the *Pipelines* left-hand tab to see the details of the pipeline.
 
 image::images/pipeline-ui-list.png[]
 
@@ -69,7 +69,6 @@ Perfect, the deployments are now running. Let's go ahead and check the status of
 image::images/application-status.png[]
 
 ## Start `vote-ui` with a Webhook
-
 
 Tekton supports Tekton Triggers to enable automation and web hooks to Pipelines. All settings have been already installed from previous command, and both pipelines support web hooks.
 
