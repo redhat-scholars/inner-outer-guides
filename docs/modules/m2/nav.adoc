@@ -2,4 +2,5 @@
 * xref:intro.adoc[Introduction]
 * xref:pipelines.adoc[Pipelines]
 * xref:argocd.adoc[ArgoCD]
+* xref:devspaces.adoc[DevSpaces]
 * xref:finish.adoc[Finish]

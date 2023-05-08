@@ -1,6 +1,6 @@
 # Red Hat Summit 2023: Vote App Lab Demo - ArgoCD
 
-Now, the next step is to deploy the Vote App to the dev enviroment using ArgoCD.
+Now, the next step is to deploy the Vote App to the dev environment using ArgoCD.
 
 ## Creating a new application using ArgoCD
 
