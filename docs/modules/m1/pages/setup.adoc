@@ -9,21 +9,21 @@ Red Hat Developer Tools provides a set of tools that help developers to build, t
 
 [tabs, subs="attributes+,+macros"]
 ====
-OpenShift Dev Spaces::
+Inner Loop: OpenShift Dev Spaces::
 +
 --
 link:https://developers.redhat.com/products/openshift-dev-spaces/overview[*OpenShift Dev Spaces*] is a cloud and container-native development environment that provides a fast, secure, and zero-configuration development environment for Kubernetes and OpenShift. It allows developers to quickly bootstrap their development environment and start coding.
 
 image::devspaces-interface.png[OpenShift Dev Spaces]
 --
-OpenShift Pipelines::
+Outer Loop: OpenShift Pipelines::
 +
 --
 link:https://catalog.redhat.com/software/container-stacks/detail/5ec54a4628834587a6b85ca5[*OpenShift Pipelines*] is a cloud-native, continuous integration and delivery (CI/CD) solution for building pipelines using Tekton. Tekton is a flexible, Kubernetes-native, open-source CI/CD framework that enables automating deployments across multiple platforms (Kubernetes, serverless, VMs, etc) by abstracting away the underlying implementation details.
 
 image::pipeline-status.png[OpenShift Pipelines]
 --
-OpenShift GitOps::
+Outer Loop: OpenShift GitOps::
 +
 --
 link:https://www.redhat.com/en/technologies/cloud-computing/openshift/gitops[*OpenShift GitOps*] OpenShift GitOps is a declarative application continuous delivery tool for Kubernetes based on ArgoCD project. Application definitions, configurations, and environments are declarative and version controlled in Git.
@@ -149,8 +149,8 @@ image::gitea.png[Gitea]
 
 Once logged in, you can access the following Vote App source repositories:
 
-- link:https://gitea.%SUBDOMAIN%/%USERID%/pipelines-vote-ui[Gitea Vote App UI Frontend]
-- link:https://gitea.%SUBDOMAIN%/%USERID%/pipelines-vote-api[Gitea Vote App API Backend]
+- link:https://gitea.%SUBDOMAIN%/%USERID%/pipelines-vote-ui[Vote App UI Frontend]
+- link:https://gitea.%SUBDOMAIN%/%USERID%/pipelines-vote-api[Vote App API Backend]
 
 We also have a repository that contains the ArgoCD application manifests for the Vote App.
 

@@ -1,13 +1,13 @@
 # Red Hat Summit 2023: Vote App Lab Conclusion - Resources
 
-Thank you once again for participating in the Red Hat Summit 2023 Vote App Lab. As you continue to explore and apply the concepts and tools learned in this lab, we would like to provide you with some valuable resources that will support your ongoing GitOps journey and help you gain a deeper understanding of OpenShift, Tekton, ArgoCD, and OpenShift DevSpaces.
+Thank you once again for participating in the Red Hat Summit 2023 Vote App Lab. As you continue to explore and apply the concepts and tools learned in this lab, we would like to provide you with some valuable resources that will support your ongoing GitOps journey and help you gain a deeper understanding of OpenShift, Tekton, ArgoCD, and OpenShift Dev Spaces.
 
 ## Official Documentation
 
 1. OpenShift Documentation - https://docs.openshift.com/container-platform/latest/welcome/index.html
 2. Tekton Documentation - https://tekton.dev/docs/
 3. ArgoCD Documentation - https://argo-cd.readthedocs.io/en/stable/
-5. OpenShift DevSpaces Documentation - https://access.redhat.com/documentation/en-us/red_hat_openshift_dev_spaces/3.0
+5. OpenShift Dev Spaces Documentation - https://access.redhat.com/documentation/en-us/red_hat_openshift_dev_spaces/3.0
 
 ## Blogs and Tutorials
 

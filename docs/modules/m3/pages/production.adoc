@@ -1,19 +1,115 @@
 # Red Hat Summit 2023: Vote App Lab Production - Pushing to Production
 
-Thank you for participating in the Red Hat Summit 2023 Vote App Lab! We hope that you enjoyed building a CI/CD pipeline using OpenShift, Tekton, ArgoCD, and DevSpaces. This lab provided a hands-on experience that allowed you to explore the powerful capabilities of these tools in creating, managing, and deploying applications.
+Now, it's time to push our application to production. We will use the same pipeline we used in the previous lab, but this time we will use the `production` branch.
 
-## Summary
+## Using the `promote-to-prod` pipeline
 
-In this lab, you learned how to:
+Firstly, ensure that you're currently using the `vote-app-ci-%USERID%` project. This is where the pipeline manifests have been created, and where we'll be running the pipeline from.
 
-- Set up an OpenShift cluster and prepare it for a GitOps workflow.
-- Configure Tekton and ArgoCD to create and manage your CI/CD pipeline.
-- Deploy and manage the vote-api and vote-ui applications using OpenShift.
-- Use webhooks to trigger pipelines automatically.
-- Implement GitOps principles for managing your application environments.
-- Work with OpenShift DevSpaces for an integrated development experience.
-- Monitor and manage drifts in your applications and environments.
+image::switch-project.png[]
 
-## Resources
+Within this Pipelines dashboard, you will see a list of pipelines. Click on the `promote-to-prod` pipeline to see the details of the pipeline.
 
-Don't forget to check out the next page for a curated list of resources to help you continue your GitOps journey, learn more about the technologies we covered in this lab, and further enhance your skills in working with OpenShift, Tekton, ArgoCD, and DevSpaces.
+image::pipeline-prod-details.png[]
+
+Here, you can go through the pipeline steps and see what each step is doing.  You can also see the pipeline resources that are being used. In addition, you can see the pipeline parameters that are being used.  These parameters are used to pass in the name of the image that will be built, and the name of the image that will be pushed to the registry.
+
+For reference, here's the pipeline steps:
+
+- `tag-to-prod`: This step tags the image from the `dev` project and pushes it to the `prod` project.
+- `image-tag-to-digest`: This step tags the image with the digest of the image that was pushed to the `prod` project.
+- `git-update-deployment`: This step updates the `vote-app-gitops` repository with the new image digest.
+
+## Running the `promote-to-prod` pipeline
+
+Here, we can go ahead and start the Pipeline. Click on the top-right *Actions* then *Start* button to start the pipeline. The steps are the same as the previous pipelines, so we won't go through them again.
+
+image::pipeline-prod-ui-start.png[]
+
+You will be prompted to enter the values for the pipeline parameters, however the default values are already set for you. You'll need to specify a *Empty Directory* for the `app-source` parameter. This is because we're not building the application from source, we're using the image that was built in the `dev` project. Click on the *Start* button to start the pipeline.
+
+image::pipeline-prod-ui-start-2.png[]
+
+Now that the `vote-app-ui` pipeline has been started, let's go ahead and check the status of the pipeline.
+
+image::pipeline-prod-ui-status.png[]
+
+Once the pipeline has completed, you'll notice that the `vote-app-gitops` repo has been updated with a new hash of an image. This is the image that was built in the `dev` project, and pushed to the `prod` project, and referenced in the `environments/prod/kustomization.yaml` file that can be found link:https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops/src/branch/main/environments/prod/kustomization.yaml[*here*].
+
+image::pipeline-prod-ui-gitops.png[]
+
+## Deploying the application to production using ArgoCD
+
+Within the link:https://argocd-server-argocd-%USERID%.%SUBDOMAIN%[*Argo CD*] dashboard, click on the `+ New App` button.
+
+image::argocd-new-app.png[]
+
+Fill in the following information, many of which may auto-fill when selected:
+
+* Application Name: `vote-app-prod-%USERID%`
+* Project: `default`
+* Sync Policy: `Automatic`
+* Self-Healing: `Enabled`
+* Auto-create Namespace: `Enabled`
+* Repository URL: `http://gitea.gitea.svc:3000/%USERID%/vote-app-gitops`
+* Revision: `main`
+* Path: `environments/prod`
+* Cluster URL: `https://kubernetes.default.svc`
+* Namespace: `vote-app-prod-%USERID%`
+
+image::argocd-new-app-2.png[]
+image::argocd-new-app-3.png[]
+
+Click on the *Create* button to create the application. You will be taken to the application details page. Here, you can see the application status, and the resources that are being deployed.
+
+image::argocd-new-app-5.png[]
+
+## Viewing the application and detecting drift
+
+Now that the application has been deployed to production, let's go ahead and view the application in the OpenShift console. Click on the *Developer* perspective, then click on the *Topology* view. Ensure you're in the `vote-app-prod-%USERID%` application, and you should see the application deployed.
+
+image::app-prod-topology.png[]
+
+Click on the `vote-ui` deployment, and click *Details* to see the details of the deployment. Here, you see how Argo CD will auto-detect drift in the application. Let's go ahead and change the number of replicas to `2`, and see how Argo CD detects the drift and auto-heals.
+
+image::app-prod-topology-2.png[]
+
+## Using Git to modify the application
+
+Now, let's go ahead and make a change to the application. We'll change the number of replicas to `2`, and see how Argo CD detects the drift and auto-heals. To do this, let's go ahead and modify the `environments/prod/kustomization.yaml` file in the `vote-app-gitops` repository. You can do this by clicking on the *Code* tab, then clicking on the `environments/prod/kustomization.yaml` file link:https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops/src/branch/main/environments/prod/kustomization.yaml[*here*], then clicking on the *Edit* button.
+
+image::gitops-prod-kustomization.png[]
+
+ Change the number of replicas on line 4 to `2`, then navigate to the *Commit changes* section at the bottom of the page. Here, we can select *Create a new branch for this commit and start a pull request*. We will create a new branch, `%USERID%-feature-id` and start a pull request to merge the changes into the `main` branch. Click on the *Propose file change* button to create the pull request.
+
+image::gitops-prod-kustomization-2.png[]
+
+You will be taken to the *New Pull Request* page. Here, you can see the changes that were made to the file. Click on the *New Pull Request* button to create the pull request.
+
+image::gitops-prod-kustomization-3.png[]
+
+Now, you'll see a new page to create a pull request. Here, you can see the details of the pull request. Click on the *Create pull request* button to create the pull request.
+
+image::gitops-prod-kustomization-4.png[]
+
+With the new pull request created, let's go ahead and merge the pull request. Click on the *Create merge commit* button to merge the pull request.
+
+image::gitops-prod-kustomization-5.png[]
+
+## Viewing the application and detecting drift
+
+Now, let's go ahead and check the status of the application in the OpenShift console. Click on the *Developer* perspective, then click on the *Topology* view. Ensure you're in the `vote-app-prod-%USERID%` application, and you should see the `vote-ui` deployed, now with 2 replicas.
+
+image::app-prod-topology-3.png[]
+
+Click on the `vote-ui` deployment, and click *Details* to see the details of the deployment. Here, you see how Argo CD will auto-detect drift in the application. Let's go ahead and change the number of replicas to `1`, and see how Argo CD detects the drift and auto-heals.
+
+image::app-prod-topology-4.png[]
+
+We can also see this in Argo CD, where auto sync is enabled.
+
+image::argocd-new-app-6.png[]
+
+## Conclusion
+
+In this lab, we learned how to use GitOps to deploy an application to multiple environments, and how to use Argo CD to detect drift in the application and auto-heal the application. We also learned how to use Tekton to build and deploy an application to multiple environments.

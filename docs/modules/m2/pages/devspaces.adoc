@@ -1,6 +1,6 @@
 # Red Hat Summit 2023: Vote App Lab Development - Dev Spaces
 
-With the Vote Application deployed to our `vote-app-dev-%USERID%` project, we can now use Dev Spaces to develop and test our application. Dev Spaces is a browser-based IDE that allows you to develop in the cloud. It provides a ready-to-use development stack with a web-based IDE, terminal, and version control support. It also provides pre-built developer workspaces that allow you to start coding immediately.
+With the Vote Application deployed to our `vote-app-dev-%USERID%` project, we can now use OpenShift Dev Spaces to develop and test our application. Dev Spaces is a browser-based IDE that allows you to develop in the cloud. It provides a ready-to-use development stack with a web-based IDE, terminal, and version control support. It also provides pre-built developer workspaces that allow you to start coding immediately.
 
 ## Getting setup with Dev Spaces
 
@@ -12,19 +12,54 @@ This will open up the Dev Spaces interface. You'll need to firstly authorize Dev
 
 image::devspaces-interface.png[Dev Spaces Interface]
 
+### Extension support
+
 Built from the open Eclipse Che project, Dev Spaces provides support for Microsoft Visual Studio Code extensions and Language Server Protocol. This means that you can use your favorite Visual Studio Code extensions in Dev Spaces. You can also use the Language Server Protocol to provide language features like auto-complete, go-to-definition, and hover support.
 
 image::devspaces-extensions.png[Dev Spaces Extensions]
 
+### Terminal support
+
 Dev Spaces also provides a terminal that allows you to run commands in your workspace. This is useful for running commands like `mvn clean package` or `npm install` to build your application. You can also use the terminal to run commands within your OpenShift cluster without needing to authenticate again.
 
 image::devspaces-terminal.png[Dev Spaces Terminal]
+
+With the terminal, let's run the following command to test out the Python which has been installed in our workspace.
+
+[.console-input]
+[source,python,subs="+attributes,macros+"]
+----
+python
+print("Hello from Summit 2023!")
+quit()
+----
+
+image::devspaces-terminal-python.png[Dev Spaces Terminal Python]
+
+### Git support
 
 Dev Spaces also provides a built-in version control system. This allows you to commit and push your changes to a Git repository. You can also use the version control system to pull changes from a Git repository.
 
 image::devspaces-git.png[Dev Spaces Git]
 
 ## Editing the Vote Application in Dev Spaces
+
+Let's first setup the dependencies for our application and run the the Vote Application locally. From the top right corner, we can select *Terminal* and then *Run Task*. 
+
+image::devspaces-run-task.png[Dev Spaces Run Task]
+
+From here, we can select *Show all tasks* and *devfile: Install dependencies*. This will install the dependencies for the Vote Application.
+
+image::devspaces-run-task-2.png[Dev Spaces Run Task]
+
+Next, we can select *Terminal* and then *Run Task* again. From here, we can select *Show all tasks* and *devfile: Run Python App*. This will run the Vote Application in development.
+
+image::devspaces-run-app.png[Dev Spaces Run App]
+
+You'll now see a pop-up in the lower right corner about a new process running on port 8080. We'll also be able to see live code changes to the Vote Application running in the browser.
+
+image::devspaces-run-app-browser.png[Dev Spaces Run App Browser]
+image::devspaces-run-app-browser-1.png[Dev Spaces Run App Browser]
 
 From the Dev Spaces interface, we can now begin to make changes to the Vote Application. To do this, we can edit the `index.html` file in the `templates` directory. 
 
@@ -40,25 +75,21 @@ Here, on line 16, we can change the text from `{{option_a}} vs {{option_b}}!` to
 
 image::devspaces-edit-title.png[Dev Spaces Edit Title]
 
-Now before pushing our changes to the repository, we can test our changes by running the Vote Application locally. From the top right corner, we can select *Terminal* and then *Run Task*. 
-
-image::devspaces-run-task.png[Dev Spaces Run Task]
-
-From here, we can select *Show all tasks* and *devfile: Install dependencies*. This will install the dependencies for the Vote Application.
-
-image::devspaces-run-task-2.png[Dev Spaces Run Task]
-
-Next, we can select *Terminal* and then *Run Task* again. From here, we can select *Show all tasks* and *devfile: Run Python App*. This will run the Vote Application in development.
-
-image::devspaces-run-app.png[Dev Spaces Run App]
-
-You'll now see a pop-up in the lower right corner about a new process running on port 8080.
-
-image::devspaces-run-app-browser.png[Dev Spaces Run App Browser]
-
 From here, we can click on the *Open* button to open the Vote Application in a new browser tab. It may take a few seconds, but you should see the Vote Application running.
 
 image::devspaces-run-app-browser-2.png[Dev Spaces Run App Browser]
+
+## Performing a security scan
+
+Now that we've made our changes to the Vote Application, we can analyze our dependencies by performing a security scan. Dependency Analytics is powered by Snyk Intel Vulnerability DB, it is the most advanced and accurate open source vulnerability database in the industry.
+
+To do this, we can right click the *requirements.txt* file from the left menu. From here, we can select *Dependency Analytics Report* to perform a security scan on the Vote Application.
+
+image::devspaces-snyk.png[Dev Spaces Snyk]
+
+This will open up a new tab in the browser with the results of the security scan. Here, we can see information about security issues, dependencies, and licenses.
+
+image::devspaces-snyk-report.png[Dev Spaces Snyk Report]
 
 ## Pushing changes to the Git repository
 
