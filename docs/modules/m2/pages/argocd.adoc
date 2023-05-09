@@ -1,18 +1,18 @@
-# Red Hat Summit 2023: Vote App Lab Development - ArgoCD
+# Red Hat Summit 2023: Vote App Lab Development - Argo CD
 
-Now, the next step is to deploy the Vote App to the dev environment using ArgoCD.
+Now, the next step is to deploy the Vote App to the dev environment using Argo CD.
 
-## Creating a new application using ArgoCD
+## Creating a new application using Argo CD
 
-Let's use the ArgoCD CLI to create a new application. From the OpenShift web console, click on the menu icon on the top right corner and select `ArgoCD`.
+Let's use Argo CD to create a new application. While you can use this link:https://argocd-server-argocd-%USERID%.%SUBDOMAIN%[*Argo CD*] link to login to the Argo CD dashboard, you can also head to Argo CD from within your cluster by visiting the `argocd-%USERID%` project in the OpenShift web console.
 
-image::argocd-button.png[ArgoCD Button]
+image::argocd-button.png[Argo CD Button]
 
 Then, click on the `Login with OpenShift` button.
 
-image::argocd-login.png[ArgoCD Login]
+image::argocd-login.png[Argo CD Login]
 
-Within the ArgoCD web console, click on the `+ New App` button.
+Within the Argo CD web console, click on the `+ New App` button.
 
 image::argocd-new-app.png[ArgoCD New App]
 
@@ -46,7 +46,7 @@ image::argocd-app-details-2.png[ArgoCD App Details Continued]
 
 ## Viewing the application in the OpenShift web console
 
-Now, let's view the application in the OpenShift web console. From the OpenShift web console in the `vote-app-dev-%USERID%` project, click on the `Topology` tab.
+Now, let's link:https://vote-ui-vote-app-dev-%USERID%.%SUBDOMAIN%[*view the application*] in the OpenShift web console. From the OpenShift web console in the `vote-app-dev-%USERID%` project, click on the `Topology` tab.
 
 image::dev-topology.png[OpenShift Topology]
 
@@ -54,6 +54,30 @@ To access the application, click on the `vote-app` route icon, which will open t
 
 image::vote-app-access.png[Voting App Access]
 
+## Using the Web Terminal to modify the development project
+
+Now, let's use the web terminal to modify the development project and demonstrate that we have not yet put in place self-healing or high availability just yet. From the OpenShift web console in the `vote-app-dev-%USERID%` project, click on the *Terminal* icon from the top right of the page.
+
+image::terminal-icon.png[Web Terminal Icon]
+
+From the web terminal, run the following command scale up the `vote-ui` deployment to 2 replicas:
+
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
+----
+oc scale deployment vote-ui --replicas=2
+----
+
+image::scale-up.png[Scale Up]
+
+This command will scale up the `vote-ui` deployment to 2 replicas. Now, we can return to Argo CD to see how the application is out of sync.
+
+image::argocd-app-details-3.png[ArgoCD App Details]
+
+Now, click *Sync* and select *Synchronize* to sync the application back to the manifests in the link:https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops[Gitea Vote App GitOps] repository.
+
+image::argocd-sync.png[Argo CD Sync]
+
 ## Next Steps
 
-Now that you have deployed the Vote App to the dev environment using ArgoCD, we can use OpenShift DevSpaces to develop and test the application locally before moving to the `prod` environment.
+Now that you have deployed the Vote App to the dev environment using Argo CD, we can use OpenShift DevSpaces to develop and test the application locally before moving to the `vote-app-prod-%USERID%` environment and implementing self-healing and high availability.

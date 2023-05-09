@@ -1,10 +1,10 @@
 # Red Hat Summit 2023: Vote App Lab Development - Finish
 
-Congratulations on completing the first half of the lab! You have successfully deployed the Vote App to OpenShift using Tekton pipelines and ArgoCD. You have also learned how to use OpenShift DevSpaces to develop cloud-native applications. Thus far, you have:
+Congratulations on completing the first half of the lab! You have successfully deployed the Vote App to OpenShift using Tekton pipelines and ArgoCD. You have also learned how to use OpenShift Dev Spaces to develop cloud-native applications. Thus far, you have:
 
 - Set up a GitOps workflow using OpenShift, Tekton, and ArgoCD.
 - Deploy applications using Tekton pipelines and synchronized environments with ArgoCD.
-- Utilized OpenShift DevSpaces for a cloud-native development environment.
+- Utilized OpenShift Dev Spaces for a cloud-native development environment.
 - Manage application drifts and synchronization with ArgoCD.
 
 ## Next Steps
