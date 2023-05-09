@@ -11,7 +11,7 @@ In this lab, you learned how to:
 - Deploy and manage the `vote-api` and `vote-ui` applications using OpenShift.
 - Use webhooks to trigger pipelines automatically.
 - Implement GitOps principles for managing your application environments.
-- Work with OpenShift DevSpaces for an integrated development experience.
+- Work with OpenShift Dev Spaces for an integrated development experience.
 - Monitor and manage drifts in your applications and environments.
 
 ## Resources

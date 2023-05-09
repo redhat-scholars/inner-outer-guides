@@ -24,7 +24,7 @@ Dev Spaces also provides a terminal that allows you to run commands in your work
 
 image::devspaces-terminal.png[Dev Spaces Terminal]
 
-With the terminal, let's run the following command to test out the Python which has been installed in our workspace.
+With the terminal, let's run the following command to test out a bit of Python code, as Python has been installed in our workspace.
 
 [.console-input]
 [source,python,subs="+attributes,macros+"]

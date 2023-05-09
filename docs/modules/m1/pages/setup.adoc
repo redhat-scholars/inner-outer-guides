@@ -87,13 +87,13 @@ We'll use link:https://devspaces.%SUBDOMAIN%[*OpenShift Dev Spaces*] to develop 
 then click to *OpenShift Dev Spaces*:
 
 .OpenShift Dev Spaces Operator
-image::openshift-devspaces-operator.png[OpenShift DevSpaces Operator]
+image::openshift-devspaces-operator.png[OpenShift Dev Spaces Operator]
 
 - From the description view, click _Install_ to review all installation
 settings.
 
 .OpenShift Dev Spaces Operator Install
-image::openshift-devspaces-operator-install.png[OpenShift DevSpaces operator]
+image::openshift-devspaces-operator-install.png[OpenShift Dev Spaces operator]
 
 - After few seconds, the installation should be completed with success and
 you can verify it looking at _Status_ column, check if the status is
