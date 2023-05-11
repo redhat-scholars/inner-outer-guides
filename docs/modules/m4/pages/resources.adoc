@@ -1,25 +1,33 @@
 # Red Hat Summit 2023: Vote App Lab Conclusion - Resources
 
-Thank you once again for participating in the Red Hat Summit 2023 Vote App Lab. As you continue to explore and apply the concepts and tools learned in this lab, we would like to provide you with some valuable resources that will support your ongoing GitOps journey and help you gain a deeper understanding of OpenShift, Tekton, ArgoCD, and OpenShift Dev Spaces.
+Thank you once again for participating in the Red Hat Summit 2023 Vote App Lab. As you continue to explore and apply the concepts and tools learned in this lab, we would like to provide you with some valuable resources that will support your ongoing GitOps journey and help you gain a deeper understanding of OpenShift, Tekton, Argo CD, and OpenShift Dev Spaces.
+
+## Red Hat Developer Resources
+
+1. link:https://developers.redhat.com/e-books/gitops-cookbook[GitOps Cookbook eBook]
+
+image::gitops-cookbook.png
 
 ## Official Documentation
 
-1. OpenShift Documentation - https://docs.openshift.com/container-platform/latest/welcome/index.html
-2. Tekton Documentation - https://tekton.dev/docs/
-3. ArgoCD Documentation - https://argo-cd.readthedocs.io/en/stable/
-5. OpenShift Dev Spaces Documentation - https://access.redhat.com/documentation/en-us/red_hat_openshift_dev_spaces/3.0
+1. link:https://docs.openshift.com/container-platform/latest/welcome/index.html[OpenShift Documentation]
+2. link:https://tekton.dev/docs[Tekton Documentation]
+3. link:https://argo-cd.readthedocs.io/en/stable[OpenShift Dev Spaces]
+4. link:https://access.redhat.com/documentation/en-us/red_hat_openshift_dev_spaces/3.0[OpenShift Dev Spaces Documentation]
 
 ## Blogs and Tutorials
 
-1. OpenShift Blog - https://www.openshift.com/blog
-2. Tekton Blog - https://tekton.dev/blog/
-3. ArgoCD Blog - https://blog.argoproj.io/
-4. Red Hat Developer Blog - https://developers.redhat.com/blog/
+1. link:https://www.openshift.com/blog[OpenShift Blog]
+2. link:https://tekton.dev/blog[Tekton Blog]
+3. link:https://blog.argoproj.io[Argo CD Blog]
+4. link:https://developers.redhat.com/blog/[Red Hat Developer Blog]
 
 ## Community and Support
 
-1. OpenShift Community - https://www.openshift.com/community
-2. Tekton Community - https://tekton.dev/community/
-3. ArgoCD Community - https://github.com/argoproj/argo-cd/discussions/
+1. link:https://www.openshift.com/community[OpenShift Community]
+2. link:https://tekton.dev/community/[Tekton Community]
+3. link:https://github.com/argoproj/argo-cd/discussions/[Argo CD Community]
+
+## Wrapping Up
 
 We hope that these resources will be helpful in your journey to mastering the concepts and tools covered in the Vote App Lab. Good luck, and happy learning!

@@ -1,3 +1,4 @@
 .Module One: Overview
 * xref:intro.adoc[Introduction]
-* xref:setup.adoc[Setup]
+* xref:inner-outer.adoc[Inner vs Outer Loop]
+* xref:setup.adoc[Lab Setup]

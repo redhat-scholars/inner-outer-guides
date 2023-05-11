@@ -1,6 +1,6 @@
 # Red Hat Summit 2023: Vote App Lab Development - Pipelines
 
-In this section, you will learn how to use a pipeline resource and trigger the pipeline to run. The pipeline will build and deploy the vote app API and UI. The pipeline will be triggered when a commit is made to the vote app API and UI git repositories. The pipeline will build the application and push the image to the internal image registry. The pipeline will then update the deployment in the `vote-app-gitops` repository with the new image.
+In this section, you will learn how to use a Tekton pipeline resource and trigger the pipeline to run. The pipeline will firstly clone the git repository source code of the `vote-api` and `vote-ui` repositories. The pipeline will then build the application and push the image to the internal image registry. Finally, the pipeline will then update the deployment in the `vote-app-gitops` repository with the new image. We'll also later add a webhook to the `vote-ui` to trigger when a commit is made to the Git repository.
 
 ## Viewing the pipelines
 
@@ -10,369 +10,369 @@ image::switch-perspective.png[]
 
 Before we start the pipelines, let's take a look at the pipelines that have been created for you. These pipelines are created in the `vote-app-ci-%USERID%` namespace. To view the pipelines, click on the *Pipelines* link in the left navigation menu. Let's also take a look at the contents of the pipelines:
 
-[tabs, subs="attributes+,+macros"]
-====
-vote-app-api-pipeline::
-+
---
-[.console-output]
-[source,bash]
-----
-apiVersion: tekton.dev/v1beta1
-kind: Pipeline
-metadata:
-  name: vote-app-api-pipeline
-  namespace: vote-app-ci-%USERID%
-spec:
-  params:
-  - name: SOURCE_GIT_URL
-    type: string
-    description: The application git repository url
-    default: 'http://gitea.gitea.svc:3000/%USERID%/pipelines-vote-api'
-  - name: SOURCE_GIT_REVISION
-    type: string
-    default: master
-    description: The application git repository revision
-  - default: image-registry.openshift-image-registry.svc:5000/vote-app-dev-%USERID%/vote-api
-    name: IMAGE_NAME
-    type: string
-  - default: .
-    name: PATH_CONTEXT
-    type: string
-  - default: 'http://gitea.gitea.svc:3000/%USERID%/vote-app-gitops'
-    name: CONFIG_GIT_REPO
-    type: string
-  - default: main
-    name: CONFIG_GIT_REVISION
-    type: string
+// [tabs, subs="attributes+,+macros"]
+// ====
+// vote-app-api-pipeline::
+// +
+// --
+// [.console-output]
+// [source,bash]
+// ----
+// apiVersion: tekton.dev/v1beta1
+// kind: Pipeline
+// metadata:
+//   name: vote-app-api-pipeline
+//   namespace: vote-app-ci-%USERID%
+// spec:
+//   params:
+//   - name: SOURCE_GIT_URL
+//     type: string
+//     description: The application git repository url
+//     default: 'http://gitea.gitea.svc:3000/%USERID%/pipelines-vote-api'
+//   - name: SOURCE_GIT_REVISION
+//     type: string
+//     default: master
+//     description: The application git repository revision
+//   - default: image-registry.openshift-image-registry.svc:5000/vote-app-dev-%USERID%/vote-api
+//     name: IMAGE_NAME
+//     type: string
+//   - default: .
+//     name: PATH_CONTEXT
+//     type: string
+//   - default: 'http://gitea.gitea.svc:3000/%USERID%/vote-app-gitops'
+//     name: CONFIG_GIT_REPO
+//     type: string
+//   - default: main
+//     name: CONFIG_GIT_REVISION
+//     type: string
 
-  workspaces:
-  - name: app-source
+//   workspaces:
+//   - name: app-source
 
-  tasks:
+//   tasks:
 
-  - name: git-clone
-    taskRef:
-      kind: ClusterTask
-      name: git-clone
-    params:
-    - name: url
-      value: $(params.SOURCE_GIT_URL)
-    - name: revision
-      value: $(params.SOURCE_GIT_REVISION)
-    - name: deleteExisting
-      value: 'true'
-    workspaces:
-    - name: output
-      workspace: app-source
+//   - name: git-clone
+//     taskRef:
+//       kind: ClusterTask
+//       name: git-clone
+//     params:
+//     - name: url
+//       value: $(params.SOURCE_GIT_URL)
+//     - name: revision
+//       value: $(params.SOURCE_GIT_REVISION)
+//     - name: deleteExisting
+//       value: 'true'
+//     workspaces:
+//     - name: output
+//       workspace: app-source
 
-  - name: build-and-push
-    params:
-    - name: IMAGE
-      value: $(params.IMAGE_NAME)
-    - name: TLSVERIFY
-      value: "false"
-    - name: CONTEXT
-      value: $(params.PATH_CONTEXT)
-    runAfter:
-    - git-clone
-    taskRef:
-      kind: ClusterTask
-      name: buildah
-    workspaces:
-    - name: source
-      workspace: app-source
+//   - name: build-and-push
+//     params:
+//     - name: IMAGE
+//       value: $(params.IMAGE_NAME)
+//     - name: TLSVERIFY
+//       value: "false"
+//     - name: CONTEXT
+//       value: $(params.PATH_CONTEXT)
+//     runAfter:
+//     - git-clone
+//     taskRef:
+//       kind: ClusterTask
+//       name: buildah
+//     workspaces:
+//     - name: source
+//       workspace: app-source
 
-  - name: git-update-deployment
-    params:
-    - name: GIT_REPOSITORY
-      value: $(params.CONFIG_GIT_REPO)
-    - name: CURRENT_IMAGE
-      value: quay.io/bluesman/vote-api:latest
-    - name: NEW_IMAGE
-      value: $(params.IMAGE_NAME)
-    - name: NEW_DIGEST
-      value: $(tasks.build-and-push.results.IMAGE_DIGEST)
-    - name: KUSTOMIZATION_PATH
-      value: environments/dev
-    - name: GIT_REF
-      value: $(params.CONFIG_GIT_REVISION)
-    runAfter:
-      - build-and-push
-    taskRef:
-      kind: Task
-      name: git-update-deployment
-    workspaces:
-    - name: workspace
-      workspace: app-source
-----
---
-vote-app-ui-pipeline::
-+
---
-[.console-output]
-[source,bash]
-----
-apiVersion: tekton.dev/v1beta1
-kind: Pipeline
-metadata:
-  name: vote-app-ui-pipeline
-  namespace: vote-app-ci-%USERID%
-spec:
-  params:
-  - name: SOURCE_GIT_URL
-    type: string
-    description: The application git repository url
-    default: 'http://gitea.gitea.svc:3000/%USERID%/pipelines-vote-ui'
-  - name: SOURCE_GIT_REVISION
-    type: string
-    default: master
-    description: The application git repository revision
-  - default: image-registry.openshift-image-registry.svc:5000/vote-app-dev-%USERID%/vote-ui
-    name: IMAGE_NAME
-    type: string
-  - default: .
-    name: PATH_CONTEXT
-    type: string
-  - default: 'http://gitea.gitea.svc:3000/%USERID%/vote-app-gitops'
-    name: CONFIG_GIT_REPO
-    type: string
-  - default: main
-    name: CONFIG_GIT_REVISION
-    type: string
+//   - name: git-update-deployment
+//     params:
+//     - name: GIT_REPOSITORY
+//       value: $(params.CONFIG_GIT_REPO)
+//     - name: CURRENT_IMAGE
+//       value: quay.io/bluesman/vote-api:latest
+//     - name: NEW_IMAGE
+//       value: $(params.IMAGE_NAME)
+//     - name: NEW_DIGEST
+//       value: $(tasks.build-and-push.results.IMAGE_DIGEST)
+//     - name: KUSTOMIZATION_PATH
+//       value: environments/dev
+//     - name: GIT_REF
+//       value: $(params.CONFIG_GIT_REVISION)
+//     runAfter:
+//       - build-and-push
+//     taskRef:
+//       kind: Task
+//       name: git-update-deployment
+//     workspaces:
+//     - name: workspace
+//       workspace: app-source
+// ----
+// --
+// vote-app-ui-pipeline::
+// +
+// --
+// [.console-output]
+// [source,bash]
+// ----
+// apiVersion: tekton.dev/v1beta1
+// kind: Pipeline
+// metadata:
+//   name: vote-app-ui-pipeline
+//   namespace: vote-app-ci-%USERID%
+// spec:
+//   params:
+//   - name: SOURCE_GIT_URL
+//     type: string
+//     description: The application git repository url
+//     default: 'http://gitea.gitea.svc:3000/%USERID%/pipelines-vote-ui'
+//   - name: SOURCE_GIT_REVISION
+//     type: string
+//     default: master
+//     description: The application git repository revision
+//   - default: image-registry.openshift-image-registry.svc:5000/vote-app-dev-%USERID%/vote-ui
+//     name: IMAGE_NAME
+//     type: string
+//   - default: .
+//     name: PATH_CONTEXT
+//     type: string
+//   - default: 'http://gitea.gitea.svc:3000/%USERID%/vote-app-gitops'
+//     name: CONFIG_GIT_REPO
+//     type: string
+//   - default: main
+//     name: CONFIG_GIT_REVISION
+//     type: string
 
-  workspaces:
-  - name: app-source
+//   workspaces:
+//   - name: app-source
 
-  tasks:
+//   tasks:
 
-  - name: git-clone
-    taskRef:
-      kind: ClusterTask
-      name: git-clone
-    params:
-    - name: url
-      value: $(params.SOURCE_GIT_URL)
-    - name: revision
-      value: $(params.SOURCE_GIT_REVISION)
-    - name: deleteExisting
-      value: 'true'
-    workspaces:
-    - name: output
-      workspace: app-source
+//   - name: git-clone
+//     taskRef:
+//       kind: ClusterTask
+//       name: git-clone
+//     params:
+//     - name: url
+//       value: $(params.SOURCE_GIT_URL)
+//     - name: revision
+//       value: $(params.SOURCE_GIT_REVISION)
+//     - name: deleteExisting
+//       value: 'true'
+//     workspaces:
+//     - name: output
+//       workspace: app-source
 
-  - name: build-and-push
-    params:
-    - name: IMAGE
-      value: $(params.IMAGE_NAME)
-    - name: TLSVERIFY
-      value: "false"
-    - name: CONTEXT
-      value: $(params.PATH_CONTEXT)
-    runAfter:
-    - git-clone
-    taskRef:
-      kind: ClusterTask
-      name: buildah
-    workspaces:
-    - name: source
-      workspace: app-source
+//   - name: build-and-push
+//     params:
+//     - name: IMAGE
+//       value: $(params.IMAGE_NAME)
+//     - name: TLSVERIFY
+//       value: "false"
+//     - name: CONTEXT
+//       value: $(params.PATH_CONTEXT)
+//     runAfter:
+//     - git-clone
+//     taskRef:
+//       kind: ClusterTask
+//       name: buildah
+//     workspaces:
+//     - name: source
+//       workspace: app-source
 
-  - name: git-update-deployment
-    params:
-    - name: GIT_REPOSITORY
-      value: $(params.CONFIG_GIT_REPO)
-    - name: CURRENT_IMAGE
-      value: quay.io/bluesman/vote-ui:latest
-    - name: NEW_IMAGE
-      value: $(params.IMAGE_NAME)
-    - name: NEW_DIGEST
-      value: $(tasks.build-and-push.results.IMAGE_DIGEST)
-    - name: KUSTOMIZATION_PATH
-      value: environments/dev
-    - name: GIT_REF
-      value: $(params.CONFIG_GIT_REVISION)
-    runAfter:
-      - build-and-push
-    taskRef:
-      kind: Task
-      name: git-update-deployment
-    workspaces:
-    - name: workspace
-      workspace: app-source
-----
---
-promote-to-prod::
-+
---
-[.console-output]
-[source,bash]
-----
-apiVersion: tekton.dev/v1beta1
-kind: Pipeline
-metadata:
-  name: promote-to-prod
-  namespace: vote-app-ci-%USERID%
-spec:
-  params:
-    - default: 'vote-app-dev-%USERID%/vote-ui:latest'
-      name: SOURCE_IMAGE
-      type: string
-    - default: 'vote-app-prod-%USERID%/vote-ui:prod'
-      name: DEST_IMAGE
-      type: string
-    - default: 'http://gitea.gitea.svc:3000/%USERID%/vote-app-gitops'
-      name: CONFIG_GIT_REPO
-      type: string
-    - default: main
-      name: CONFIG_GIT_REVISION
-      type: string
-    - default: >-
-        image-registry.openshift-image-registry.svc:5000/vote-app-prod-%USERID%/vote-ui
-      name: IMAGE_NAME
-      type: string
-  tasks:
-    - name: tag-to-prod
-      params:
-        - name: SCRIPT
-          value: oc tag $(params.SOURCE_IMAGE) $(params.DEST_IMAGE)
-        - name: VERSION
-          value: latest
-      taskRef:
-        kind: ClusterTask
-        name: openshift-client
-    - name: image-tag-to-digest
-      params:
-        - name: image_dest_url
-          value: $(params.IMAGE_NAME)
-        - name: image_dest_tag
-          value: prod
-      runAfter:
-        - tag-to-prod
-      taskRef:
-        kind: Task
-        name: image-tag-to-digest
-    - name: git-update-deployment
-      params:
-        - name: GIT_REPOSITORY
-          value: $(params.CONFIG_GIT_REPO)
-        - name: GIT_REF
-          value: $(params.CONFIG_GIT_REVISION)
-        - name: CURRENT_IMAGE
-          value: quay.io/bluesman/vote-ui:latest
-        - name: NEW_IMAGE
-          value: $(params.IMAGE_NAME)
-        - name: NEW_DIGEST
-          value: $(tasks.image-tag-to-digest.results.image_digest)
-        - name: KUSTOMIZATION_PATH
-          value: environments/prod
-      runAfter:
-        - image-tag-to-digest
-      taskRef:
-        kind: Task
-        name: git-update-deployment
-      workspaces:
-        - name: workspace
-          workspace: app-source
-  workspaces:
-    - name: app-source
-----
---
-git-update-deployment-task::
-+
---
-[.console-output]
-[source,bash]
-----
-apiVersion: tekton.dev/v1beta1
-kind: Task
-metadata:
-  annotations:
-    tekton.dev/pipelines.minVersion: 0.12.1
-    tekton.dev/tags: git
-  name: git-update-deployment
-  namespace: vote-app-ci-%USERID%
-  labels:
-    app.kubernetes.io/version: '0.2'
-    operator.tekton.dev/provider-type: community
-spec:
-  description: >-
-    This Task can be used to update image digest in a Git repo using kustomize.
-    It requires a secret with credentials for accessing the git repo.
-  params:
-    - name: GIT_REPOSITORY
-      type: string
-    - name: GIT_REF
-      type: string
-    - name: CURRENT_IMAGE
-      type: string
-    - name: NEW_IMAGE
-      type: string
-    - name: NEW_DIGEST
-      type: string
-    - name: KUSTOMIZATION_PATH
-      type: string
-  results:
-    - description: The commit SHA
-      name: commit
-  steps:
-    - image: 'docker.io/alpine/git:v2.26.2'
-      name: git-clone
-      resources: {}
-      script: >
-        rm -rf git-update-digest-workdir
+//   - name: git-update-deployment
+//     params:
+//     - name: GIT_REPOSITORY
+//       value: $(params.CONFIG_GIT_REPO)
+//     - name: CURRENT_IMAGE
+//       value: quay.io/bluesman/vote-ui:latest
+//     - name: NEW_IMAGE
+//       value: $(params.IMAGE_NAME)
+//     - name: NEW_DIGEST
+//       value: $(tasks.build-and-push.results.IMAGE_DIGEST)
+//     - name: KUSTOMIZATION_PATH
+//       value: environments/dev
+//     - name: GIT_REF
+//       value: $(params.CONFIG_GIT_REVISION)
+//     runAfter:
+//       - build-and-push
+//     taskRef:
+//       kind: Task
+//       name: git-update-deployment
+//     workspaces:
+//     - name: workspace
+//       workspace: app-source
+// ----
+// --
+// promote-to-prod::
+// +
+// --
+// [.console-output]
+// [source,bash]
+// ----
+// apiVersion: tekton.dev/v1beta1
+// kind: Pipeline
+// metadata:
+//   name: promote-to-prod
+//   namespace: vote-app-ci-%USERID%
+// spec:
+//   params:
+//     - default: 'vote-app-dev-%USERID%/vote-ui:latest'
+//       name: SOURCE_IMAGE
+//       type: string
+//     - default: 'vote-app-prod-%USERID%/vote-ui:prod'
+//       name: DEST_IMAGE
+//       type: string
+//     - default: 'http://gitea.gitea.svc:3000/%USERID%/vote-app-gitops'
+//       name: CONFIG_GIT_REPO
+//       type: string
+//     - default: main
+//       name: CONFIG_GIT_REVISION
+//       type: string
+//     - default: >-
+//         image-registry.openshift-image-registry.svc:5000/vote-app-prod-%USERID%/vote-ui
+//       name: IMAGE_NAME
+//       type: string
+//   tasks:
+//     - name: tag-to-prod
+//       params:
+//         - name: SCRIPT
+//           value: oc tag $(params.SOURCE_IMAGE) $(params.DEST_IMAGE)
+//         - name: VERSION
+//           value: latest
+//       taskRef:
+//         kind: ClusterTask
+//         name: openshift-client
+//     - name: image-tag-to-digest
+//       params:
+//         - name: image_dest_url
+//           value: $(params.IMAGE_NAME)
+//         - name: image_dest_tag
+//           value: prod
+//       runAfter:
+//         - tag-to-prod
+//       taskRef:
+//         kind: Task
+//         name: image-tag-to-digest
+//     - name: git-update-deployment
+//       params:
+//         - name: GIT_REPOSITORY
+//           value: $(params.CONFIG_GIT_REPO)
+//         - name: GIT_REF
+//           value: $(params.CONFIG_GIT_REVISION)
+//         - name: CURRENT_IMAGE
+//           value: quay.io/bluesman/vote-ui:latest
+//         - name: NEW_IMAGE
+//           value: $(params.IMAGE_NAME)
+//         - name: NEW_DIGEST
+//           value: $(tasks.image-tag-to-digest.results.image_digest)
+//         - name: KUSTOMIZATION_PATH
+//           value: environments/prod
+//       runAfter:
+//         - image-tag-to-digest
+//       taskRef:
+//         kind: Task
+//         name: git-update-deployment
+//       workspaces:
+//         - name: workspace
+//           workspace: app-source
+//   workspaces:
+//     - name: app-source
+// ----
+// --
+// git-update-deployment-task::
+// +
+// --
+// [.console-output]
+// [source,bash]
+// ----
+// apiVersion: tekton.dev/v1beta1
+// kind: Task
+// metadata:
+//   annotations:
+//     tekton.dev/pipelines.minVersion: 0.12.1
+//     tekton.dev/tags: git
+//   name: git-update-deployment
+//   namespace: vote-app-ci-%USERID%
+//   labels:
+//     app.kubernetes.io/version: '0.2'
+//     operator.tekton.dev/provider-type: community
+// spec:
+//   description: >-
+//     This Task can be used to update image digest in a Git repo using kustomize.
+//     It requires a secret with credentials for accessing the git repo.
+//   params:
+//     - name: GIT_REPOSITORY
+//       type: string
+//     - name: GIT_REF
+//       type: string
+//     - name: CURRENT_IMAGE
+//       type: string
+//     - name: NEW_IMAGE
+//       type: string
+//     - name: NEW_DIGEST
+//       type: string
+//     - name: KUSTOMIZATION_PATH
+//       type: string
+//   results:
+//     - description: The commit SHA
+//       name: commit
+//   steps:
+//     - image: 'docker.io/alpine/git:v2.26.2'
+//       name: git-clone
+//       resources: {}
+//       script: >
+//         rm -rf git-update-digest-workdir
 
-        git clone $(params.GIT_REPOSITORY) -b $(params.GIT_REF)
-        git-update-digest-workdir
-      workingDir: $(workspaces.workspace.path)
-    - image: 'quay.io/wpernath/kustomize-ubi:latest'
-      name: update-digest
-      resources: {}
-      script: >
-        cd git-update-digest-workdir/$(params.KUSTOMIZATION_PATH)
+//         git clone $(params.GIT_REPOSITORY) -b $(params.GIT_REF)
+//         git-update-digest-workdir
+//       workingDir: $(workspaces.workspace.path)
+//     - image: 'quay.io/wpernath/kustomize-ubi:latest'
+//       name: update-digest
+//       resources: {}
+//       script: >
+//         cd git-update-digest-workdir/$(params.KUSTOMIZATION_PATH)
 
-        kustomize edit set image
-        $(params.CURRENT_IMAGE)=$(params.NEW_IMAGE)@$(params.NEW_DIGEST)
+//         kustomize edit set image
+//         $(params.CURRENT_IMAGE)=$(params.NEW_IMAGE)@$(params.NEW_DIGEST)
 
 
-        echo "##########################"
+//         echo "##########################"
 
-        echo "### kustomization.yaml ###"
+//         echo "### kustomization.yaml ###"
 
-        echo "##########################"
+//         echo "##########################"
 
-        cat kustomization.yaml
-      workingDir: $(workspaces.workspace.path)
-    - image: 'docker.io/alpine/git:v2.26.2'
-      name: git-commit
-      resources: {}
-      script: |
-        cd git-update-digest-workdir
+//         cat kustomization.yaml
+//       workingDir: $(workspaces.workspace.path)
+//     - image: 'docker.io/alpine/git:v2.26.2'
+//       name: git-commit
+//       resources: {}
+//       script: |
+//         cd git-update-digest-workdir
 
-        git config user.email "tektonbot@redhat.com"
-        git config user.name "My Tekton Bot"
+//         git config user.email "tektonbot@redhat.com"
+//         git config user.name "My Tekton Bot"
 
-        git status
-        git add $(params.KUSTOMIZATION_PATH)/kustomization.yaml
-        git commit -m "[ci] Image digest updated"
+//         git status
+//         git add $(params.KUSTOMIZATION_PATH)/kustomization.yaml
+//         git commit -m "[ci] Image digest updated"
 
-        git push
+//         git push
 
-        RESULT_SHA="$(git rev-parse HEAD | tr -d '\n')"
-        EXIT_CODE="$?"
-        if [ "$EXIT_CODE" != 0 ]
-        then
-          exit $EXIT_CODE
-        fi
-        # Make sure we don't add a trailing newline to the result!
-        echo -n "$RESULT_SHA" > $(results.commit.path)
-      workingDir: $(workspaces.workspace.path)
-  workspaces:
-    - description: The workspace consisting of maven project.
-      name: workspace
-----
---
-====
+//         RESULT_SHA="$(git rev-parse HEAD | tr -d '\n')"
+//         EXIT_CODE="$?"
+//         if [ "$EXIT_CODE" != 0 ]
+//         then
+//           exit $EXIT_CODE
+//         fi
+//         # Make sure we don't add a trailing newline to the result!
+//         echo -n "$RESULT_SHA" > $(results.commit.path)
+//       workingDir: $(workspaces.workspace.path)
+//   workspaces:
+//     - description: The workspace consisting of maven project.
+//       name: workspace
+// ----
+// --
+// ====
 
 ## Starting the `vote-app-api` pipeline
 
@@ -384,13 +384,11 @@ Within this Pipelines dashboard, you will see a list of pipelines.  Click on the
 
 image::pipeline-list.png[]
 
-Here, you can go through the pipeline steps and see what each step is doing.  You can also see the pipeline resources that are being used. In addition, you can see the pipeline parameters that are being used.  These parameters are used to pass in the name of the image that will be built, and the name of the image that will be pushed to the registry.
-
-For reference, here's the pipeline steps:
+Here, you can go through the pipeline steps and see what each step is doing.  You can also see the pipeline resources that are being used. In addition, you can see the pipeline parameters that are being used.  These parameters are used to pass in the name of the image that will be built, and the name of the image that will be pushed to the registry. For reference, here's the pipeline steps:
 
 - `git-clone`: This step clones the local Gitea repository that contains the source code for the application. We're able to do so because of a `gitea-gitops` secret that was created for you. This secret contains the username and password to access the Gitea repository.
 - `build-and-push`: This step builds the image and pushes it to the internal OpenShift registry.  The image name is passed in as a parameter.
-- `git-update-deployment`: This final step updates the deployment manifests in the Github repository.
+- `git-update-deployment`: This final step updates the deployment manifests in the Git repository.
 
 image::pipeline-details.png[]
 
@@ -442,7 +440,7 @@ Here, you can see the status of the deployment. You can also see the status of t
 
 Tekton supports Tekton Triggers to enable automation and web hooks to Pipelines. All settings have been already installed from previous command, and both pipelines support web hooks.
 
-Now that the `vote-ui` application is running, let's add a webhook to the application.  This webhook will be used to trigger a new build of the application when a change is made to the Github repository.
+Now that the `vote-ui` deployment is running, let's add a webhook. This webhook will be used to trigger a new build of the application when a change is made to the Git repository.
 
 From the Topology view, click on the `el-eventlistener-ui` Deployment. From there, navigate to the Routes section and copy the `el-eventlistener-ui` Route URL.
 
@@ -452,14 +450,14 @@ Once you have the URL copied to your clipboard, navigate to the code repository 
 
 image::add-webhook.png[Add Webhook]
 
-In the next screen, paste the copied Route URL into the Payload URL field. You can leave the secret token field blank. Change the Content Type to `application/json`.
+In the next screen, paste the copied Route URL into the *Target URL* field. You can leave the other fields blank, just ensure the Content Type is set to `application/json`.
 
 Finally, click on *Add webhook* to create the webhook.
 
 image::create-webhook.png[Create Webhook]
 
-To verify that everything is working, let's make some changes in the next section to the source code and push the changes to your forked repository. This should trigger the pipeline to start automatically.
+To verify that everything is working, let's make some changes in the OpenShift Dev Spaces section to the source code and push the changes to your forked repository. This should trigger the pipeline to start automatically.
 
 ## Next Steps
 
-Congratulations! You've successfully deployed the `vote-app` and `vote-api` pipelines using Tekton Pipelines. You've also added a webhook to the `vote-ui` application to trigger a new build when changes are made to the Github repository. Now, let's move on to the next lab to learn how to deploy the application using ArgoCD.
+Congratulations! You've successfully deployed the `vote-app` and `vote-api` pipelines using Tekton Pipelines. You've also added a webhook to the `vote-ui` application to trigger a new build when changes are made to the Git repository. Now, let's move on to the next lab to learn how to deploy the application using Argo CD.
