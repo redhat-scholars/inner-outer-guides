@@ -119,7 +119,7 @@ Now that we've pushed our changes to the Git repository, and with the webhook co
 
 image::devspaces-pipeline.png[Dev Spaces Pipeline]
 
-Once the pipeline has completed, in the link:https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops/[vote-app-gitops] repository, there will be a new commit from Tekton that will contain the new hash for the Vote Application image. 
+Once the pipeline has completed, in the link:https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops/[vote-app-gitops,role='params-link',window='_blank']] repository, there will be a new commit from Tekton that will contain the new hash for the Vote Application image. 
 
 image::devspaces-gitops-commit.png[Dev Spaces GitOps Commit]
 

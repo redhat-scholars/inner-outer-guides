@@ -40,7 +40,7 @@ image::pipeline-prod-ui-gitops.png[]
 
 ## Deploying the application to production using Argo CD
 
-Now it's time to create the production application directly from the link:https://argocd-server-argocd-%USERID%.%SUBDOMAIN%[*Argo CD*] dashboard, so firstly click on the `+ New App` button.
+Within the link:https://argocd-server-argocd-%USERID%.%SUBDOMAIN%[*Argo CD*,,role='params-link',window='_blank'] dashboard, click on the `+ New App` button.
 
 image::argocd-new-app.png[]
 
@@ -78,7 +78,7 @@ Almost immediately after scaling up the replicas for the `vote-ui` deployment, A
 
 ## Using Git to modify the application
 
-Now, let's go ahead and make a change to the application using Git. We'll change the number of replicas to `2`, and see how Argo CD detects the drift and auto-heals. To do this, let's go ahead and modify the `environments/prod/kustomization.yaml` file in the `vote-app-gitops` repository. You can do this by navigating to Gitea, clicking on the *Code* tab, navigating to the `environments/prod/kustomization.yaml` file link:https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops/src/branch/main/environments/prod/kustomization.yaml[*here*], then clicking on the *Edit File* button.
+Now, let's go ahead and make a change to the application. We'll change the number of replicas to `2`, and see how Argo CD detects the drift and auto-heals. To do this, let's go ahead and modify the `environments/prod/kustomization.yaml` file in the `vote-app-gitops` repository. You can do this by clicking on the *Code* tab, then clicking on the `environments/prod/kustomization.yaml` file link:https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops/src/branch/main/environments/prod/kustomization.yaml[*here*,,role='params-link',window='_blank'], then clicking on the *Edit* button.
 
 image::gitops-prod-kustomization.png[]
 
