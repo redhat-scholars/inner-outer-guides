@@ -1,6 +1,6 @@
 .Module Two: Development
 * xref:intro.adoc[Introduction]
 * xref:pipelines.adoc[Pipelines]
-* xref:argocd.adoc[ArgoCD]
+* xref:argocd.adoc[Argo CD]
 * xref:devspaces.adoc[Dev Spaces]
 * xref:finish.adoc[Finish]

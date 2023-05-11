@@ -1,0 +1,44 @@
+# Red Hat Summit 2023: Vote App Lab Overview - Inner & Outer Loop
+
+To understand the flow of the lab, let's learn a bit about the inner and outer loop of development. This is a critical part of a developer's workflow when it comes to using the various technologies in this workshop. The development cycle is typically organized in two loops, one closer to the developer inner-loop; where you code, test, debug iteratively and one further away, the outer-loop; where your code runs inside a container image you have to build, push and deploy.
+
+## Inner Loop vs Outer Loop
+
+In this lab, we will be using these two different types of CI/CD pipelines: the inner loop and outer loop. The inner loop pipeline is used for development and testing of code locally (ex. using OpenShift Dev Spaces). The outer loop pipeline is used for deploying applications to development and production (ex. using Argo CD).
+
+.Inner vs Outer
+image::inner-vs-outer-loop.png[Inner vs Outer Loop]
+
+The truth is that, even though you will eventually run your code inside a kubernetes cluster, you still generally develop locally where you have your IDE, compilers, etc. Well, you may think to yourself:
+
+[quote]
+____
+I can "test it all" locally, then just push my code and the rest is history.
+____
+
+However, this is not always the case, for example, you may need to connect to a database, or a service, or a large database, etc. and you may not have all that locally. In this case, this is where the Kubernetes native inner and outer development loop comes in handy.
+
+.Kubernetes Native Development Loop
+image::kubernetes-development-loop.png[Kubernetes Native Development Loop]
+
+## Inner and Outer loop flow
+
+Now, let's take a look at our usage of the inner and outer loop development flow that we'll be using today.
+
+### Inner Loop
+
+The inner loop pipeline is used for development and testing of code locally using OpenShift Dev Spaces. This inner loop involves local development and testing, where developers write code, build the application, and test it locally before pushing any changes to the remote repository. This is where developers fix bugs, add features, and iterate on the application rapidly.
+
+.Working within OpenShift Dev Spaces
+image::devspaces-interface.png[Dev Spaces Interface]
+
+### Outer Loop
+
+The outer loop pipeline is used for deploying applications to production using Argo CD within OpenShift Gitops. This stage starts after the inner loop, when changes are pushed to the remote repository. The outer loop pipeline is triggered when a developer pushes code to a Git repository. The pipeline will build the code, create a new image, and update the repository with the new image tag. Argo CD will then detect the change and deploy the new image to the production environment. The outer loop automates the deployment of the application to the Kubernetes cluster, ensuring that the infrastructure is always in sync with the desired state defined in the Git repository.
+
+.Argo CD syncing our application
+image::argocd-app-details-2.png[Argo CD App Details]
+
+## Next Steps
+
+Great! Now that we understand the role of the inner and outer loop, we can begin to start taking a look at the OpenShift cluster that we're using. This includes understanding the operators used (such as OpenShift GitOps and Dev Spaces), as well as the Git repositories.

@@ -1,7 +1,15 @@
 # Red Hat Summit 2023: Vote App Lab Development - Introduction
 
-## Introduction
+In this module, we'll perform a few steps during our development phase of the Vote App deployment.
 
-In this module, we'll start by creating a basic CI/CD pipeline using Tekton and OpenShift. We'll then deploy our application to a development environment using ArgoCD. Next, we'll make changes to the code and push them to the repository. We'll see how Tekton automatically detects the changes and triggers a new build. We'll then deploy the new version of the application to the development environment
+## Development Module Flow
 
-Let's begin!
+- We'll start by running two CI/CD pipelines using Tekton provided by OpenShift Pipelines, and afterwards enable automation using a git webhook for our pipeline. 
+- Next, we will pre-deploy the application to our `vote-app-dev-%USERID%` environment using Argo CD through OpenShift GitOps. 
+- After, we can make changes to the code and push them to the repository using OpenShift Dev Spaces. We'll see how Tekton automatically detects the changes and triggers a new build. 
+- Argo CD will then detect a drift between what is declared in Git and what it is available in the cluster, and we'll manually sync the application.
+- Finally, we will use the OpenShift Web Terminal to scale the deployment being that we haven't implemented high-availability.
+
+## Next Steps 
+
+Great, we'll be learning a lot through this development module! Let's begin.

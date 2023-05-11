@@ -1,52 +1,28 @@
 # Red Hat Summit 2023: Vote App Lab Overview - Introduction
 
+Welcome to the Red Hat Summit 2023 Vote App Lab, we're glad to have you here with us!
+
 ## About this lab
 
-This lab will guide you through the process of creating a CI/CD pipeline for a sample Vote App using OpenShift, Tekton, ArgoCD, and OpenShift Dev Spaces. You will learn how to set up and manage the entire application lifecycle, from development to production.
+This lab will guide you through the process of inner and outer loop development, using link:https://developers.redhat.com/products/openshift-dev-spaces/overview[OpenShift Dev Spaces] to code and push changes to a Git repository, as well as start Tekton pipelines using link:https://catalog.redhat.com/software/container-stacks/detail/5ec54a4628834587a6b85ca5[OpenShift Pipelines]. Then, we'll use Argo CD with link:https://www.redhat.com/en/technologies/cloud-computing/openshift/gitops[OpenShift GitOps] to sync our application in both development and production environments. Through this lab, you'll learn how to set up and manage the entire application lifecycle within a Red Hat OpenShift cluster.
 
 .Lab Architecture
 image::demo-architecture.png[Architecture]
 
 ## Introduction
 
-The Vote App is a simple application that allows users to vote for their favorite option and view the results. In this lab, you will be working with two main components: the vote-api and the vote-ui.
+The Vote App is a simple application that allows users to vote for their favorite option, currently a cat or dog, and view the results. In this lab, you will be working with two main components: the `vote-api` (Go) and the `vote-ui` (Python).
 
 .Vote App
 image::vote-app.png[Vote App]
 
-The goal of this lab is to demonstrate how to create a seamless CI/CD pipeline using OpenShift, Tekton, ArgoCD, and OpenShift Dev Spaces. By the end of this lab, you will have a better understanding of:
+The goal of this lab is to demonstrate how to create a seamless CI/CD pipeline using OpenShift, Tekton, Argo CD, and OpenShift Dev Spaces. By the end of this lab, you will have a better understanding of:
 
-- Creating Tekton pipeline manifests
-- Setting up webhooks for pipeline automation
-- Deploying applications using ArgoCD
-- Development and testing of code locally using Dev Spaces
-- Managing application drifts and syncing
+- Understanding Tekton pipeline manifests, starting them manually, and connecting webhooks for automation
+- Using Argo CD to deploy our application to a development environment
+- Development and local testing of application code using OpenShift Dev Spaces within the web browser
+- Ensuring high-availability of our application using Argo CD in a production environment
 
-## Inner Loop vs Outer Loop
+## Next Steps
 
-In this lab, we will be using two different types of CI/CD pipelines: inner loop and outer loop. The inner loop pipeline is used for development and testing of code locally using OpenShift Dev Spaces. The outer loop pipeline is used for deploying applications to development and production using ArgoCD.
-
-The truth is that, even though you will eventually run your code inside a kubernetes cluster, you still develop (in general) locally where you have your IDE, compilers, etc. There are several ways to explain the development cycle, for example. 
-
-[quote]
-____
-There are *two loops*, *one closer* to the developer *inner-loop*; *where you code, test, debug iteratively* and *one further away* the *outer-loop*; *where your code runs inside a container image you have to build, push and deploy* and... that take a lot longer.
-____
-
-.Inner vs Outer "one more debug session nightmare"
-image::inner-vs-outer-loop.png[Inner vs Outer Loop]
-
-You may think... I can "test it all" locally, then just push my code and the rest is history. Something like this.
-
-.Kubernetes Native Development Loop
-image::kubernetes-development-loop.png[Kubernetes Native Development Loop]
-
-However, this is not always the case, for example, you may need to connect to a database, or a service, or a large database, etc. and you may not have all that locally. In this case, this is where the Kubernetes native inner and outer development loop comes in handy.
-
-### Inner Loop
-
-The inner loop pipeline is used for development and testing of code locally using OpenShift Dev Spaces. This inner loop involves local development and testing, where developers write code, build the application, and test it locally before pushing any changes to the remote repository. This is where developers fix bugs, add features, and iterate on the application rapidly.
-
-### Outer Loop
-
-The outer loop pipeline is used for deploying applications to production using ArgoCD. This stage starts after the inner loop, when changes are pushed to the remote repository. The outer loop pipeline is triggered when a developer pushes code to a GitHub repository. The pipeline will build the code, create a new image, and update the repository with the new image tag. ArgoCD will then detect the change and deploy the new image to the production environment. The outer loop automates the deployment of the application to the Kubernetes cluster, ensuring that the infrastructure is always in sync with the desired state defined in the Git repository.
+Ready to get started with the lab? Let's begin, firstly by learning a bit of theory about the inner vs outer loop of development.

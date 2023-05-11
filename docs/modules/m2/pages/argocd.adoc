@@ -1,6 +1,6 @@
 # Red Hat Summit 2023: Vote App Lab Development - Argo CD
 
-Now, the next step is to deploy the Vote App to the dev environment using Argo CD.
+Now, the next step is to deploy the Vote App to the `vote-app-dev-%USERID%` environment using Argo CD. This will allow us to view the application before it reaches production, and make necessary changes throughout our development flow. We'll also use the OpenShift Web Terminal to scale up the replicas for one of the deployments, and learn how to use Argo CD to manage application drifts and syncing.
 
 ## Creating a new application using Argo CD
 
@@ -8,13 +8,13 @@ Let's use Argo CD to create a new application. While you can use this https://ar
 
 image::argocd-button.png[Argo CD Button]
 
-Then, click on the `Login with OpenShift` button.
+Then, click on the *Login with OpenShift* button.
 
 image::argocd-login.png[Argo CD Login]
 
-Within the Argo CD web console, click on the `+ New App` button.
+Within the Argo CD web console, click on the *+ New App* button.
 
-image::argocd-new-app.png[ArgoCD New App]
+image::argocd-new-app.png[Argo CD New App]
 
 Fill in the following information, many of which may auto-fill when selected:
 
@@ -29,20 +29,20 @@ Fill in the following information, many of which may auto-fill when selected:
 * Cluster URL: `https://kubernetes.default.svc`
 * Namespace: `vote-app-dev-%USERID%`
 
-image::argocd-new-app-form.png[ArgoCD New App Form]
-image::argocd-new-app-form-2.png[ArgoCD New App Form Continued]
+image::argocd-new-app-form.png[Argo CD New App Form]
+image::argocd-new-app-form-2.png[Argo CD New App Form Continued]
 
-Click on the `CREATE` button.
+When finished, click on the *CREATE* button.
 
-## Viewing the application in ArgoCD
+## Viewing the application in Argo CD
 
-Now, let's view the application in ArgoCD. After creating the application, you should be redirected to the application details page. Click on the application's name to view the application details.
+Now, let's view the application in Argo CD. After creating the application, you should be redirected to the application details page. If not, click on the application's name to view the application details.
 
-image::argocd-app-details.png[ArgoCD App Details]
+image::argocd-app-details.png[Argo CD App Details]
 
-Here, you see the `vote-app-dev-%USERID%` application's status, resources, and history. Currently, the application is syncing, so the status is `OutOfSync`. Once the application is synced, the status will change to `Synced`.
+Here, you'll see the `vote-app-dev-%USERID%` application's health, sync status, and associated resources. Currently, the application is syncing, so the status is `OutOfSync`. Once the application is synced, the status will change to a green `Synced`.
 
-image::argocd-app-details-2.png[ArgoCD App Details Continued]
+image::argocd-app-details-2.png[Argo CD App Details Continued]
 
 ## Viewing the application in the OpenShift web console
 
@@ -50,9 +50,11 @@ Now, let's link:https://vote-ui-vote-app-dev-%USERID%.%SUBDOMAIN%[*view the appl
 
 image::dev-topology.png[OpenShift Topology]
 
-To access the application, click on the `vote-app` route icon, which will open the application in a new tab.
+To access the application, click on the `vote-ui` route icon, which will open the application in a new tab.
 
 image::vote-app-access.png[Voting App Access]
+
+Great! Looks like we're able to see the newly deployed Vote App in our browser through this development environment.
 
 ## Using the Web Terminal to modify the development project
 
@@ -72,7 +74,7 @@ image::scale-up.png[Scale Up]
 
 This command will scale up the `vote-ui` deployment to 2 replicas. Now, we can return to Argo CD to see how the application is out of sync.
 
-image::argocd-app-details-3.png[ArgoCD App Details]
+image::argocd-app-details-3.png[Argo CD App Details]
 
 Now, click *Sync* and select *Synchronize* to sync the application back to the manifests in the link:https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops[Gitea Vote App GitOps,,role='params-link',window='_blank'] repository.
 
