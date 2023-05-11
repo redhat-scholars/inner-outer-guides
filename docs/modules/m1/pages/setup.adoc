@@ -39,7 +39,7 @@ NOTE: Everything has already been pre-installed on your cluster, so there's no n
 To run this lab, we're using an OpenShift 4.12 cluster. This cluster has been pre-configured with the following:
 
 ### Operator: OpenShift Pipelines 
-We'll be using link:https://console-openshift-console.%SUBDOMAIN%[*OpenShift Pipelines*] to pull our code from Gitea, build it, and update the Gitea repository with the new image tag. Follow these instructions in order to install OpenShift Pipelines on OpenShift via the OperatorHub:
+We'll be using link:https://docs.openshift.com/container-platform/4.12/cicd/pipelines/understanding-openshift-pipelines.html[*OpenShift Pipelines*] to pull our code from Gitea, build it, and update the Gitea repository with the new image tag. Follow these instructions in order to install OpenShift Pipelines on OpenShift via the OperatorHub:
 
 - From the left-side menu under *Administrator* perspective, go to
 *Operators*-> *OperatorHub*. In the search box, search for _OpenShift Pipelines_,
@@ -60,7 +60,7 @@ you can verify it looking at _Status_ column, check if the status is
 _Succeeded_.
 
 ### Operator: OpenShift GitOps 
-We'll be using link:https://openshift-gitops-server-openshift-gitops.%SUBDOMAIN%[*OpenShift GitOps*] to deploy our application to the cluster, and to manage the application lifecycle. Our two projects, `vote-app-dev-%USERID%` and `vote-app-prod-%USERID%`, will be managed by ArgoCD, and we'll be able to demonstrate high-availability using GitOps. Follow these instructions in order to install OpenShift GitOps on OpenShift via the OperatorHub.
+We'll be using link:https://docs.openshift.com/container-platform/4.12/cicd/gitops/understanding-openshift-gitops.html[*OpenShift GitOps*] to deploy our application to the cluster, and to manage the application lifecycle. Our two projects, `vote-app-dev-%USERID%` and `vote-app-prod-%USERID%`, will be managed by ArgoCD, and we'll be able to demonstrate high-availability using GitOps. Follow these instructions in order to install OpenShift GitOps on OpenShift via the OperatorHub.
 
 - From the left-side menu under *Administrator* perspective, go to
 *Operators*-> *OperatorHub*. In the search box, search for _OpenShift GitOps_,
@@ -80,7 +80,7 @@ you can verify it looking at _Status_ column, check if the status is
 _Succeeded_.
 
 ### Operator: OpenShift Dev Spaces
-We'll use link:https://devspaces.%SUBDOMAIN%[*OpenShift Dev Spaces*] to develop our application locally, commit our changes using Git, and then deploy our changes to the cluster. Follow these instructions in order to install OpenShift Dev Spaces on OpenShift via the OperatorHub:
+We'll use link:https://developers.redhat.com/products/openshift-dev-spaces/overview[*OpenShift Dev Spaces*] to develop our application locally, commit our changes using Git, and then deploy our changes to the cluster. Follow these instructions in order to install OpenShift Dev Spaces on OpenShift via the OperatorHub:
 
 - From the left-side menu under *Administrator* perspective, go to
 *Operators*-> *OperatorHub*. In the search box, search for _OpenShift Dev Spaces_,
@@ -125,7 +125,7 @@ _Succeeded_.
 
 ### Argo CD
 
-link:https://argocd-server-argocd-%USERID%.%SUBDOMAIN%[*Argo CD*] is a declarative, GitOps continuous delivery tool for Kubernetes provided in the OpenShift GitOps Operator. From your OpenShift cluster, you can access the ArgoCD dashboard.
+link:https://argocd-server-argocd-%USERID%.%SUBDOMAIN%[*Argo CD*,role='params-link',window='_blank'] is a declarative, GitOps continuous delivery tool for Kubernetes provided in the OpenShift GitOps Operator. From your OpenShift cluster, you can access the ArgoCD dashboard.
 
 image::argocd-button.png[ArgoCD]
 
@@ -140,7 +140,7 @@ image::argocd.png[ArgoCD]
 
 ### Vote App Repository
 
-You'll also have access to a link:http://gitea.%SUBDOMAIN%[*Gitea*] repository that contains the Vote App source code. This repository can also be located back at the *Lab Guides*, and you'll be able to access this repository using following credentials:
+You'll also have access to a link:http://gitea.%SUBDOMAIN%[*Gitea*,,role='params-link',window='_blank'] repository that contains the Vote App source code. This repository can also be located back at the *Lab Guides*, and you'll be able to access this repository using following credentials:
 
 - Username: `%USERID%`
 - Password: `openshift`
@@ -149,12 +149,12 @@ image::gitea.png[Gitea]
 
 Once logged in, you can access the following Vote App source repositories:
 
-- link:https://gitea.%SUBDOMAIN%/%USERID%/pipelines-vote-ui[Vote App UI Frontend]
-- link:https://gitea.%SUBDOMAIN%/%USERID%/pipelines-vote-api[Vote App API Backend]
+- link:https://gitea.%SUBDOMAIN%/%USERID%/pipelines-vote-ui[Vote App UI Frontend,role='params-link',window='_blank']
+- link:https://gitea.%SUBDOMAIN%/%USERID%/pipelines-vote-api[Vote App API Backend,role='params-link',window='_blank']
 
 We also have a repository that contains the ArgoCD application manifests for the Vote App.
 
-- link:https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops[Vote App GitOps]
+- link:https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops[Vote App GitOps,,role='params-link',window='_blank']
 
 ## Lab overview
 
