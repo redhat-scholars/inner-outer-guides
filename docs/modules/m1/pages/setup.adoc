@@ -92,7 +92,7 @@ image::argocd.png[Argo CD]
 
 ### Vote App Repository
 
-You'll also have access to a link:http://gitea.%SUBDOMAIN%[*Gitea*,,role='params-link',window='_blank'] repository that contains the Vote App source code. This repository can also be located back at the *Lab Guides*, and you'll be able to access this repository using following credentials:
+You'll also have access to a link:http://gitea.%SUBDOMAIN%[*Gitea*,role='params-link',window='_blank'] repository that contains the Vote App source code. This repository can also be located back at the *Lab Guides*, and you'll be able to access this repository using following credentials:
 
 - Username: `%USERID%`
 - Password: `openshift`
