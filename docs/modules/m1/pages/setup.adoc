@@ -41,22 +41,22 @@ To run this lab, we're using an OpenShift 4.12 cluster. This cluster has been pr
 ### Operator: OpenShift Pipelines 
 We'll be using link:https://console-openshift-console.%SUBDOMAIN%[*OpenShift Pipelines*,role='params-link',window='_blank'] to pull our code from Gitea, build it, and update the Gitea repository with the new image tag.
 
-image::pipelines-operator-details[Pipelines Details]
+image::pipelines-operator-details.png[Pipelines Details]
 
 ### Operator: OpenShift GitOps 
 We'll be using link:https://openshift-gitops-server-openshift-gitops.%SUBDOMAIN%[*OpenShift GitOps*] to deploy our application to the cluster, and to manage the application lifecycle. Our two projects, `vote-app-dev-%USERID%` and `vote-app-prod-%USERID%`, will be managed by Argo CD, and we'll be able to demonstrate high-availability using GitOps.
 
-image::gitops-operator-details[GitOps Details]
+image::gitops-operator-details.png[GitOps Details]
 
 ### Operator: OpenShift Dev Spaces
 We'll be using link:https://devspaces.%SUBDOMAIN%[*OpenShift Dev Spaces*] to develop our application locally, commit our changes using Git, and then deploy our changes to the cluster.
 
-image::devspaces-operator-details[Dev Spaces Details]
+image::devspaces-operator-details.png[Dev Spaces Details]
 
 ### Operator: OpenShift Web Terminal
 Finally, the *Web Terminal* is a web-based terminal for OpenShift. It allows users to access a terminal in a pod from the OpenShift Web Console.
 
-image::webterminal-operator-details[Web Terminal Details]
+image::webterminal-operator-details.png[Web Terminal Details]
 
 ## Lab Checks
 
@@ -72,7 +72,7 @@ image::installed-operators.png[Installed Operators]
 
 By clicking on one of these operators, we can view the CustomResourceDefinitions they have defined, documentation, and much more.
 
-image::operator-details.png[Operator Details]
+image::gitops-operator-details.png[Operator Details]
 
 While we won't be using the *admin* account during this lab, it's still important to understand these operators as they help extend the functionality of OpenShift and allow us to perform this lab.
 

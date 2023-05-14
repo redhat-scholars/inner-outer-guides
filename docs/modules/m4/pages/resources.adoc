@@ -6,7 +6,7 @@ Thank you once again for participating in the Red Hat Summit 2023 Vote App Lab. 
 
 1. link:https://developers.redhat.com/e-books/gitops-cookbook[GitOps Cookbook eBook]
 
-image::gitops-cookbook.png
+image::gitops-cookbook.png[GitOps Cookbook]
 
 ## Official Documentation
 
