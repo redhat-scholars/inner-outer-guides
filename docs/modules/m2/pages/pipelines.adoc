@@ -460,4 +460,4 @@ To verify that everything is working, let's make some changes in the OpenShift D
 
 ## Next Steps
 
-Congratulations! You've successfully deployed the `vote-app` and `vote-api` pipelines using Tekton Pipelines. You've also added a webhook to the `vote-ui` application to trigger a new build when changes are made to the Git repository. Now, let's move on to the next lab to learn how to deploy the application using Argo CD.
+Congratulations! You've successfully deployed the `vote-app` and `vote-api` pipelines using Tekton Pipelines. You've also added a webhook to the `vote-ui` pipeline to trigger a new build when changes are made to the Git repository. Now, let's move on to the next lab to learn how to deploy the application using Argo CD.
