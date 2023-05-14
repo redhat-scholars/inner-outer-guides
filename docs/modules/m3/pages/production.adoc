@@ -34,7 +34,7 @@ Now that the `promote-to-prod` pipeline has been started, let's go ahead and che
 
 image::pipeline-prod-ui-status.png[]
 
-Once the pipeline has completed, you'll notice that the `vote-app-gitops` repo has been updated with a new hash of an image. This is the image that was built in the `dev` project, and pushed to the `prod` project, and referenced in the `environments/prod/kustomization.yaml` file that can be found link:https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops/src/branch/main/environments/prod/kustomization.yaml[*here*].
+Once the pipeline has completed, you'll notice that the `vote-app-gitops` repo has been updated with a new hash of an image. This is the image that was built in the `dev` project, and pushed to the `prod` project, and referenced in the `environments/prod/kustomization.yaml` file that can be found link:https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops/src/branch/main/environments/prod/kustomization.yaml[*here*,role='params-link',window='_blank'].
 
 image::pipeline-prod-ui-gitops.png[]
 
