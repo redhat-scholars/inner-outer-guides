@@ -4,7 +4,7 @@ Now, the next step is to deploy the Vote App to the `vote-app-dev-%USERID%` envi
 
 ## Creating a new application using Argo CD
 
-Let's use Argo CD to create a new application. While you can use this link:https://argocd-server-argocd-%USERID%.%SUBDOMAIN%[*Argo CD*] link to login to the Argo CD dashboard, you can also head to Argo CD from within your cluster by visiting the `argocd-%USERID%` project in the OpenShift web console.
+Let's use Argo CD to create a new application. While you can use this https://argocd-server-argocd-%USERID%.%SUBDOMAIN%[Argo CD,role='params-link',window='_blank']. link to login to the Argo CD dashboard, you can also head to Argo CD from within your cluster by visiting the `argocd-%USERID%` project in the OpenShift web console.
 
 image::argocd-button.png[Argo CD Button]
 
@@ -46,7 +46,7 @@ image::argocd-app-details-2.png[Argo CD App Details Continued]
 
 ## Viewing the application in the OpenShift web console
 
-Now, let's link:https://vote-ui-vote-app-dev-%USERID%.%SUBDOMAIN%[*view the application*] in the OpenShift web console. From the OpenShift web console in the `vote-app-dev-%USERID%` project, click on the *Topology* tab.
+Now, let's link:https://vote-ui-vote-app-dev-%USERID%.%SUBDOMAIN%[*view the application*,role='params-link',window='_blank'] in the OpenShift web console. From the OpenShift web console in the `vote-app-dev-%USERID%` project, click on the `Topology` tab.
 
 image::dev-topology.png[OpenShift Topology]
 
@@ -76,10 +76,10 @@ This command will scale up the `vote-ui` deployment to 2 replicas. Now, we can r
 
 image::argocd-app-details-3.png[Argo CD App Details]
 
-Now, click *Sync* and select *Synchronize* to sync the application back to the manifests in the link:https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops[Vote App GitOps] repository.
+Now, click *Sync* and select *Synchronize* to sync the application back to the manifests in the link:https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops[Gitea Vote App GitOps,,role='params-link',window='_blank'] repository.
 
 image::argocd-sync.png[Argo CD Sync]
 
 ## Next Steps
 
-Now that you have deployed the Vote App to the dev environment using Argo CD, we can use OpenShift Dev Spaces to develop and test the application locally before deploying the application to the `vote-app-prod-%USERID%` environment and implementing self-healing and high availability.
+Now that you have deployed the Vote App to the dev environment using Argo CD, we can use OpenShift DevSpaces to develop and test the application locally before moving to the `vote-app-prod-%USERID%` environment and implementing self-healing and high availability.

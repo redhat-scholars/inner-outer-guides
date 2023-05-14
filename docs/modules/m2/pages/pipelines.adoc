@@ -446,7 +446,7 @@ From the Topology view, click on the `el-eventlistener-ui` Deployment. From ther
 
 image::trigger-vote-ui.png[Trigger Vote UI]
 
-Once you have the URL copied to your clipboard, navigate to the code repository fork that you have on link:https://gitea.%SUBDOMAIN%/%USERID%/pipelines-vote-ui[*Gitea*]. From your fork page, click on the Settings menu in the top-right corner. From the top right-side menu, click on *Settings*, then *Webhooks*. Then, click on Add webhook from the right-side menu.
+Once you have the URL copied to your clipboard, navigate to the code repository fork that you have on link:https://gitea.%SUBDOMAIN%/%USERID%/pipelines-vote-ui[*Gitea*,role='params-link',window='_blank']. From your fork page, click on the Settings menu in the top-right corner. From the top right-side menu, click on *Settings*, then *Webhooks*. Then, click on Add webhook from the right-side menu.
 
 image::add-webhook.png[Add Webhook]
 
