@@ -78,7 +78,7 @@ While we won't be using the *admin* account during this lab, it's still importan
 
 ### Argo CD
 
-Let's take a look at link:https://argocd-server-argocd-%USERID%.%SUBDOMAIN%[*Argo CD*,role='params-link',window='_blank'], a declarative, GitOps continuous delivery tool for Kubernetes provided in the OpenShift GitOps Operator. While you can access Argo CD from the back at the *Lab Guides*, you can also visit Argo CD from your OpenShift cluster. Within the *Developer* perspective, navigate to the `argocd-%USERID%` project, and visit the *Topology* page.
+Let's take a look at link:https://argocd-server-argocd-%USERID%.%SUBDOMAIN%[*Argo CD*,role='params-link',window='_blank'], a declarative, GitOps continuous delivery tool for Kubernetes provided in the OpenShift GitOps Operator. While you can access Argo CD from the the *Lab Guides*, you can also visit Argo CD from your OpenShift cluster. Within the *Developer* perspective, navigate to the `argocd-%USERID%` project, and visit the *Topology* page.
 
 image::argocd-button.png[Argo CD Route Button]
 
