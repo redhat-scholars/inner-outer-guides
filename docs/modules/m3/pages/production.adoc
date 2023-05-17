@@ -64,6 +64,46 @@ Click on the *Create* button to create the application. You will be taken to the
 
 image::argocd-new-app-5.png[]
 
+## Reviewing SyncWaves in Argo CD
+
+Argo CD has a feature called https://argoproj.github.io/argo-cd/user-guide/sync-waves/[Syncwaves,window='_blank'], which allows you to deploy applications in a staggered fashion. This is useful when you have multiple applications that are dependent on each other, and you want to deploy them in a specific order. For example, you may have a database application that you want to deploy first, then your application that depends on the database. You can use SyncWaves to deploy the database application first, then the application that depends on the database.
+
+image::app-diagram.png[]
+
+
+In our case, let's see SyncWaves in action. Let's visit the `vote-app-gitops` production kustomization.yaml file link:https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops/src/branch/main/environments/prod/kustomization.yaml[*here*,role='params-link',window='_blank'].
+
+[.console-output]
+[source,yaml,subs="attributes+,+macros"]
+----
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+bases:
+  - ../../k8s/
+replicas:
+- name: vote-ui
+  count: 1
+patchesJson6902:
+- patch: |-
+    - op: add
+      path: /metadata/annotations
+      value:
+        argocd.argoproj.io/sync-wave: "0"
+  target:
+    group: apps
+    kind: Deployment
+    name: vote-api
+    version: v1
+- patch: |-
+    - op: add
+      path: /metadata/annotations
+      value:
+        argocd.argoproj.io/sync-wave: "1"
+...
+----
+
+With our configuration currently, SyncWaves allow for a controlled rollout of resources by setting a sequence in which they should be deployed. In this case, we have multiple resources, `vote-api` and `vote-ui`. The `vote-api` resource has a sync wave of `0`, and the `vote-ui` resource has a sync wave of `1`. This means that the `vote-api` resource will be deployed first, then the `vote-ui` resource will be deployed second.
+
 ## Viewing the application and detecting drift
 
 Now that the application has been deployed to production, let's go ahead and view the application in the OpenShift console. Click on the *Developer* perspective, then click on the *Topology* view. Ensure you're in the `vote-app-prod-%USERID%` application, and you should see the application deployed.
