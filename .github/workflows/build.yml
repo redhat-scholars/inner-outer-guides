@@ -59,7 +59,7 @@ jobs:
     - name: Run antora
       uses: docker://antora/antora:3.1.2
       with:
-        args: site-gh-pages.yml
+        args: site.yml
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
