@@ -1,4 +1,4 @@
-# Red Hat Summit 2023: Vote App Lab Conclusion - Finish
+# Vote App Lab Conclusion - Finish
 
 Thank you for participating in the Red Hat Summit 2023 Vote App Lab! We hope that you enjoyed building a CI/CD pipeline using OpenShift, Tekton, Argo CD, and Dev Spaces. This lab provided a hands-on experience that allowed you to explore the powerful capabilities of these tools in creating, managing, and deploying applications.
 

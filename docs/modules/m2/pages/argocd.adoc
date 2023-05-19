@@ -1,4 +1,4 @@
-# Red Hat Summit 2023: Vote App Lab Development - Argo CD
+# Vote App Lab Development - Argo CD
 
 Now, the next step is to deploy the Vote App to the `vote-app-dev-%USERID%` environment using Argo CD. This will allow us to view the application before it reaches production, and make necessary changes throughout our development flow. We'll also use the OpenShift Web Terminal to scale up the replicas for one of the deployments, and learn how to use Argo CD to manage application drifts and syncing.
 

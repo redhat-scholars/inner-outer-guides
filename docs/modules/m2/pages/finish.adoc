@@ -1,4 +1,4 @@
-# Red Hat Summit 2023: Vote App Lab Development - Finish
+# Vote App Lab Development - Finish
 
 Congratulations on completing the first half of the lab! You have successfully deployed the Vote App to OpenShift using Tekton pipelines and Argo CD. You have also learned how to use OpenShift Dev Spaces to develop cloud-native applications, and make changes locally in real time. Thus far, you have:
 

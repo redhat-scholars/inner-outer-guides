@@ -1,10 +1,10 @@
-# Red Hat Summit 2023: Vote App Lab Overview - Inner & Outer Loop
+# Vote App Lab Overview - Inner & Outer Loop
 
 To understand the flow of the lab, let's learn a bit about the inner and outer loop of development. This is a critical part of a developer's workflow when it comes to using the various technologies in this workshop. The development cycle is typically organized in two loops, one closer to the developer inner-loop; where you code, test, debug iteratively and one further away, the outer-loop; where your code runs inside a container image you have to build, push and deploy.
 
 ## Inner Loop vs Outer Loop
 
-In this lab, we will be using these two different types of CI/CD pipelines: the inner loop and outer loop. The inner loop pipeline is used for development and testing of code locally (ex. using OpenShift Dev Spaces). The outer loop pipeline is used for deploying applications to development and production (ex. using Argo CD).
+In this lab, we will be using these two different types of CI/CD pipelines: the inner loop and outer loop. The inner loop workflow is used for development and testing of code locally (ex. using OpenShift Dev Spaces). The outer loop pipeline is used for deploying applications to development and production (ex. using Argo CD).
 
 .Inner vs Outer
 image::inner-vs-outer-loop.png[Inner vs Outer Loop]
@@ -27,7 +27,7 @@ Now, let's take a look at our usage of the inner and outer loop development flow
 
 ### Inner Loop
 
-The inner loop pipeline is used for development and testing of code locally using OpenShift Dev Spaces. This inner loop involves local development and testing, where developers write code, build the application, and test it locally before pushing any changes to the remote repository. This is where developers fix bugs, add features, and iterate on the application rapidly.
+The inner loop workflow is used for development and testing of code locally using OpenShift Dev Spaces. This inner loop involves local development and testing, where developers write code, build the application, and test it locally before pushing any changes to the remote repository. This is where developers fix bugs, add features, and iterate on the application rapidly.
 
 .Working within OpenShift Dev Spaces
 image::devspaces-interface.png[Dev Spaces Interface]

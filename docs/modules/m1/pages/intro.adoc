@@ -1,4 +1,4 @@
-# Red Hat Summit 2023: Vote App Lab Overview - Introduction
+# Vote App Lab Overview - Introduction
 
 Welcome to the Red Hat Summit 2023 Vote App Lab, we're glad to have you here with us!
 

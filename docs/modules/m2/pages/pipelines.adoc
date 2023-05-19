@@ -1,4 +1,4 @@
-# Red Hat Summit 2023: Vote App Lab Development - Pipelines
+# Vote App Lab Development - Pipelines
 
 In this section, you will learn how to use a Tekton pipeline resource and trigger the pipeline to run. The pipeline will firstly clone the git repository source code of the `vote-api` and `vote-ui` repositories. The pipeline will then build the application and push the image to the internal image registry. Finally, the pipeline will then update the deployment in the `vote-app-gitops` repository with the new image. We'll also later add a webhook to the `vote-ui` to trigger when a commit is made to the Git repository.
 
@@ -8,7 +8,9 @@ While the actual Tekton pipelines has been created for you, you will need to cre
 
 image::switch-perspective.png[]
 
-Before we start the pipelines, let's take a look at the pipelines that have been created for you. These pipelines are created in the `vote-app-ci-%USERID%` namespace. To view the pipelines, click on the *Pipelines* link in the left navigation menu. Let's also take a look at the contents of the pipelines:
+Before we start the pipelines, let's take a look at the pipelines that have been created for you. These pipelines are created in the `vote-app-ci-%USERID%` namespace. To view the pipelines, click on the *Pipelines* link in the left navigation menu. 
+
+// Let's also take a look at the contents of the pipelines:
 
 // [tabs, subs="attributes+,+macros"]
 // ====
