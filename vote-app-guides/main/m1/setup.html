@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Red Hat Summit 2023: Vote App Lab Overview - Setup :: Summit 2023 Vote App Lab Guide</title>
+    <title>Vote App Lab Overview - Setup :: Summit 2023 Vote App Lab Guide</title>
     <link rel="prev" href="inner-outer.html">
     <link rel="next" href="../m2/intro.html">
     <meta name="generator" content="Antora 3.1.2">
@@ -191,7 +191,7 @@
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Red Hat Summit 2023: Vote App Lab Overview - Setup</h1>
+<h1 class="page">Vote App Lab Overview - Setup</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
@@ -217,42 +217,41 @@
 <div class="sect2">
 <h3 id="_inner_loop_openshift_dev_spaces"><a class="anchor" href="#_inner_loop_openshift_dev_spaces"></a>Inner Loop: OpenShift Dev Spaces</h3>
 <div class="paragraph">
-<p><a href="https://developers.redhat.com/products/openshift-dev-spaces/overview"><strong>OpenShift Dev Spaces</strong></a> is a cloud and container-native development environment that provides a fast, secure, and zero-configuration development environment for Kubernetes and OpenShift. It allows developers to quickly bootstrap their development environment and start coding.</p>
+<p><a href="https://developers.redhat.com/products/openshift-dev-spaces/overview" class="params-link" target="_blank" rel="noopener"><strong>OpenShift Dev Spaces</strong></a> is a cloud and container-native development environment that provides a fast, secure, and zero-configuration development environment for Kubernetes and OpenShift. It allows developers to quickly bootstrap their development environment and start coding.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devspaces-interface.png" alt="OpenShift Dev Spaces">
 </div>
-<div class="title">Figure 2. OpenShift Dev Spaces Dashboard</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_outer_loop_openshift_pipelines"><a class="anchor" href="#_outer_loop_openshift_pipelines"></a>Outer Loop: OpenShift Pipelines</h3>
 <div class="paragraph">
-<p><a href="https://catalog.redhat.com/software/container-stacks/detail/5ec54a4628834587a6b85ca5"><strong>OpenShift Pipelines</strong></a> is a cloud-native, continuous integration and delivery (CI/CD) solution for building pipelines using Tekton. Tekton is a flexible, Kubernetes-native, open-source CI/CD framework that enables automating deployments across multiple platforms (Kubernetes, serverless, VMs, etc) by abstracting away the underlying implementation details.</p>
+<p><a href="https://catalog.redhat.com/software/container-stacks/detail/5ec54a4628834587a6b85ca5" class="params-link" target="_blank" rel="noopener"><strong>OpenShift Pipelines</strong></a> is a cloud-native, continuous integration and delivery (CI/CD) solution for building pipelines using <a href="https://tekton.dev" class="params-link" target="_blank" rel="noopener"><strong>Tekton</strong></a>. Tekton is a flexible, Kubernetes-native, open-source CI/CD framework that enables automating deployments across multiple platforms (Kubernetes, serverless, VMs, etc) by abstracting away the underlying implementation details.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/pipeline-details.png" alt="OpenShift Pipelines">
 </div>
-<div class="title">Figure 3. Vote App Pipeline</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_outer_loop_openshift_gitops"><a class="anchor" href="#_outer_loop_openshift_gitops"></a>Outer Loop: OpenShift GitOps</h3>
-
-</div>
-<div class="sect2">
-<h3 id="_operator_openshift_pipelines"><a class="anchor" href="#_operator_openshift_pipelines"></a>Operator: OpenShift Pipelines</h3>
 <div class="paragraph">
-<p>We&#8217;ll be using <a href="https://docs.openshift.com/container-platform/4.12/cicd/pipelines/understanding-openshift-pipelines.html"><strong>OpenShift Pipelines</strong></a> to pull our code from Gitea, build it, and update the Gitea repository with the new image tag. Follow these instructions in order to install OpenShift Pipelines on OpenShift via the OperatorHub:</p>
+<p><a href="https://docs.openshift.com/container-platform/4.12/cicd/pipelines/understanding-openshift-pipelines.html" class="params-link" target="_blank" rel="noopener"><strong>OpenShift GitOps</strong></a> is a GitOps solution for OpenShift that provides a declarative, GitOps-centric approach to managing applications and their delivery based on <a href="https://argoproj.github.io/cd/" class="params-link" target="_blank" rel="noopener"><strong>Argo CD</strong></a>. It provides a set of tools that allow developers to manage the application lifecycle, including deploying, updating, and deleting applications using Git as the source of truth.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd-app-details-2.png" alt="OpenShift GitOps">
 </div>
-<div class="title">Figure 4. Argo CD Application</div>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_environment_setup"><a class="anchor" href="#_environment_setup"></a>Environment Setup</h2>
+<div class="sectionbody">
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -265,19 +264,13 @@ Everything has already been pre-installed on your cluster, so there&#8217;s no n
 </tr>
 </table>
 </div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_openshift_operators"><a class="anchor" href="#_openshift_operators"></a>OpenShift Operators</h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>To run this lab, we&#8217;re using an OpenShift 4.12 cluster. This cluster has been pre-configured with the following OpenShift Operators:</p>
+<p>You&#8217;ll be using your own OpenShift 4.12 cluster throughout this lab. This cluster has been pre-configured with the below OpenShift Operators. You can think of Operators as addons to an OpenShift or Kubernetes cluster that provide it with extended features/capabilities. We&#8217;ve attached a screenshot of each operator&#8217;s details page as only the cluster <strong>admin</strong> account can view these details.</p>
 </div>
 <div class="sect2">
-<h3 id="_operator_openshift_pipelines_2"><a class="anchor" href="#_operator_openshift_pipelines_2"></a>Operator: OpenShift Pipelines</h3>
+<h3 id="_operator_openshift_pipelines"><a class="anchor" href="#_operator_openshift_pipelines"></a>Operator: OpenShift Pipelines</h3>
 <div class="paragraph">
-<p>We&#8217;ll be using <a href="https://console-openshift-console.%SUBDOMAIN%" class="params-link" target="_blank" rel="noopener"><strong>OpenShift Pipelines</strong></a> to pull our code from Gitea, build it, and update the Gitea repository with the new image tag.</p>
+<p>We&#8217;ll be using <strong>OpenShift Pipelines</strong> to pull our code from Git, build it, and update the Git repository with the new image tag.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -288,45 +281,7 @@ Everything has already been pre-installed on your cluster, so there&#8217;s no n
 <div class="sect2">
 <h3 id="_operator_openshift_gitops"><a class="anchor" href="#_operator_openshift_gitops"></a>Operator: OpenShift GitOps</h3>
 <div class="paragraph">
-<p>We&#8217;ll be using <a href="https://docs.openshift.com/container-platform/4.12/cicd/gitops/understanding-openshift-gitops.html"><strong>OpenShift GitOps</strong></a> to deploy our application to the cluster, and to manage the application lifecycle. Our two projects, <code>vote-app-dev-%USERID%</code> and <code>vote-app-prod-%USERID%</code>, will be managed by ArgoCD, and we&#8217;ll be able to demonstrate high-availability using GitOps. Follow these instructions in order to install OpenShift GitOps on OpenShift via the OperatorHub.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>From the left-side menu under <strong>Administrator</strong> perspective, go to
-<strong>Operators</strong>&#8594; <strong>OperatorHub</strong>. In the search box, search for <em>OpenShift GitOps</em>,
-then click to <strong>OpenShift GitOps</strong>:</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/openshift-gitops-operator.png" alt="OpenShift GitOps Operator">
-</div>
-<div class="title">Figure 5. OpenShift GitOps Operator</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>From the description view, click <em>Install</em> to review all installation
-settings.</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/openshift-gitops-operator-install.png" alt="OpenShift GitOps operator">
-</div>
-<div class="title">Figure 6. OpenShift GitOps operator</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>After few seconds, the installation should be completed with success and
-you can verify it looking at <em>Status</em> column, check if the status is
-<em>Succeeded</em>.</p>
-</li>
-</ul>
+<p>We&#8217;ll be using <strong>OpenShift GitOps</strong> to deploy our application to the cluster and to manage the application lifecycle. Our two projects, <code>vote-app-dev-%USERID%</code> and <code>vote-app-prod-%USERID%</code>, will be managed by ArgoCD, and we&#8217;ll be able to demonstrate high-availability using GitOps.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -337,7 +292,7 @@ you can verify it looking at <em>Status</em> column, check if the status is
 <div class="sect2">
 <h3 id="_operator_openshift_dev_spaces"><a class="anchor" href="#_operator_openshift_dev_spaces"></a>Operator: OpenShift Dev Spaces</h3>
 <div class="paragraph">
-<p>We&#8217;ll use <a href="https://developers.redhat.com/products/openshift-dev-spaces/overview"><strong>OpenShift Dev Spaces</strong></a> to develop our application locally, commit our changes using Git, and then deploy our changes to the cluster. Follow these instructions in order to install OpenShift Dev Spaces on OpenShift via the OperatorHub:</p>
+<p>We&#8217;ll use <strong>OpenShift Dev Spaces</strong> to quickly bootstrap our development environment and start coding. We&#8217;ll be able to make changes to our code and see them reflected in the cluster in real-time, as well as commit our changes to Git.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -362,7 +317,7 @@ you can verify it looking at <em>Status</em> column, check if the status is
 <h2 id="_lab_checks"><a class="anchor" href="#_lab_checks"></a>Lab Checks</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_openshift_operators_2"><a class="anchor" href="#_openshift_operators_2"></a>OpenShift Operators</h3>
+<h3 id="_openshift_operators"><a class="anchor" href="#_openshift_operators"></a>OpenShift Operators</h3>
 <div class="paragraph">
 <p>This OpenShift cluster has been pre-configured with the operators listed above, cluster-wide, and from the <strong>admin</strong> account, we can confirm this. Firstly, navigate to the <strong>Administrator</strong> perspective, and click on <strong>Operators</strong> from within the left-hand menu. Now, click on <strong>Installed Operators</strong> from the sub-menu.</p>
 </div>
@@ -394,7 +349,7 @@ you can verify it looking at <em>Status</em> column, check if the status is
 <div class="sect2">
 <h3 id="_argo_cd"><a class="anchor" href="#_argo_cd"></a>Argo CD</h3>
 <div class="paragraph">
-<p>Let&#8217;s take a look at <a href="https://argocd-server-argocd-%USERID%.%SUBDOMAIN%" class="params-link" target="_blank" rel="noopener"><strong>Argo CD</strong></a>, a declarative, GitOps continuous delivery tool for Kubernetes provided in the OpenShift GitOps Operator. While you can access Argo CD from the the <strong>Lab Guides</strong>, you can also visit Argo CD from your OpenShift cluster. Within the <strong>Developer</strong> perspective, navigate to the <code>argocd-%USERID%</code> project, and visit the <strong>Topology</strong> page.</p>
+<p>Let&#8217;s take a look at <strong>Argo CD</strong>, a declarative, GitOps continuous delivery tool for Kubernetes provided in the OpenShift GitOps Operator. While you can access Argo CD from the <strong>Lab Guides</strong>, you can also visit Argo CD from your OpenShift cluster. Within the <strong>Developer</strong> perspective, navigate to the <code>argocd-%USERID%</code> project, and visit the <strong>Topology</strong> page.</p>
 </div>
 <div class="imageblock">
 <div class="content">
