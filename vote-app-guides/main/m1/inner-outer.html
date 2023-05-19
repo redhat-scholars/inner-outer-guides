@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Red Hat Summit 2023: Vote App Lab Overview - Inner &amp; Outer Loop :: Summit 2023 Vote App Lab Guide</title>
+    <link rel="prev" href="intro.html">
+    <link rel="next" href="setup.html">
+    <meta name="generator" content="Antora 3.1.2">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+<link rel="icon" href="../../../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const userId = urlParams.get('USERID');
+      const subDomain = urlParams.get('SUBDOMAIN');
+      const apiUrl = urlParams.get('APIURL');
+      if (userId) {
+        showUserId( userId );
+      }
+      else {
+        showUserIdForm();
+      }
+    } );
+
+
+    function showUserId( userId ) {
+      document.getElementById('navbar-form-empty').style.display = "none";
+      document.getElementById('navbar-form-filled').style.display = "flex";
+      document.getElementById('username').textContent = userId;
+      document.getElementById('subDomain').value = subDomain;
+      document.getElementById('apiUrl').value = apiUrl;
+
+    }
+
+    function showUserIdForm( userId ) {
+      document.getElementById('navbar-form-empty').style.display = "flex";
+      document.getElementById('navbar-form-filled').style.display = "none";
+    }
+
+    function goWithUserId() {
+      elUserIdInput = document.getElementById('userId');
+      elSubDomainInput = document.getElementById('subDomain');
+      elapiUrlInput = document.getElementById('apiUrl');
+
+      window.location.search = ('&USERID=' + elUserIdInput.value + '&SUBDOMAIN=' + elSubDomainInput.value + '&APIURL=' + elapiUrlInput.value);
+    }
+
+  </script>
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com/en/technologies/cloud-computing/openshift" target="_blank"><img
+          src="../../../_/img/Logo-Red_Hat-OpenShift_4-A-Reverse-RGB.png" height="40px" alt="Red Hat OpenShift"></a>
+      <a class="navbar-item" href="../../.." style="color: white;"><h3>Summit 2023 Vote App Lab Guide</h3></a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item" id="navbar-form-empty">
+          <span class="navbar-text" style="margin-left: 1rem;">Your Workshop Environment</span>
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i style="color: orange;"
+              class="fa fa-exclamation-triangle" aria-hidden="true"></i></span>
+
+          <form action="javascript:void(0);" onsubmit="goWithUserId();">
+            <div class="navbar-item" id="navbar-form-project-filled" style="display: none;">
+              <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">|</span>
+            </div>
+            <input size="40" id="userId" type="text" placeholder="Enter USER ID">
+            <input type="hidden" id="subDomain" name="subDomain" value="">
+            <input type="hidden" id="apiUrl" name="apiUrl" value="">
+          </form>
+        </div>
+
+        <div class="navbar-item" id="navbar-form-filled" style="display: none;">
+          <span class="navbar-text" style="margin-left: 1rem;">Your Workshop Environment</span>
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">|</span>
+          <span class="navbar-text" id="username"></span>
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i onclick="recycle();" style="color: green;" class="fa fa-recycle" aria-hidden="true"></i></span>
+        </div>
+
+    </div>
+  </nav>
+</header><div class="body">
+<div class="nav-container" data-component="vote-app-guides" data-version="main">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="intro.html" class=" query-params-link">Vote App Lab Guides</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Module One: Overview</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="intro.html">Introduction</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="inner-outer.html">Inner vs Outer Loop</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="setup.html">Lab Setup</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Module Two: Development</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../m2/intro.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../m2/pipelines.html">Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../m2/argocd.html">Argo CD</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../m2/devspaces.html">Dev Spaces</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../m2/finish.html">Finish</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Module Three: Production</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../m3/production.html">Pushing to Production</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Module Four: Conclusion</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../m4/finish.html">Finish</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../m4/resources.html">Resources</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Vote App Lab Guides</span>
+    <span class="version">main</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Vote App Lab Guides</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="intro.html">main</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="intro.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="intro.html">Vote App Lab Guides</a></li>
+    <li>Module One: Overview</li>
+    <li><a href="inner-outer.html">Inner vs Outer Loop</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/blues-man/vote-app-guides/edit/main/docs/modules/m1/pages/inner-outer.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Red Hat Summit 2023: Vote App Lab Overview - Inner &amp; Outer Loop</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>To understand the flow of the lab, let&#8217;s learn a bit about the inner and outer loop of development. This is a critical part of a developer&#8217;s workflow when it comes to using the various technologies in this workshop. The development cycle is typically organized in two loops, one closer to the developer inner-loop; where you code, test, debug iteratively and one further away, the outer-loop; where your code runs inside a container image you have to build, push and deploy.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_inner_loop_vs_outer_loop"><a class="anchor" href="#_inner_loop_vs_outer_loop"></a>Inner Loop vs Outer Loop</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this lab, we will be using these two different types of CI/CD pipelines: the inner loop and outer loop. The inner loop pipeline is used for development and testing of code locally (ex. using OpenShift Dev Spaces). The outer loop pipeline is used for deploying applications to development and production (ex. using Argo CD).</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/inner-vs-outer-loop.png" alt="Inner vs Outer Loop">
+</div>
+<div class="title">Figure 1. Inner vs Outer</div>
+</div>
+<div class="paragraph">
+<p>The truth is that, even though you will eventually run your code inside a kubernetes cluster, you still generally develop locally where you have your IDE, compilers, etc. Well, you may think to yourself:</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>I can "test it all" locally, then just push my code and the rest is history.</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>However, this is not always the case, for example, you may need to connect to a database, or a service, or a large database, etc. and you may not have all that locally. In this case, this is where the Kubernetes native inner and outer development loop comes in handy.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/kubernetes-development-loop.png" alt="Kubernetes Native Development Loop">
+</div>
+<div class="title">Figure 2. Kubernetes Native Development Loop</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_inner_and_outer_loop_flow"><a class="anchor" href="#_inner_and_outer_loop_flow"></a>Inner and Outer loop flow</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now, let&#8217;s take a look at our usage of the inner and outer loop development flow that we&#8217;ll be using today.</p>
+</div>
+<div class="sect2">
+<h3 id="_inner_loop"><a class="anchor" href="#_inner_loop"></a>Inner Loop</h3>
+<div class="paragraph">
+<p>The inner loop pipeline is used for development and testing of code locally using OpenShift Dev Spaces. This inner loop involves local development and testing, where developers write code, build the application, and test it locally before pushing any changes to the remote repository. This is where developers fix bugs, add features, and iterate on the application rapidly.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devspaces-interface.png" alt="Dev Spaces Interface">
+</div>
+<div class="title">Figure 3. Working within OpenShift Dev Spaces</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_outer_loop"><a class="anchor" href="#_outer_loop"></a>Outer Loop</h3>
+<div class="paragraph">
+<p>The outer loop pipeline is used for deploying applications to production using Argo CD within OpenShift Gitops. This stage starts after the inner loop, when changes are pushed to the remote repository. The outer loop pipeline is triggered when a developer pushes code to a Git repository. The pipeline will build the code, create a new image, and update the repository with the new image tag. Argo CD will then detect the change and deploy the new image to the production environment. The outer loop automates the deployment of the application to the Kubernetes cluster, ensuring that the infrastructure is always in sync with the desired state defined in the Git repository.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd-app-details-2.png" alt="Argo CD App Details">
+</div>
+<div class="title">Figure 4. Argo CD syncing our application</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_next_steps"><a class="anchor" href="#_next_steps"></a>Next Steps</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Great! Now that we understand the role of the inner and outer loop, we can begin to start taking a look at the OpenShift cluster that we&#8217;re using. This includes understanding the operators used (such as OpenShift GitOps and Dev Spaces), as well as the Git repositories.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="intro.html" class="query-params-link">Introduction</a></span>
+  <span class="next"><a href="setup.html" class="query-params-link">Lab Setup</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<script src="../../../_/js/vendor/clipboard.js"></script>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

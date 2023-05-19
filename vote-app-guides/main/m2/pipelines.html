@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Red Hat Summit 2023: Vote App Lab Development - Pipelines :: Summit 2023 Vote App Lab Guide</title>
+    <link rel="prev" href="intro.html">
+    <link rel="next" href="argocd.html">
+    <meta name="generator" content="Antora 3.1.2">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+<link rel="icon" href="../../../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const userId = urlParams.get('USERID');
+      const subDomain = urlParams.get('SUBDOMAIN');
+      const apiUrl = urlParams.get('APIURL');
+      if (userId) {
+        showUserId( userId );
+      }
+      else {
+        showUserIdForm();
+      }
+    } );
+
+
+    function showUserId( userId ) {
+      document.getElementById('navbar-form-empty').style.display = "none";
+      document.getElementById('navbar-form-filled').style.display = "flex";
+      document.getElementById('username').textContent = userId;
+      document.getElementById('subDomain').value = subDomain;
+      document.getElementById('apiUrl').value = apiUrl;
+
+    }
+
+    function showUserIdForm( userId ) {
+      document.getElementById('navbar-form-empty').style.display = "flex";
+      document.getElementById('navbar-form-filled').style.display = "none";
+    }
+
+    function goWithUserId() {
+      elUserIdInput = document.getElementById('userId');
+      elSubDomainInput = document.getElementById('subDomain');
+      elapiUrlInput = document.getElementById('apiUrl');
+
+      window.location.search = ('&USERID=' + elUserIdInput.value + '&SUBDOMAIN=' + elSubDomainInput.value + '&APIURL=' + elapiUrlInput.value);
+    }
+
+  </script>
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com/en/technologies/cloud-computing/openshift" target="_blank"><img
+          src="../../../_/img/Logo-Red_Hat-OpenShift_4-A-Reverse-RGB.png" height="40px" alt="Red Hat OpenShift"></a>
+      <a class="navbar-item" href="../../.." style="color: white;"><h3>Summit 2023 Vote App Lab Guide</h3></a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item" id="navbar-form-empty">
+          <span class="navbar-text" style="margin-left: 1rem;">Your Workshop Environment</span>
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i style="color: orange;"
+              class="fa fa-exclamation-triangle" aria-hidden="true"></i></span>
+
+          <form action="javascript:void(0);" onsubmit="goWithUserId();">
+            <div class="navbar-item" id="navbar-form-project-filled" style="display: none;">
+              <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">|</span>
+            </div>
+            <input size="40" id="userId" type="text" placeholder="Enter USER ID">
+            <input type="hidden" id="subDomain" name="subDomain" value="">
+            <input type="hidden" id="apiUrl" name="apiUrl" value="">
+          </form>
+        </div>
+
+        <div class="navbar-item" id="navbar-form-filled" style="display: none;">
+          <span class="navbar-text" style="margin-left: 1rem;">Your Workshop Environment</span>
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">|</span>
+          <span class="navbar-text" id="username"></span>
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i onclick="recycle();" style="color: green;" class="fa fa-recycle" aria-hidden="true"></i></span>
+        </div>
+
+    </div>
+  </nav>
+</header><div class="body">
+<div class="nav-container" data-component="vote-app-guides" data-version="main">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../m1/intro.html" class=" query-params-link">Vote App Lab Guides</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Module One: Overview</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../m1/intro.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../m1/inner-outer.html">Inner vs Outer Loop</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../m1/setup.html">Lab Setup</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Module Two: Development</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="intro.html">Introduction</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="pipelines.html">Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="argocd.html">Argo CD</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="devspaces.html">Dev Spaces</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="finish.html">Finish</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Module Three: Production</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../m3/production.html">Pushing to Production</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Module Four: Conclusion</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../m4/finish.html">Finish</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../m4/resources.html">Resources</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Vote App Lab Guides</span>
+    <span class="version">main</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Vote App Lab Guides</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="../m1/intro.html">main</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../m1/intro.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../m1/intro.html">Vote App Lab Guides</a></li>
+    <li>Module Two: Development</li>
+    <li><a href="pipelines.html">Pipelines</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/blues-man/vote-app-guides/edit/main/docs/modules/m2/pages/pipelines.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Red Hat Summit 2023: Vote App Lab Development - Pipelines</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this section, you will learn how to use a Tekton pipeline resource and trigger the pipeline to run. The pipeline will firstly clone the git repository source code of the <code>vote-api</code> and <code>vote-ui</code> repositories. The pipeline will then build the application and push the image to the internal image registry. Finally, the pipeline will then update the deployment in the <code>vote-app-gitops</code> repository with the new image. We&#8217;ll also later add a webhook to the <code>vote-ui</code> to trigger when a commit is made to the Git repository.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_viewing_the_pipelines"><a class="anchor" href="#_viewing_the_pipelines"></a>Viewing the pipelines</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>While the actual Tekton pipelines has been created for you, you will need to create a pipeline resource and trigger the pipeline to run. Before we begin, ensure you&#8217;ve switched to the <strong>Developer</strong> perspective.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/switch-perspective.png" alt="switch perspective">
+</div>
+</div>
+<div class="paragraph">
+<p>Before we start the pipelines, let&#8217;s take a look at the pipelines that have been created for you. These pipelines are created in the <code>vote-app-ci-%USERID%</code> namespace. To view the pipelines, click on the <strong>Pipelines</strong> link in the left navigation menu. Let&#8217;s also take a look at the contents of the pipelines:</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_starting_the_vote_app_api_pipeline"><a class="anchor" href="#_starting_the_vote_app_api_pipeline"></a>Starting the <code>vote-app-api</code> pipeline</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Firstly, ensure that you&#8217;re currently using the <code>vote-app-ci-%USERID%</code> project. This is where the pipeline manifests have been created, and where we&#8217;ll be running the pipeline from.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/switch-project.png" alt="switch project">
+</div>
+</div>
+<div class="paragraph">
+<p>Within this Pipelines dashboard, you will see a list of pipelines.  Click on the <code>vote-app-api-pipeline</code> pipeline to see the details of the pipeline.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipeline-list.png" alt="pipeline list">
+</div>
+</div>
+<div class="paragraph">
+<p>Here, you can go through the pipeline steps and see what each step is doing.  You can also see the pipeline resources that are being used. In addition, you can see the pipeline parameters that are being used.  These parameters are used to pass in the name of the image that will be built, and the name of the image that will be pushed to the registry. For reference, here&#8217;s the pipeline steps:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>git-clone</code>: This step clones the local Gitea repository that contains the source code for the application. We&#8217;re able to do so because of a <code>gitea-gitops</code> secret that was created for you. This secret contains the username and password to access the Gitea repository.</p>
+</li>
+<li>
+<p><code>build-and-push</code>: This step builds the image and pushes it to the internal OpenShift registry.  The image name is passed in as a parameter.</p>
+</li>
+<li>
+<p><code>git-update-deployment</code>: This final step updates the deployment manifests in the Git repository.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipeline-details.png" alt="pipeline details">
+</div>
+</div>
+<div class="paragraph">
+<p>Now, let&#8217;s start the pipeline.  Click on the top-right <strong>Actions</strong> then <strong>Start</strong> button to start the pipeline. You will be prompted to enter the values for the pipeline parameters, however the default values are already set for you. You&#8217;ll still need to select a workspace, so select <strong>Persistent Volume Claim</strong> and choose the <code>workspace-app-api-source</code> PVC. Now, click on the <strong>Start</strong> button.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipeline-start.png" alt="pipeline start">
+</div>
+</div>
+<div class="paragraph">
+<p>Now that the <code>vote-app-api</code> pipeline has been started, let&#8217;s start the <code>vote-app-ui</code> pipeline.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_starting_the_vote_app_ui_pipeline"><a class="anchor" href="#_starting_the_vote_app_ui_pipeline"></a>Starting the <code>vote-app-ui</code> pipeline</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let&#8217;s repeat the same steps for the <code>vote-app-ui-pipeline</code> pipeline.  Click on the <code>vote-app-ui-pipeline</code> pipeline from the <strong>Pipelines</strong> left-hand tab to see the details of the pipeline.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipeline-ui-list.png" alt="pipeline ui list">
+</div>
+</div>
+<div class="paragraph">
+<p>Here, we can go ahead and start the Pipeline. Click on the top-right <strong>Actions</strong> then <strong>Start</strong> button to start the pipeline. The steps are the same as the <code>vote-app-api</code> pipeline, so we won&#8217;t go through them again.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipeline-ui-start.png" alt="pipeline ui start">
+</div>
+</div>
+<div class="paragraph">
+<p>You will be prompted to enter the values for the pipeline parameters, however the default values are already set for you. You&#8217;ll still need to select a workspace, so select <strong>Persistent Volume Claim</strong> and choose the <code>workspace-ui-app-source</code> PVC.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipeline-ui-start-2.png" alt="pipeline ui start 2">
+</div>
+</div>
+<div class="paragraph">
+<p>Now that the <code>vote-app-ui</code> pipeline has been started, let&#8217;s go ahead and check the status of the pipelines.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_checking_the_status_of_the_pipelines"><a class="anchor" href="#_checking_the_status_of_the_pipelines"></a>Checking the status of the pipelines</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To check the status of the pipelines, click on the <strong>Pipelines</strong> left-hand tab. You will see the list of pipelines that are currently running. You can click on the pipeline to see the details of the pipeline.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipeline-status.png" alt="pipeline status">
+</div>
+</div>
+<div class="paragraph">
+<p>You can also click on the <strong>PipelineRuns</strong> section tab to see the list of PipelineRuns that have been created. You can click on the PipelineRun to see the details of the PipelineRun.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipelinerun-status.png" alt="pipelinerun status">
+</div>
+</div>
+<div class="paragraph">
+<p>Here, you can view each step of the pipeline and see the status of each step. You can also view the logs of the PipelineRun and the logs of each step.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipelinerun-status-2.png" alt="pipelinerun status 2">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_checking_the_status_of_the_applications"><a class="anchor" href="#_checking_the_status_of_the_applications"></a>Checking the status of the applications</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now that the pipelines have been started, let&#8217;s check the status of the deployments. Click on the <strong>Topology</strong> left-hand tab to see the list of deployments that have been created. You can click on the deployment to see the details of the deployment.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/deployment-status.png" alt="deployment status">
+</div>
+</div>
+<div class="paragraph">
+<p>Here, you can see the status of the deployment. You can also see the status of the pods that are running.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_start_vote_ui_with_a_webhook"><a class="anchor" href="#_start_vote_ui_with_a_webhook"></a>Start <code>vote-ui</code> with a Webhook</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Tekton supports Tekton Triggers to enable automation and web hooks to Pipelines. All settings have been already installed from previous command, and both pipelines support web hooks.</p>
+</div>
+<div class="paragraph">
+<p>Now that the <code>vote-ui</code> deployment is running, let&#8217;s add a webhook. This webhook will be used to trigger a new build of the application when a change is made to the Git repository.</p>
+</div>
+<div class="paragraph">
+<p>From the Topology view, click on the <code>el-eventlistener-ui</code> Deployment. From there, navigate to the Routes section and copy the <code>el-eventlistener-ui</code> Route URL.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/trigger-vote-ui.png" alt="Trigger Vote UI">
+</div>
+</div>
+<div class="paragraph">
+<p>Once you have the URL copied to your clipboard, navigate to the code repository fork that you have on <a href="https://gitea.%SUBDOMAIN%/%USERID%/pipelines-vote-ui" class="params-link" target="_blank" rel="noopener"><strong>Gitea</strong></a>. From your fork page, click on the Settings menu in the top-right corner. From the top right-side menu, click on <strong>Settings</strong>, then <strong>Webhooks</strong>. Then, click on Add webhook from the right-side menu.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/add-webhook.png" alt="Add Webhook">
+</div>
+</div>
+<div class="paragraph">
+<p>In the next screen, paste the copied Route URL into the <strong>Target URL</strong> field. You can leave the other fields blank, just ensure the Content Type is set to <code>application/json</code>.</p>
+</div>
+<div class="paragraph">
+<p>Finally, click on <strong>Add webhook</strong> to create the webhook.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/create-webhook.png" alt="Create Webhook">
+</div>
+</div>
+<div class="paragraph">
+<p>To verify that everything is working, let&#8217;s make some changes in the OpenShift Dev Spaces section to the source code and push the changes to your forked repository. This should trigger the pipeline to start automatically.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_next_steps"><a class="anchor" href="#_next_steps"></a>Next Steps</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Congratulations! You&#8217;ve successfully deployed the <code>vote-app</code> and <code>vote-api</code> pipelines using Tekton Pipelines. You&#8217;ve also added a webhook to the <code>vote-ui</code> pipeline to trigger a new build when changes are made to the Git repository. Now, let&#8217;s move on to the next lab to learn how to deploy the application using Argo CD.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="intro.html" class="query-params-link">Introduction</a></span>
+  <span class="next"><a href="argocd.html" class="query-params-link">Argo CD</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<script src="../../../_/js/vendor/clipboard.js"></script>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

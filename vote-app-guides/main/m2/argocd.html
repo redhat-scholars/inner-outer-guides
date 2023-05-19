@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Red Hat Summit 2023: Vote App Lab Development - Argo CD :: Summit 2023 Vote App Lab Guide</title>
+    <link rel="prev" href="pipelines.html">
+    <link rel="next" href="devspaces.html">
+    <meta name="generator" content="Antora 3.1.2">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+<link rel="icon" href="../../../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const userId = urlParams.get('USERID');
+      const subDomain = urlParams.get('SUBDOMAIN');
+      const apiUrl = urlParams.get('APIURL');
+      if (userId) {
+        showUserId( userId );
+      }
+      else {
+        showUserIdForm();
+      }
+    } );
+
+
+    function showUserId( userId ) {
+      document.getElementById('navbar-form-empty').style.display = "none";
+      document.getElementById('navbar-form-filled').style.display = "flex";
+      document.getElementById('username').textContent = userId;
+      document.getElementById('subDomain').value = subDomain;
+      document.getElementById('apiUrl').value = apiUrl;
+
+    }
+
+    function showUserIdForm( userId ) {
+      document.getElementById('navbar-form-empty').style.display = "flex";
+      document.getElementById('navbar-form-filled').style.display = "none";
+    }
+
+    function goWithUserId() {
+      elUserIdInput = document.getElementById('userId');
+      elSubDomainInput = document.getElementById('subDomain');
+      elapiUrlInput = document.getElementById('apiUrl');
+
+      window.location.search = ('&USERID=' + elUserIdInput.value + '&SUBDOMAIN=' + elSubDomainInput.value + '&APIURL=' + elapiUrlInput.value);
+    }
+
+  </script>
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com/en/technologies/cloud-computing/openshift" target="_blank"><img
+          src="../../../_/img/Logo-Red_Hat-OpenShift_4-A-Reverse-RGB.png" height="40px" alt="Red Hat OpenShift"></a>
+      <a class="navbar-item" href="../../.." style="color: white;"><h3>Summit 2023 Vote App Lab Guide</h3></a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item" id="navbar-form-empty">
+          <span class="navbar-text" style="margin-left: 1rem;">Your Workshop Environment</span>
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i style="color: orange;"
+              class="fa fa-exclamation-triangle" aria-hidden="true"></i></span>
+
+          <form action="javascript:void(0);" onsubmit="goWithUserId();">
+            <div class="navbar-item" id="navbar-form-project-filled" style="display: none;">
+              <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">|</span>
+            </div>
+            <input size="40" id="userId" type="text" placeholder="Enter USER ID">
+            <input type="hidden" id="subDomain" name="subDomain" value="">
+            <input type="hidden" id="apiUrl" name="apiUrl" value="">
+          </form>
+        </div>
+
+        <div class="navbar-item" id="navbar-form-filled" style="display: none;">
+          <span class="navbar-text" style="margin-left: 1rem;">Your Workshop Environment</span>
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">|</span>
+          <span class="navbar-text" id="username"></span>
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i onclick="recycle();" style="color: green;" class="fa fa-recycle" aria-hidden="true"></i></span>
+        </div>
+
+    </div>
+  </nav>
+</header><div class="body">
+<div class="nav-container" data-component="vote-app-guides" data-version="main">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../m1/intro.html" class=" query-params-link">Vote App Lab Guides</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Module One: Overview</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../m1/intro.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../m1/inner-outer.html">Inner vs Outer Loop</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../m1/setup.html">Lab Setup</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Module Two: Development</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="intro.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="pipelines.html">Pipelines</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="argocd.html">Argo CD</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="devspaces.html">Dev Spaces</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="finish.html">Finish</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Module Three: Production</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../m3/production.html">Pushing to Production</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Module Four: Conclusion</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../m4/finish.html">Finish</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../m4/resources.html">Resources</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Vote App Lab Guides</span>
+    <span class="version">main</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Vote App Lab Guides</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="../m1/intro.html">main</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../m1/intro.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../m1/intro.html">Vote App Lab Guides</a></li>
+    <li>Module Two: Development</li>
+    <li><a href="argocd.html">Argo CD</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/blues-man/vote-app-guides/edit/main/docs/modules/m2/pages/argocd.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Red Hat Summit 2023: Vote App Lab Development - Argo CD</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now, the next step is to deploy the Vote App to the <code>vote-app-dev-%USERID%</code> environment using Argo CD. This will allow us to view the application before it reaches production, and make necessary changes throughout our development flow. We&#8217;ll also use the OpenShift Web Terminal to scale up the replicas for one of the deployments, and learn how to use Argo CD to manage application drifts and syncing.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_creating_a_new_application_using_argo_cd"><a class="anchor" href="#_creating_a_new_application_using_argo_cd"></a>Creating a new application using Argo CD</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let&#8217;s use Argo CD to create a new application. While you can use this <a href="https://argocd-server-argocd-%USERID%.%SUBDOMAIN%" class="params-link" target="_blank" rel="noopener">Argo CD</a>. link to login to the Argo CD dashboard, you can also head to Argo CD from within your cluster by visiting the <code>argocd-%USERID%</code> project in the OpenShift web console.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd-button.png" alt="Argo CD Button">
+</div>
+</div>
+<div class="paragraph">
+<p>Then, click on the <strong>Login with OpenShift</strong> button.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd-login.png" alt="Argo CD Login">
+</div>
+</div>
+<div class="paragraph">
+<p>Within the Argo CD web console, click on the <strong>+ New App</strong> button.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd-new-app.png" alt="Argo CD New App">
+</div>
+</div>
+<div class="paragraph">
+<p>Fill in the following information, many of which may auto-fill when selected:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Application Name: <code>vote-app-dev-%USERID%</code></p>
+</li>
+<li>
+<p>Project: <code>default</code></p>
+</li>
+<li>
+<p>Sync Policy: <code>Automatic</code></p>
+</li>
+<li>
+<p>Self-Healing: <code>Disabled</code></p>
+</li>
+<li>
+<p>Auto-create Namespace: <code>Enabled</code></p>
+</li>
+<li>
+<p>Repository URL: <code><a href="http://gitea.gitea.svc:3000/%USERID%/vote-app-gitops" class="bare">http://gitea.gitea.svc:3000/%USERID%/vote-app-gitops</a></code></p>
+</li>
+<li>
+<p>Revision: <code>main</code></p>
+</li>
+<li>
+<p>Path: <code>environments/dev</code></p>
+</li>
+<li>
+<p>Cluster URL: <code><a href="https://kubernetes.default.svc" class="bare">https://kubernetes.default.svc</a></code></p>
+</li>
+<li>
+<p>Namespace: <code>vote-app-dev-%USERID%</code></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd-new-app-form.png" alt="Argo CD New App Form">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd-new-app-form-2.png" alt="Argo CD New App Form Continued">
+</div>
+</div>
+<div class="paragraph">
+<p>When finished, click on the <strong>CREATE</strong> button.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_viewing_the_application_in_argo_cd"><a class="anchor" href="#_viewing_the_application_in_argo_cd"></a>Viewing the application in Argo CD</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now, let&#8217;s view the application in Argo CD. After creating the application, you should be redirected to the application details page. If not, click on the application&#8217;s name to view the application details.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd-app-details.png" alt="Argo CD App Details">
+</div>
+</div>
+<div class="paragraph">
+<p>Here, you&#8217;ll see the <code>vote-app-dev-%USERID%</code> application&#8217;s health, sync status, and associated resources. Currently, the application is syncing, so the status is <code>OutOfSync</code>. Once the application is synced, the status will change to a green <code>Synced</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd-app-details-2.png" alt="Argo CD App Details Continued">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_viewing_the_application_in_the_openshift_web_console"><a class="anchor" href="#_viewing_the_application_in_the_openshift_web_console"></a>Viewing the application in the OpenShift web console</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now, let&#8217;s <a href="https://vote-ui-vote-app-dev-%USERID%.%SUBDOMAIN%" class="params-link" target="_blank" rel="noopener"><strong>view the application</strong></a> in the OpenShift web console. From the OpenShift web console in the <code>vote-app-dev-%USERID%</code> project, click on the <code>Topology</code> tab.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/dev-topology.png" alt="OpenShift Topology">
+</div>
+</div>
+<div class="paragraph">
+<p>To access the application, click on the <code>vote-ui</code> route icon, which will open the application in a new tab.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/vote-app-access.png" alt="Voting App Access">
+</div>
+</div>
+<div class="paragraph">
+<p>Great! Looks like we&#8217;re able to see the newly deployed Vote App in our browser through this development environment.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_using_the_web_terminal_to_modify_the_development_project"><a class="anchor" href="#_using_the_web_terminal_to_modify_the_development_project"></a>Using the Web Terminal to modify the development project</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now, let&#8217;s use the web terminal to modify the development project and demonstrate that we have not yet put in place self-healing or high availability just yet. From the OpenShift web console in the <code>vote-app-dev-%USERID%</code> project, click on the <strong>Terminal</strong> icon from the top right of the page.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/terminal-icon.png" alt="Web Terminal Icon">
+</div>
+</div>
+<div class="paragraph">
+<p>From the web terminal, run the following command scale up the <code>vote-ui</code> deployment to 2 replicas:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc scale deployment vote-ui --replicas=2</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/scale-up.png" alt="Scale Up">
+</div>
+</div>
+<div class="paragraph">
+<p>This command will scale up the <code>vote-ui</code> deployment to 2 replicas. Now, we can return to Argo CD to see how the application is out of sync.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd-app-details-3.png" alt="Argo CD App Details">
+</div>
+</div>
+<div class="paragraph">
+<p>Now, click <strong>Sync</strong> and select <strong>Synchronize</strong> to sync the application back to the manifests in the <a href="https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops" class="params-link" target="_blank" rel="noopener">Gitea Vote App GitOps</a> repository.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd-sync.png" alt="Argo CD Sync">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_next_steps"><a class="anchor" href="#_next_steps"></a>Next Steps</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now that you have deployed the Vote App to the dev environment using Argo CD, we can use OpenShift DevSpaces to develop and test the application locally before moving to the <code>vote-app-prod-%USERID%</code> environment and implementing self-healing and high availability.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="pipelines.html" class="query-params-link">Pipelines</a></span>
+  <span class="next"><a href="devspaces.html" class="query-params-link">Dev Spaces</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<script src="../../../_/js/vendor/clipboard.js"></script>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Red Hat Summit 2023: Vote App Lab Development - Dev Spaces :: Summit 2023 Vote App Lab Guide</title>
+    <link rel="prev" href="argocd.html">
+    <link rel="next" href="finish.html">
+    <meta name="generator" content="Antora 3.1.2">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+<link rel="icon" href="../../../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const userId = urlParams.get('USERID');
+      const subDomain = urlParams.get('SUBDOMAIN');
+      const apiUrl = urlParams.get('APIURL');
+      if (userId) {
+        showUserId( userId );
+      }
+      else {
+        showUserIdForm();
+      }
+    } );
+
+
+    function showUserId( userId ) {
+      document.getElementById('navbar-form-empty').style.display = "none";
+      document.getElementById('navbar-form-filled').style.display = "flex";
+      document.getElementById('username').textContent = userId;
+      document.getElementById('subDomain').value = subDomain;
+      document.getElementById('apiUrl').value = apiUrl;
+
+    }
+
+    function showUserIdForm( userId ) {
+      document.getElementById('navbar-form-empty').style.display = "flex";
+      document.getElementById('navbar-form-filled').style.display = "none";
+    }
+
+    function goWithUserId() {
+      elUserIdInput = document.getElementById('userId');
+      elSubDomainInput = document.getElementById('subDomain');
+      elapiUrlInput = document.getElementById('apiUrl');
+
+      window.location.search = ('&USERID=' + elUserIdInput.value + '&SUBDOMAIN=' + elSubDomainInput.value + '&APIURL=' + elapiUrlInput.value);
+    }
+
+  </script>
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com/en/technologies/cloud-computing/openshift" target="_blank"><img
+          src="../../../_/img/Logo-Red_Hat-OpenShift_4-A-Reverse-RGB.png" height="40px" alt="Red Hat OpenShift"></a>
+      <a class="navbar-item" href="../../.." style="color: white;"><h3>Summit 2023 Vote App Lab Guide</h3></a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item" id="navbar-form-empty">
+          <span class="navbar-text" style="margin-left: 1rem;">Your Workshop Environment</span>
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i style="color: orange;"
+              class="fa fa-exclamation-triangle" aria-hidden="true"></i></span>
+
+          <form action="javascript:void(0);" onsubmit="goWithUserId();">
+            <div class="navbar-item" id="navbar-form-project-filled" style="display: none;">
+              <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">|</span>
+            </div>
+            <input size="40" id="userId" type="text" placeholder="Enter USER ID">
+            <input type="hidden" id="subDomain" name="subDomain" value="">
+            <input type="hidden" id="apiUrl" name="apiUrl" value="">
+          </form>
+        </div>
+
+        <div class="navbar-item" id="navbar-form-filled" style="display: none;">
+          <span class="navbar-text" style="margin-left: 1rem;">Your Workshop Environment</span>
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">|</span>
+          <span class="navbar-text" id="username"></span>
+          <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">&nbsp;<i onclick="recycle();" style="color: green;" class="fa fa-recycle" aria-hidden="true"></i></span>
+        </div>
+
+    </div>
+  </nav>
+</header><div class="body">
+<div class="nav-container" data-component="vote-app-guides" data-version="main">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../m1/intro.html" class=" query-params-link">Vote App Lab Guides</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Module One: Overview</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../m1/intro.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../m1/inner-outer.html">Inner vs Outer Loop</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../m1/setup.html">Lab Setup</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Module Two: Development</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="intro.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="pipelines.html">Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="argocd.html">Argo CD</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="devspaces.html">Dev Spaces</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="finish.html">Finish</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Module Three: Production</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../m3/production.html">Pushing to Production</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Module Four: Conclusion</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../m4/finish.html">Finish</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../m4/resources.html">Resources</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Vote App Lab Guides</span>
+    <span class="version">main</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Vote App Lab Guides</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="../m1/intro.html">main</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../m1/intro.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../m1/intro.html">Vote App Lab Guides</a></li>
+    <li>Module Two: Development</li>
+    <li><a href="devspaces.html">Dev Spaces</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/blues-man/vote-app-guides/edit/main/docs/modules/m2/pages/devspaces.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Red Hat Summit 2023: Vote App Lab Development - Dev Spaces</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>With the Vote Application deployed to our <code>vote-app-dev-%USERID%</code> project, we can now use OpenShift Dev Spaces to develop and test our application. Dev Spaces is a browser-based IDE that allows you to develop in the cloud. It provides a ready-to-use development stack with a web-based IDE, terminal, and version control support. It also provides pre-built developer workspaces that allow you to start coding immediately, which we&#8217;ll be using in this lab. We&#8217;ll make a quick change to the source code of our <code>vote-ui</code> application, see the results in real-time, and push these changes to our repository.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_getting_setup_with_dev_spaces"><a class="anchor" href="#_getting_setup_with_dev_spaces"></a>Getting setup with Dev Spaces</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let&#8217;s start out with getting more familiar with the Dev Spaces interface. To do this, we can begin with navigating to Dev Spaces from the OpenShift Console. To do this, click on the menu icon on the top right corner and select <code>Red Hat OpenShift Dev Spaces</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devspaces-button.png" alt="Dev Spaces Button">
+</div>
+</div>
+<div class="paragraph">
+<p>This will open up the Dev Spaces interface. You&#8217;ll need to firstly authorize Dev Spaces to access your OpenShift cluster. Next, you&#8217;ll see the <code>vote-ui</code> workspace from within the Dev Spaces dashboard. Click on the <code>vote-ui</code> workspace and hit <strong>Actions</strong> from the top right corner, then click <strong>Start</strong> to enter the Dev Spaces IDE.</p>
+</div>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="devspaces-workspaces.png" alt="Dev Spaces Workspaces">
+</div>
+</div>
+<div class="paragraph">
+<p>From here, we can begin to make our changes to the Vote Application. But first, let&#8217;s get familiar with the powerful features of Dev Spaces.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devspaces-interface.png" alt="Dev Spaces Interface">
+</div>
+</div>
+<div class="sect2">
+<h3 id="_extension_support"><a class="anchor" href="#_extension_support"></a>Extension support</h3>
+<div class="paragraph">
+<p>Built from the open Eclipse Che project, Dev Spaces provides support for Microsoft Visual Studio Code extensions and Language Server Protocol. This means that you can use your favorite Visual Studio Code extensions in Dev Spaces. You can also use the Language Server Protocol to provide language features like auto-complete, go-to-definition, and hover support.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devspaces-extensions.png" alt="Dev Spaces Extensions">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_terminal_support"><a class="anchor" href="#_terminal_support"></a>Terminal support</h3>
+<div class="paragraph">
+<p>Dev Spaces also provides a terminal that allows you to run commands in your workspace. This is useful for running commands like <code>mvn clean package</code> or <code>npm install</code> to build your application. You can also use the terminal to run commands within your OpenShift cluster without needing to authenticate again.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devspaces-terminal.png" alt="Dev Spaces Terminal">
+</div>
+</div>
+<div class="paragraph">
+<p>With the terminal, let&#8217;s run the following command to test out a bit of Python code, as Python has been installed in our workspace.</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">python
+print("Hello from Summit 2023!")
+quit()</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devspaces-terminal-python.png" alt="Dev Spaces Terminal Python">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_git_support"><a class="anchor" href="#_git_support"></a>Git support</h3>
+<div class="paragraph">
+<p>Dev Spaces also provides a built-in version control system. This allows you to commit and push your changes to a Git repository. You can also use the version control system to pull changes from a Git repository.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devspaces-git.png" alt="Dev Spaces Git">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_editing_the_vote_application_in_dev_spaces"><a class="anchor" href="#_editing_the_vote_application_in_dev_spaces"></a>Editing the Vote Application in Dev Spaces</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_installing_the_application_dependencies"><a class="anchor" href="#_installing_the_application_dependencies"></a>Installing the application dependencies</h3>
+<div class="paragraph">
+<p>Let&#8217;s first setup the dependencies for our application and run the the Vote Application locally. From the top right corner, we can select <strong>Terminal</strong> and then <strong>Run Task</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devspaces-run-task.png" alt="Dev Spaces Run Task">
+</div>
+</div>
+<div class="paragraph">
+<p>From here, we can select <strong>Show all tasks</strong> and <strong>devfile: Install dependencies</strong>. This will install the dependencies for the Vote Application.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devspaces-run-task-2.png" alt="Dev Spaces Run Task">
+</div>
+</div>
+<div class="paragraph">
+<p>Next, we can select <strong>Terminal</strong> and then <strong>Run Task</strong> again. From here, we can select <strong>Show all tasks</strong> and <strong>devfile: Run Python App</strong>. This will run the Vote Application in development.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devspaces-run-app.png" alt="Dev Spaces Run App">
+</div>
+</div>
+<div class="paragraph">
+<p>You&#8217;ll now see a pop-up in the lower right corner about a new process running on port 8080. Using this, we will be able to see live code changes to the Vote Application running in the browser.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devspaces-run-app-browser.png" alt="Dev Spaces Run App Browser">
+</div>
+</div>
+<div class="paragraph">
+<p>From here, we can click on the <strong>Open</strong> button to open the Vote Application in a new browser tab. It may take a few seconds, but you should see the Vote Application running.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devspaces-run-app-browser-1.png" alt="Dev Spaces Run App Browser">
+</div>
+</div>
+<div class="paragraph">
+<p>From the Dev Spaces interface, we can now begin to make changes to the Vote Application. To do this, we can edit the <code>index.html</code> file in the <code>templates</code> directory.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_live_coding_within_dev_spaces"><a class="anchor" href="#_live_coding_within_dev_spaces"></a>Live coding within Dev Spaces</h3>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devspaces-edit.png" alt="Dev Spaces Edit">
+</div>
+</div>
+<div class="paragraph">
+<p>Here, on line 16, we can change the text from <code>{{option_a}} vs {{option_b}}!</code> to <code>{{option_a}} vs {{option_b}}! - Red Hat Summit 2023</code>. This will change the title of the Vote Application to <code>Vote App - Red Hat Summit 2023</code>. Feel free to copy the below code and insert it within the <code>&lt;h1&gt;&lt;/h1&gt;</code> blocks.</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">{{option_a}} vs {{option_b}}! - Red Hat Summit 2023</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devspaces-edit-title.png" alt="Dev Spaces Edit Title">
+</div>
+</div>
+<div class="paragraph">
+<p>Now, if we return to our new tab with the local Vote Application running, we can see the new changes we&#8217;ve made, live.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devspaces-run-app-browser-2.png" alt="Dev Spaces Run App Browser">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_performing_a_security_scan"><a class="anchor" href="#_performing_a_security_scan"></a>Performing a security scan</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now that we&#8217;ve made our changes to the Vote Application, we can analyze our dependencies by performing a security scan. Dependency Analytics is powered by Snyk Intel Vulnerability DB, the most advanced and accurate open source vulnerability database in the industry.</p>
+</div>
+<div class="paragraph">
+<p>To do this, we can right click the <strong>requirements.txt</strong> file from the left menu. From here, we can select <strong>Dependency Analytics Report</strong> to perform a security scan on the Vote Application.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devspaces-snyk.png" alt="Dev Spaces Snyk">
+</div>
+</div>
+<div class="paragraph">
+<p>This will open up a new tab in the browser with the results of the security scan. Here, we can see information about security issues, dependencies, licenses, and add-ons.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devspaces-snyk-report.png" alt="Dev Spaces Snyk Report">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pushing_changes_to_the_git_repository"><a class="anchor" href="#_pushing_changes_to_the_git_repository"></a>Pushing changes to the Git repository</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now that we&#8217;ve tested our changes, we can push our changes to the Git repository. To do this, we can select the <strong>Source Control</strong> tab from the left menu. From here, we can select the <strong>✓ Commit</strong> button to stage all of our changes. We can then enter a commit message (ex. <code>Modified index.html header</code>) and commit, as well as push our changes to the Git repository.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devspaces-commit.png" alt="Dev Spaces Commit">
+</div>
+</div>
+<div class="paragraph">
+<p>Finally, you&#8217;ll be prompted to enter your credentials to push your changes to the Git repository. To recall, your credentials are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Username: <code>%USERID%</code></p>
+</li>
+<li>
+<p>Password: <code>openshift</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_syncing_changes_to_the_vote_application"><a class="anchor" href="#_syncing_changes_to_the_vote_application"></a>Syncing changes to the Vote Application</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now that we&#8217;ve pushed our changes to the Git repository, and with the webhook configured, our changes will be automatically deployed to the Vote Application. To see this, we can navigate to the OpenShift Console and select the <code>vote-app-ci-%USERID%</code> project. From here, we can select <strong>Pipelines</strong> from the left menu. We should see the pipeline <code>vote-app-ci-pipeline</code> running and rebuilding the Vote Application.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devspaces-pipeline.png" alt="Dev Spaces Pipeline">
+</div>
+</div>
+<div class="paragraph">
+<p>Once the pipeline has completed, in the <a href="https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops/" class="params-link" target="_blank" rel="noopener">vote-app-gitops</a>] repository, there will be a new commit from Tekton that will contain the new hash for the Vote Application image.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devspaces-gitops-commit.png" alt="Dev Spaces GitOps Commit">
+</div>
+</div>
+<div class="paragraph">
+<p>Now, Argo CD will automatically pick up on these changes from the repository. To deploy the new image to the <code>vote-app-dev-%USERID%</code> project, head back to Argo CD and select the <code>vote-app-dev-%USERID%</code> application. You&#8217;ll see that the application is now out of sync, and hasn&#8217;t updated, as we declared in our <code>Application</code> resource that we didn&#8217;t want <em>self-healing</em> enabled. From the top menu, click on <strong>Sync</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd-sync.png" alt="Argo CD Sync">
+</div>
+</div>
+<div class="paragraph">
+<p>Now, select <strong>Synchronize</strong>. This will deploy the new image to the <code>vote-app-dev-%USERID%</code> project.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devspaces-argocd-sync.png" alt="Dev Spaces Argo CD Sync">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_next_steps"><a class="anchor" href="#_next_steps"></a>Next steps</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Making these changes manually is a good solution for our development environment, but let&#8217;s push this application to production and automate all of this. For this, we can use a separate pipeline that will deploy the application to the <code>vote-app-prod-%USERID%</code> project.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="argocd.html" class="query-params-link">Argo CD</a></span>
+  <span class="next"><a href="finish.html" class="query-params-link">Finish</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<script src="../../../_/js/vendor/clipboard.js"></script>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
