@@ -64,6 +64,6 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
         GITHUB_TOKEN: "${{github.token}}"
-        FOLDER: site
+        FOLDER: gh-pages
         BRANCH: gh-pages
         COMMIT_MESSAGE: "[docs] Publishing the docs for commit(s) ${{github.sha}}"
