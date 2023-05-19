@@ -213,6 +213,365 @@
 <div class="paragraph">
 <p>Before we start the pipelines, let&#8217;s take a look at the pipelines that have been created for you. These pipelines are created in the <code>vote-app-ci-%USERID%</code> namespace. To view the pipelines, click on the <strong>Pipelines</strong> link in the left navigation menu.</p>
 </div>
+<div class="paragraph">
+<p>Let&#8217;s also take a look at the contents of the pipelines:</p>
+</div>
+<div class="paragraph">
+<p><strong>vote-app-api-pipeline</strong></p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: vote-app-api-pipeline
+  namespace: vote-app-ci-%USERID%
+spec:
+  params:
+  - name: SOURCE_GIT_URL
+    type: string
+    description: The application git repository url
+    default: 'http://gitea.gitea.svc:3000/%USERID%/pipelines-vote-api'
+  - name: SOURCE_GIT_REVISION
+    type: string
+    default: master
+    description: The application git repository revision
+  - default: image-registry.openshift-image-registry.svc:5000/vote-app-dev-%USERID%/vote-api
+    name: IMAGE_NAME
+    type: string
+  - default: .
+    name: PATH_CONTEXT
+    type: string
+  - default: 'http://gitea.gitea.svc:3000/%USERID%/vote-app-gitops'
+    name: CONFIG_GIT_REPO
+    type: string
+  - default: main
+    name: CONFIG_GIT_REVISION
+    type: string
+
+  workspaces:
+  - name: app-source
+
+  tasks:
+
+  - name: git-clone
+    taskRef:
+      kind: ClusterTask
+      name: git-clone
+    params:
+    - name: url
+      value: $(params.SOURCE_GIT_URL)
+    - name: revision
+      value: $(params.SOURCE_GIT_REVISION)
+    - name: deleteExisting
+      value: 'true'
+    workspaces:
+    - name: output
+      workspace: app-source
+
+  - name: build-and-push
+    params:
+    - name: IMAGE
+      value: $(params.IMAGE_NAME)
+    - name: TLSVERIFY
+      value: "false"
+    - name: CONTEXT
+      value: $(params.PATH_CONTEXT)
+    runAfter:
+    - git-clone
+    taskRef:
+      kind: ClusterTask
+      name: buildah
+    workspaces:
+    - name: source
+      workspace: app-source
+
+  - name: git-update-deployment
+    params:
+    - name: GIT_REPOSITORY
+      value: $(params.CONFIG_GIT_REPO)
+    - name: CURRENT_IMAGE
+      value: quay.io/bluesman/vote-api:latest
+    - name: NEW_IMAGE
+      value: $(params.IMAGE_NAME)
+    - name: NEW_DIGEST
+      value: $(tasks.build-and-push.results.IMAGE_DIGEST)
+    - name: KUSTOMIZATION_PATH
+      value: environments/dev
+    - name: GIT_REF
+      value: $(params.CONFIG_GIT_REVISION)
+    runAfter:
+      - build-and-push
+    taskRef:
+      kind: Task
+      name: git-update-deployment
+    workspaces:
+    - name: workspace
+      workspace: app-source</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>vote-app-ui-pipeline</strong></p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: vote-app-ui-pipeline
+  namespace: vote-app-ci-%USERID%
+spec:
+  params:
+  - name: SOURCE_GIT_URL
+    type: string
+    description: The application git repository url
+    default: 'http://gitea.gitea.svc:3000/%USERID%/pipelines-vote-ui'
+  - name: SOURCE_GIT_REVISION
+    type: string
+    default: master
+    description: The application git repository revision
+  - default: image-registry.openshift-image-registry.svc:5000/vote-app-dev-%USERID%/vote-ui
+    name: IMAGE_NAME
+    type: string
+  - default: .
+    name: PATH_CONTEXT
+    type: string
+  - default: 'http://gitea.gitea.svc:3000/%USERID%/vote-app-gitops'
+    name: CONFIG_GIT_REPO
+    type: string
+  - default: main
+    name: CONFIG_GIT_REVISION
+    type: string
+
+  workspaces:
+  - name: app-source
+
+  tasks:
+
+  - name: git-clone
+    taskRef:
+      kind: ClusterTask
+      name: git-clone
+    params:
+    - name: url
+      value: $(params.SOURCE_GIT_URL)
+    - name: revision
+      value: $(params.SOURCE_GIT_REVISION)
+    - name: deleteExisting
+      value: 'true'
+    workspaces:
+    - name: output
+      workspace: app-source
+
+  - name: build-and-push
+    params:
+    - name: IMAGE
+      value: $(params.IMAGE_NAME)
+    - name: TLSVERIFY
+      value: "false"
+    - name: CONTEXT
+      value: $(params.PATH_CONTEXT)
+    runAfter:
+    - git-clone
+    taskRef:
+      kind: ClusterTask
+      name: buildah
+    workspaces:
+    - name: source
+      workspace: app-source
+
+  - name: git-update-deployment
+    params:
+    - name: GIT_REPOSITORY
+      value: $(params.CONFIG_GIT_REPO)
+    - name: CURRENT_IMAGE
+      value: quay.io/bluesman/vote-ui:latest
+    - name: NEW_IMAGE
+      value: $(params.IMAGE_NAME)
+    - name: NEW_DIGEST
+      value: $(tasks.build-and-push.results.IMAGE_DIGEST)
+    - name: KUSTOMIZATION_PATH
+      value: environments/dev
+    - name: GIT_REF
+      value: $(params.CONFIG_GIT_REVISION)
+    runAfter:
+      - build-and-push
+    taskRef:
+      kind: Task
+      name: git-update-deployment
+    workspaces:
+    - name: workspace
+      workspace: app-source</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>promote-to-prod**</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: promote-to-prod
+  namespace: vote-app-ci-%USERID%
+spec:
+  params:
+    - default: 'vote-app-dev-%USERID%/vote-ui:latest'
+      name: SOURCE_IMAGE
+      type: string
+    - default: 'vote-app-prod-%USERID%/vote-ui:prod'
+      name: DEST_IMAGE
+      type: string
+    - default: 'http://gitea.gitea.svc:3000/%USERID%/vote-app-gitops'
+      name: CONFIG_GIT_REPO
+      type: string
+    - default: main
+      name: CONFIG_GIT_REVISION
+      type: string
+    - default: &gt;-
+        image-registry.openshift-image-registry.svc:5000/vote-app-prod-%USERID%/vote-ui
+      name: IMAGE_NAME
+      type: string
+  tasks:
+    - name: tag-to-prod
+      params:
+        - name: SCRIPT
+          value: oc tag $(params.SOURCE_IMAGE) $(params.DEST_IMAGE)
+        - name: VERSION
+          value: latest
+      taskRef:
+        kind: ClusterTask
+        name: openshift-client
+    - name: image-tag-to-digest
+      params:
+        - name: image_dest_url
+          value: $(params.IMAGE_NAME)
+        - name: image_dest_tag
+          value: prod
+      runAfter:
+        - tag-to-prod
+      taskRef:
+        kind: Task
+        name: image-tag-to-digest
+    - name: git-update-deployment
+      params:
+        - name: GIT_REPOSITORY
+          value: $(params.CONFIG_GIT_REPO)
+        - name: GIT_REF
+          value: $(params.CONFIG_GIT_REVISION)
+        - name: CURRENT_IMAGE
+          value: quay.io/bluesman/vote-ui:latest
+        - name: NEW_IMAGE
+          value: $(params.IMAGE_NAME)
+        - name: NEW_DIGEST
+          value: $(tasks.image-tag-to-digest.results.image_digest)
+        - name: KUSTOMIZATION_PATH
+          value: environments/prod
+      runAfter:
+        - image-tag-to-digest
+      taskRef:
+        kind: Task
+        name: git-update-deployment
+      workspaces:
+        - name: workspace
+          workspace: app-source
+  workspaces:
+    - name: app-source</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>git-update-deployment-task</strong></p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  annotations:
+    tekton.dev/pipelines.minVersion: 0.12.1
+    tekton.dev/tags: git
+  name: git-update-deployment
+  namespace: vote-app-ci-%USERID%
+  labels:
+    app.kubernetes.io/version: '0.2'
+    operator.tekton.dev/provider-type: community
+spec:
+  description: &gt;-
+    This Task can be used to update image digest in a Git repo using kustomize.
+    It requires a secret with credentials for accessing the git repo.
+  params:
+    - name: GIT_REPOSITORY
+      type: string
+    - name: GIT_REF
+      type: string
+    - name: CURRENT_IMAGE
+      type: string
+    - name: NEW_IMAGE
+      type: string
+    - name: NEW_DIGEST
+      type: string
+    - name: KUSTOMIZATION_PATH
+      type: string
+  results:
+    - description: The commit SHA
+      name: commit
+  steps:
+    - image: 'docker.io/alpine/git:v2.26.2'
+      name: git-clone
+      resources: {}
+      script: &gt;
+        rm -rf git-update-digest-workdir
+
+        git clone $(params.GIT_REPOSITORY) -b $(params.GIT_REF)
+        git-update-digest-workdir
+      workingDir: $(workspaces.workspace.path)
+    - image: 'quay.io/wpernath/kustomize-ubi:latest'
+      name: update-digest
+      resources: {}
+      script: &gt;
+        cd git-update-digest-workdir/$(params.KUSTOMIZATION_PATH)
+
+        kustomize edit set image
+        $(params.CURRENT_IMAGE)=$(params.NEW_IMAGE)@$(params.NEW_DIGEST)
+
+
+        echo "##########################"
+
+        echo "### kustomization.yaml ###"
+
+        echo "##########################"
+
+        cat kustomization.yaml
+      workingDir: $(workspaces.workspace.path)
+    - image: 'docker.io/alpine/git:v2.26.2'
+      name: git-commit
+      resources: {}
+      script: |
+        cd git-update-digest-workdir
+
+        git config user.email "tektonbot@redhat.com"
+        git config user.name "My Tekton Bot"
+
+        git status
+        git add $(params.KUSTOMIZATION_PATH)/kustomization.yaml
+        git commit -m "[ci] Image digest updated"
+
+        git push
+
+        RESULT_SHA="$(git rev-parse HEAD | tr -d '\n')"
+        EXIT_CODE="$?"
+        if [ "$EXIT_CODE" != 0 ]
+        then
+          exit $EXIT_CODE
+        fi
+        # Make sure we don't add a trailing newline to the result!
+        echo -n "$RESULT_SHA" &gt; $(results.commit.path)
+      workingDir: $(workspaces.workspace.path)
+  workspaces:
+    - description: The workspace consisting of maven project.
+      name: workspace</code></pre>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
