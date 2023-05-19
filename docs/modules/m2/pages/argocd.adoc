@@ -67,7 +67,7 @@ From the web terminal, run the following command scale up the `vote-ui` deployme
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
-oc scale deployment vote-ui --replicas=2
+kubectl scale deployment vote-ui --replicas=2
 ----
 
 image::scale-up.png[Scale Up]
