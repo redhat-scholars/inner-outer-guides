@@ -2,6 +2,17 @@
 
 ## Local development
 
+### Gulp
+
+[source,bash]
+----
+npm install
+gulp
+----
+
+
+### Container
+
 [source,bash]
 ----
 podman build -t localhost/vote-app-guides .
