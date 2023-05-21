@@ -4,9 +4,13 @@ In this section, you will learn how to use a Tekton pipeline resource and trigge
 
 ## Viewing the pipelines
 
-While the actual Tekton pipelines has been created for you, you will need to create a pipeline resource and trigger the pipeline to run. Before we begin, ensure you've switched to the *Developer* perspective.
+Let's use the OpenShift Console to view the pipelines that have been created for you. Within the *Developer* perspective of the OpenShift Console, click on the *Pipelines* link in the left navigation menu. You can also use link:https://console-openshift-console.apps.%SUBDOMAIN%/dev-pipelines/all-namespaces[*this link*,role='params-link',window='_blank'] to head to the Pipelines page directly.
 
 image::switch-perspective.png[]
+
+While the actual Tekton pipelines has been created for you, you will need to create a pipeline resource and trigger the pipeline to run. Before we begin, ensure you've switched to the *Developer* perspective.
+
+
 
 Before we start the pipelines, let's take a look at the pipelines that have been created for you. These pipelines are created in the `vote-app-ci-%USERID%` namespace. To view the pipelines, click on the *Pipelines* link in the left navigation menu. 
 

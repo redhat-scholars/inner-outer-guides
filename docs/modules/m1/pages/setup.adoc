@@ -72,9 +72,26 @@ image::webterminal-operator-details.png[Web Terminal Details]
 
 // While we won't be using the *admin* account during this lab, it's still important to understand these operators as they help extend the functionality of OpenShift and allow us to perform this lab.
 
+### OpenShift
+
+First off, let's ensure that we're logged into the *OpenShift* cluster. You can access the OpenShift Console from the *Lab Guides*, or you can visit the OpenShift Console using this link:https://console-openshift-console.apps.%SUBDOMAIN%[*OpenShift Web Console Link*,role='params-link',window='_blank']. 
+
+image::openshift-login.png[OpenShift Page Login]
+
+You'll be prompted to login to OpenShift, and you can use the OpenShift login button to do so. As a reference, here are your credentials:
+
+- Username: `%USERID%`
+- Password: `openshift`
+
+image::openshift-dashboard.png[OpenShift Dashboard]
+
+Once you're logged in, you'll be at the OpenShift dashboard. From here, if you aren't already, you can navigate to the *Developer* perspective, which is where we'll be spending most of our time.
+
+image::developer-perspective.png[Developer Perspective]
+
 ### Argo CD
 
-Let's take a look at *Argo CD*, a declarative, GitOps continuous delivery tool for Kubernetes provided in the OpenShift GitOps Operator. While you can access Argo CD from the *Lab Guides*, you can also visit Argo CD from your OpenShift cluster. Within the *Developer* perspective, navigate to the `argocd-%USERID%` project, and visit the *Topology* page.
+Let's take a look at *Argo CD*, a declarative, GitOps continuous delivery tool for Kubernetes provided in the OpenShift GitOps Operator. While you can access Argo CD from the *Lab Guides* or by using this link:https://argocd-server-argocd-%USERID%.%SUBDOMAIN%[*Argo CD link*,role='params-link',window='_blank']. You can also visit Argo CD from your OpenShift cluster. Within the *Developer* perspective, navigate to the `argocd-%USERID%` project, and visit the *Topology* page.
 
 image::argocd-button.png[Argo CD Route Button]
 
@@ -93,7 +110,7 @@ image::argocd.png[Argo CD]
 
 ### Vote App Repository
 
-You'll also have access to a link:http://gitea.%SUBDOMAIN%[*Gitea*,role='params-link',window='_blank'] repository that contains the Vote App source code. This repository can also be located back at the *Lab Guides*, and you'll be able to access this repository using following credentials:
+You'll also have access to multiple *Gitea* repositories that contains the Vote App source code and Argo CD application manifests. You can access Gitea from the *Lab Guides*, or you can visit Gitea using this link:https://gitea.%SUBDOMAIN%[*Gitea Link*,role='params-link',window='_blank']. As a reference, here are your credentials:
 
 - Username: `%USERID%`
 - Password: `openshift`
@@ -108,7 +125,6 @@ Once logged in, you can access the following Vote App source repositories:
 We also have a repository that contains the ArgoCD application manifests for the Vote App.
 
 - link:https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops[Vote App GitOps,role='params-link',window='_blank']
-
 
 ## Next steps
 
