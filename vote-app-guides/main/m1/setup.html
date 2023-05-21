@@ -313,9 +313,46 @@ Everything has already been pre-installed on your cluster, so there&#8217;s no n
 <h2 id="_lab_checks"><a class="anchor" href="#_lab_checks"></a>Lab Checks</h2>
 <div class="sectionbody">
 <div class="sect2">
+<h3 id="_openshift"><a class="anchor" href="#_openshift"></a>OpenShift</h3>
+<div class="paragraph">
+<p>First off, let&#8217;s ensure that we&#8217;re logged into the <strong>OpenShift</strong> cluster. You can access the OpenShift Console from the <strong>Lab Guides</strong>, or you can visit the OpenShift Console using this <a href="https://console-openshift-console.apps.%SUBDOMAIN%" class="params-link" target="_blank" rel="noopener"><strong>OpenShift Web Console Link</strong></a>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-login.png" alt="OpenShift Page Login">
+</div>
+</div>
+<div class="paragraph">
+<p>You&#8217;ll be prompted to login to OpenShift, and you can use the OpenShift login button to do so. As a reference, here are your credentials:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Username: <code>%USERID%</code></p>
+</li>
+<li>
+<p>Password: <code>openshift</code></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift-dashboard.png" alt="OpenShift Dashboard">
+</div>
+</div>
+<div class="paragraph">
+<p>Once you&#8217;re logged in, you&#8217;ll be at the OpenShift dashboard. From here, if you aren&#8217;t already, you can navigate to the <strong>Developer</strong> perspective, which is where we&#8217;ll be spending most of our time.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/developer-perspective.png" alt="Developer Perspective">
+</div>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_argo_cd"><a class="anchor" href="#_argo_cd"></a>Argo CD</h3>
 <div class="paragraph">
-<p>Let&#8217;s take a look at <strong>Argo CD</strong>, a declarative, GitOps continuous delivery tool for Kubernetes provided in the OpenShift GitOps Operator. While you can access Argo CD from the <strong>Lab Guides</strong>, you can also visit Argo CD from your OpenShift cluster. Within the <strong>Developer</strong> perspective, navigate to the <code>argocd-%USERID%</code> project, and visit the <strong>Topology</strong> page.</p>
+<p>Let&#8217;s take a look at <strong>Argo CD</strong>, a declarative, GitOps continuous delivery tool for Kubernetes provided in the OpenShift GitOps Operator. While you can access Argo CD from the <strong>Lab Guides</strong> or by using this <a href="https://argocd-server-argocd-%USERID%.%SUBDOMAIN%" class="params-link" target="_blank" rel="noopener"><strong>Argo CD link</strong></a>. You can also visit Argo CD from your OpenShift cluster. Within the <strong>Developer</strong> perspective, navigate to the <code>argocd-%USERID%</code> project, and visit the <strong>Topology</strong> page.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -355,7 +392,7 @@ Everything has already been pre-installed on your cluster, so there&#8217;s no n
 <div class="sect2">
 <h3 id="_vote_app_repository"><a class="anchor" href="#_vote_app_repository"></a>Vote App Repository</h3>
 <div class="paragraph">
-<p>You&#8217;ll also have access to a <a href="http://gitea.%SUBDOMAIN%" class="params-link" target="_blank" rel="noopener"><strong>Gitea</strong></a> repository that contains the Vote App source code. This repository can also be located back at the <strong>Lab Guides</strong>, and you&#8217;ll be able to access this repository using following credentials:</p>
+<p>You&#8217;ll also have access to multiple <strong>Gitea</strong> repositories that contains the Vote App source code and Argo CD application manifests. You can access Gitea from the <strong>Lab Guides</strong>, or you can visit Gitea using this <a href="https://gitea.%SUBDOMAIN%" class="params-link" target="_blank" rel="noopener"><strong>Gitea Link</strong></a>. As a reference, here are your credentials:</p>
 </div>
 <div class="ulist">
 <ul>
