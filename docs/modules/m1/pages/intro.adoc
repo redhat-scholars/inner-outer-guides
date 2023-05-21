@@ -1,13 +1,14 @@
 # Vote App Lab Overview - Introduction
 
-Welcome to the Red Hat Summit 2023 Vote App Lab, we're glad to have you here with us!
+Welcome to the Red Hat Summit 2023, and the *Vote application: A complete end-to-end story from code to production* workshop! We're glad to have you here with us!
 
 ## About this lab
 
-This lab will guide you through the process of inner and outer loop development, using link:https://developers.redhat.com/products/openshift-dev-spaces/overview[OpenShift Dev Spaces] to code and push changes to a Git repository, as well as start Tekton pipelines using link:https://catalog.redhat.com/software/container-stacks/detail/5ec54a4628834587a6b85ca5[OpenShift Pipelines]. Then, we'll use Argo CD with link:https://www.redhat.com/en/technologies/cloud-computing/openshift/gitops[OpenShift GitOps] to sync our application in both development and production environments. Through this lab, you'll learn how to set up and manage the entire application lifecycle within a Red Hat OpenShift cluster.
+This workshop provides you with your own link:https://www.redhat.com/en/technologies/cloud-computing/openshift[*Red Hat OpenShift*] cluster, and a series of exercises that teach you how to apply GitOps principles to a sample application. You will learn how to use link:https://catalog.redhat.com/software/container-stacks/detail/5ec54a4628834587a6b85ca5[*OpenShift Pipelines*] to create a CI/CD pipeline, and how to use link:https://www.redhat.com/en/technologies/cloud-computing/openshift/gitops[*OpenShift GitOps*] to deploy your application to multiple environments. You will also learn how to use link:https://developers.redhat.com/products/openshift-dev-spaces/overview[*OpenShift Dev Spaces*] to develop and test your application locally, within the web browser.
 
-.Lab Architecture
 image::demo-architecture.png[Architecture]
+
+// This lab will guide you through the process of inner and outer loop development, using  to code and push changes to a Git repository, as well as start Tekton pipelines. Then, we'll use Argo CD to sync our application in both development and production environments. Through this lab, you'll learn how to set up and manage the entire application lifecycle within a Red Hat OpenShift cluster.
 
 ## Introduction
 
@@ -22,6 +23,16 @@ The goal of this lab is to demonstrate how to create a seamless CI/CD pipeline u
 - Using Argo CD to deploy our application to a development environment
 - Development and local testing of application code using OpenShift Dev Spaces within the web browser
 - Ensuring high-availability of our application using Argo CD in a production environment
+
+== What is OpenShift?
+
+https://www.redhat.com/en/technologies/cloud-computing/openshift[Red Hat OpenShift], the industry's leading hybrid cloud application platform powered by Kubernetes, brings together tested and trusted services to reduce the friction of developing, modernizing, deploying, running, and managing applications. OpenShift delivers a consistent experience across public cloud, on-premise, hybrid cloud, or edge architecture.
+
+== What is GitOps
+
+https://www.redhat.com/en/topics/devops/what-is-gitops[GitOps] is a declarative way to implement continuous deployment for cloud native applications. You can use GitOps to create repeatable processes for managing OpenShift clusters and applications across multi-cluster Kubernetes environments. GitOps handles and automates complex deployments at a fast pace, saving time during deployment and release cycles.
+
+image:openshift-gitops-graphic.png[]
 
 ## Next Steps
 

@@ -8,7 +8,7 @@ In this module, we'll perform a few steps during our development phase of the Vo
 - Next, we will pre-deploy the application to our `vote-app-dev-%USERID%` environment using Argo CD through OpenShift GitOps. 
 - After, we can make changes to the code and push them to the repository using OpenShift Dev Spaces. We'll see how Tekton automatically detects the changes and triggers a new build. 
 - Argo CD will then detect a drift between what is declared in Git and what it is available in the cluster, and we'll manually sync the application.
-- Finally, we will use the OpenShift Web Terminal to scale the deployment being that we haven't implemented high-availability.
+- Finally, we will use the OpenShift Web Terminal to scale the deployment manually, being that we haven't implemented high-availability.
 
 ## Next Steps 
 
