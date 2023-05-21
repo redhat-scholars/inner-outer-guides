@@ -1,6 +1,6 @@
 # Vote App Lab Overview - Introduction
 
-Welcome to the Red Hat Summit 2023, and the *Vote application: A complete end-to-end story from code to production* workshop! We're glad to have you here with us!
+Welcome to the Red Hat Summit 2023 and the *Vote application: A complete end-to-end story from code to production* workshop! We're glad to have you here with us!
 
 ## About this lab
 
@@ -12,28 +12,28 @@ image::demo-architecture.png[Architecture]
 
 ## Introduction
 
-The Vote App is a simple application that allows users to vote for their favorite option, currently a cat or dog, and view the results. In this lab, you will be working with two main components: the `vote-api` (Go) and the `vote-ui` (Python).
+The Vote App is a simple application that allows users to vote for their favorite option, currently a cat or dog, and view the results. In this lab, you will work with two main components: the `vote-api` (Go) and the `vote-ui` (Python).
 
 .Vote App
 image::vote-app.png[Vote App]
 
-The goal of this lab is to demonstrate how to create a seamless CI/CD pipeline using OpenShift, Tekton, Argo CD, and OpenShift Dev Spaces. By the end of this lab, you will have a better understanding of:
+This lab aims to demonstrate how to create a seamless CI/CD pipeline using OpenShift, Tekton, Argo CD, and OpenShift Dev Spaces. By the end of this lab, you will have a better understanding of:
 
 - Understanding Tekton pipeline manifests, starting them manually, and connecting webhooks for automation
 - Using Argo CD to deploy our application to a development environment
 - Development and local testing of application code using OpenShift Dev Spaces within the web browser
-- Ensuring high-availability of our application using Argo CD in a production environment
+- Ensuring high availability of our application using Argo CD in a production environment
 
 == What is OpenShift?
 
-https://www.redhat.com/en/technologies/cloud-computing/openshift[Red Hat OpenShift,role='params-link',window='_blank'], the industry's leading hybrid cloud application platform powered by Kubernetes, brings together tested and trusted services to reduce the friction of developing, modernizing, deploying, running, and managing applications. OpenShift delivers a consistent experience across public cloud, on-premise, hybrid cloud, or edge architecture.
+link:https://www.redhat.com/en/technologies/cloud-computing/openshift[Red Hat OpenShift,role='params-link',window='_blank'], the industry's leading hybrid cloud application platform powered by Kubernetes, brings together tested and trusted services to reduce the friction of developing, modernizing, deploying, running, and managing applications. OpenShift delivers a consistent experience across public cloud, on-premise, hybrid cloud, or edge architecture.
 
 == What is GitOps
 
-https://www.redhat.com/en/topics/devops/what-is-gitops[GitOps,role='params-link',window='_blank'] is a declarative way to implement continuous deployment for cloud native applications. You can use GitOps to create repeatable processes for managing OpenShift clusters and applications across multi-cluster Kubernetes environments. GitOps handles and automates complex deployments at a fast pace, saving time during deployment and release cycles.
+link:https://www.redhat.com/en/topics/devops/what-is-gitops[GitOps,role='params-link',window='_blank'] is a declarative way to implement continuous deployment for cloud-native applications. GitOps handles and automates complex deployments quickly, saving time during deployment and release cycles. You can use GitOps to create repeatable processes for managing OpenShift clusters and applications across multi-cluster Kubernetes environments.
 
 image:openshift-gitops-graphic.png[]
 
 ## Next Steps
 
-Ready to get started with the lab? Let's begin, firstly by learning a bit of theory about the inner vs outer loop of development.
+Ready to get started with the lab? Let's begin, firstly, by learning a bit of theory about the inner vs. outer loop of development.

@@ -104,13 +104,17 @@ As a reference, here are your credentials:
 - Username: `%USERID%`
 - Password: `openshift`
 
-You'll need to authorize the Argo CD application to access your OpenShift cluster. Click on the *Allow selected permissions* button to authorize Argo CD to access your OpenShift cluster. Finally, you'll be at the Argo CD dashboard.
+You'll need to authorize the Argo CD application to access your OpenShift cluster. Click on the *Allow selected permissions* button to authorize Argo CD to access your OpenShift cluster. 
+
+image::argocd-allow.png[Argo CD Allow]
+
+Now, you'll be directed to the Argo CD dashboard.
 
 image::argocd.png[Argo CD]
 
 ### Vote App Repository
 
-You'll also have access to multiple *Gitea* repositories that contains the Vote App source code and Argo CD application manifests. You can access Gitea from the *Lab Guides*, or you can visit Gitea using this link:https://gitea.%SUBDOMAIN%[*Gitea Link*,role='params-link',window='_blank']. As a reference, here are your credentials:
+You'll also have access to multiple *Gitea* repositories that contain the Vote App source code and Argo CD application manifests. You can access Gitea from the *Lab Guides*, or you can visit Gitea using this link:https://gitea.%SUBDOMAIN%[*Gitea Link*,role='params-link',window='_blank']. As a reference, here are your credentials:
 
 - Username: `%USERID%`
 - Password: `openshift`
