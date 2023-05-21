@@ -1,32 +1,32 @@
 # Vote App Lab Conclusion - Resources
 
-Thank you once again for participating in the Red Hat Summit 2023 Vote App Lab. As you continue to explore and apply the concepts and tools learned in this lab, we would like to provide you with some valuable resources that will support your ongoing GitOps journey and help you gain a deeper understanding of OpenShift, Tekton, Argo CD, and OpenShift Dev Spaces.
+Thank you once again for participating in the Red Hat Summit 2023: *Vote application: A complete end-to-end story from code to production* lab! As you continue to explore and apply the concepts and tools learned in this lab, we would like to provide you with some valuable resources that will support your ongoing GitOps journey and help you gain a deeper understanding of OpenShift, Tekton, Argo CD, and OpenShift Dev Spaces.
 
 ## Red Hat Developer Resources
 
-1. link:https://developers.redhat.com/e-books/gitops-cookbook[GitOps Cookbook eBook]
+- link:https://developers.redhat.com/e-books/gitops-cookbook[GitOps Cookbook eBook,role='params-link',window='_blank']
 
 image::gitops-cookbook.png[GitOps Cookbook]
 
 ## Official Documentation
 
-1. link:https://docs.openshift.com/container-platform/latest/welcome/index.html[OpenShift Documentation]
-2. link:https://tekton.dev/docs[Tekton Documentation]
-3. link:https://argo-cd.readthedocs.io/en/stable[OpenShift Dev Spaces]
-4. link:https://access.redhat.com/documentation/en-us/red_hat_openshift_dev_spaces/3.0[OpenShift Dev Spaces Documentation]
+- link:https://docs.openshift.com/container-platform/latest/welcome/index.html[OpenShift Documentation,role='params-link',window='_blank']
+- link:https://tekton.dev/docs[Tekton Documentation,role='params-link',window='_blank']
+- link:https://argo-cd.readthedocs.io/en/stable[OpenShift Dev Spaces,role='params-link',window='_blank']
+- link:https://access.redhat.com/documentation/en-us/red_hat_openshift_dev_spaces/3.0[OpenShift Dev Spaces Documentation,role='params-link',window='_blank']
 
 ## Blogs and Tutorials
 
-1. link:https://www.openshift.com/blog[OpenShift Blog]
-2. link:https://tekton.dev/blog[Tekton Blog]
-3. link:https://blog.argoproj.io[Argo CD Blog]
-4. link:https://developers.redhat.com/blog/[Red Hat Developer Blog]
+- link:https://www.openshift.com/blog[OpenShift Blog,role='params-link',window='_blank']
+- link:https://tekton.dev/blog[Tekton Blog,role='params-link',window='_blank']
+- link:https://blog.argoproj.io[Argo CD Blog,role='params-link',window='_blank']
+- link:https://developers.redhat.com/blog/[Red Hat Developer Blog,role='params-link',window='_blank']
 
 ## Community and Support
 
-1. link:https://www.openshift.com/community[OpenShift Community]
-2. link:https://tekton.dev/community/[Tekton Community]
-3. link:https://github.com/argoproj/argo-cd/discussions/[Argo CD Community]
+- link:https://www.openshift.com/community[OpenShift Community,role='params-link',window='_blank']
+- link:https://tekton.dev/community/[Tekton Community,role='params-link',window='_blank']
+- link:https://github.com/argoproj/argo-cd/discussions/[Argo CD Community,role='params-link',window='_blank']
 
 ## Wrapping Up
 

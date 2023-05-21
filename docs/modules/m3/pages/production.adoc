@@ -1,6 +1,6 @@
 # Vote App Lab Production - Pushing to Production
 
-Now, it's time to push our application to production. We'll be using one last pipeline, `promote-to-prod`, to tag our image, push it to the `vote-app-prod-%USERID%` environment, then update the repository with this new image digest. Then, we'll use Argo CD to create a new `prod` application with self-healing enabled. Finally, we'll use Git to modify the application, scaling up the deployment replicas and viewing this high-availability in real-time from the OpenShift Web Console.
+Now, it's time to push our application to production. We'll be using one last pipeline, `promote-to-prod`, to tag our image, push it to the `vote-app-prod-%USERID%` environment, then update the repository with this new image digest. Then, we'll use Argo CD to create a new production application with self-healing enabled. Finally, we'll use Git to modify the application, scaling up the deployment replicas and viewing this high-availability in real-time from the OpenShift Web Console.
 
 ## Viewing the `promote-to-prod` pipeline
 
@@ -8,7 +8,7 @@ Firstly, ensure that you're currently using the `vote-app-ci-%USERID%` project. 
 
 image::switch-project.png[]
 
-Within this Pipelines dashboard, you will see a list of pipelines. Click on the `promote-to-prod` pipeline to see the details of the pipeline.
+Within the *Pipelines* dashboard, we can select the `promote-to-prod` pipeline to see the details of the pipeline.
 
 image::pipeline-prod-details.png[]
 
@@ -16,21 +16,21 @@ Here, you can go through the pipeline steps and see what each step is doing. You
 
 For reference, here's the pipeline steps:
 
-- `tag-to-prod`: This step tags the image from the `dev` project and pushes it to the `prod` project.
-- `image-tag-to-digest`: This step tags the image with the digest of the image that was pushed to the `prod` project.
+- `tag-to-prod`: This step tags the image from the `vote-app-dev-%USERID%` project and pushes it to the `vote-app-prod-%USERID%` project.
+- `image-tag-to-digest`: This step tags the image with the digest of the image that was pushed to the `vote-app-prod-%USERID%` project.
 - `git-update-deployment`: This step updates the `vote-app-gitops` repository with the new image digest.
 
 ## Running the `promote-to-prod` pipeline
 
-Here, we can go ahead and start the Pipeline. Click on the top-right *Actions* then *Start* button to start the pipeline. The steps are the same as the previous pipelines, so we won't go through them again.
+Now, let's go ahead and start the Pipeline. Click on the top-right *Actions* then *Start* button to start the pipeline. The steps are the same as the previous pipelines, so we won't go through them again.
 
 image::pipeline-prod-ui-start.png[]
 
-You will be prompted to enter the values for the pipeline parameters, however the default values are already set for you. You'll need to specify a *Empty Directory* for the `app-source` parameter. This is because we're not building the application from source, we're using the image that was built in the `dev` project. Click on the *Start* button to start the pipeline.
+You will be prompted to enter the values for the pipeline parameters, however the default values are already set for you. At the bottom of the menu, we can specify a *Empty Directory* for the `app-source` parameter. This is because we're not building the application from source, we're using the image that was built in the `dev` project. Click on the *Start* button to start the pipeline.
 
 image::pipeline-prod-ui-start-2.png[]
 
-Now that the `promote-to-prod` pipeline has been started, let's go ahead and check the status of the pipeline.
+Now that the `promote-to-prod` PipelineRun has been started, let's go ahead and check the status of the pipeline.
 
 image::pipeline-prod-ui-status.png[]
 
@@ -40,7 +40,7 @@ image::pipeline-prod-ui-gitops.png[]
 
 ## Deploying the application to production using Argo CD
 
-Within the link:https://argocd-server-argocd-%USERID%.%SUBDOMAIN%[*Argo CD*,role='params-link',window='_blank'] dashboard, click on the `+ New App` button.
+Let's head to the link:https://argocd-server-argocd-%USERID%.%SUBDOMAIN%[*Argo CD*,role='params-link',window='_blank'] dashboard, and click on the `+ New App` button to begin creating our production application.
 
 image::argocd-new-app.png[]
 
@@ -51,7 +51,14 @@ Fill in the following information, many of which may auto-fill when selected:
 * Sync Policy: `Automatic`
 * Self-Healing: `Enabled`
 * Auto-create Namespace: `Enabled`
-* Repository URL: `http://gitea.gitea.svc:3000/%USERID%/vote-app-gitops`
+* Repository URL:
+
+[.console-input]
+[source,bash]
+----
+http://gitea.gitea.svc:3000/%USERID%/vote-app-gitops
+----
+
 * Revision: `main`
 * Path: `environments/prod`
 * Cluster URL: `https://kubernetes.default.svc`
@@ -60,7 +67,7 @@ Fill in the following information, many of which may auto-fill when selected:
 image::argocd-new-app-2.png[]
 image::argocd-new-app-3.png[]
 
-Click on the *Create* button to create the application. You will be taken to the application details page. Here, you can see the application's health, sync status, and associated resources. Currently, the application is syncing, so the status is `OutOfSync`. Once the application is synced, the status will change to a green `Synced`.
+When finished, click on the *CREATE* button on the top left hand corner to create the application. You will be taken to the application details page. Here, you can see the application's health, sync status, and associated resources. Currently, the application is syncing, so the status is `OutOfSync`. Once the application is synced, the status will change to a green `Synced`.
 
 image::argocd-new-app-5.png[]
 
@@ -139,7 +146,7 @@ image::argocd-app-details-2.png[Argo CD App Details]
 
 ## Viewing the application and detecting drift
 
-Now that the application has been deployed to production, let's go ahead and view the application in the OpenShift console. Click on the *Developer* perspective, then click on the *Topology* view. Ensure you're in the `vote-app-prod-%USERID%` application, and you should see the application deployed.
+Now that the application has been deployed to production, let's go ahead and view the application in the OpenShift console. Click on the *Developer* perspective, then click on the *Topology* view. Ensure you're in the `vote-app-prod-%USERID%` project, and you should see the application deployed.
 
 image::app-prod-topology.png[]
 
@@ -151,29 +158,29 @@ Almost immediately after scaling up the replicas for the `vote-ui` deployment, A
 
 ## Using Git to modify the application
 
-Now, let's go ahead and make a change to the application. We'll change the number of replicas to `2`, and see how Argo CD detects the drift and auto-heals. To do this, let's go ahead and modify the `environments/prod/kustomization.yaml` file in the `vote-app-gitops` repository. You can do this by clicking on the *Code* tab, then clicking on the `environments/prod/kustomization.yaml` file link:https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops/src/branch/main/environments/prod/kustomization.yaml[*here*,role='params-link',window='_blank'], then clicking on the *Edit* button.
+Now, let's go ahead and make a change to the application. We'll change the number of replicas to `2`, and see how Argo CD detects the drift and auto-heals. To do this, let's go ahead and modify the `environments/prod/kustomization.yaml` file in the `vote-app-gitops` repository link:https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops/src/branch/main/environments/prod/kustomization.yaml[*here*,role='params-link',window='_blank']. Now, within the *Code* tab, click on the *Edit* button to edit within the web page.
 
 image::gitops-prod-kustomization.png[]
 
-Change the number of replicas on line 4 to `2`, then navigate to the *Commit changes* section at the bottom of the page. Here, we can select *Create a new branch for this commit and start a pull request*. We will create a new branch, `%USERID%-feature-id` and start a pull request to merge the changes into the `main` branch. Click on the *Propose file change* button to create the pull request.
+Change the number of replicas on line 4 to `2`, then navigate to the *Commit changes* section at the bottom of the page. Here, we can select *Create a new branch for this commit and start a pull request*. We will create a new branch, `%USERID%-feature-id` and start a pull request to merge the changes into the `main` branch. This can be helpful if we want to easily rollback changes to our cluster using GitOps. Click on the *Propose file change* button to create the pull request.
 
 image::gitops-prod-kustomization-2.png[]
 
-You will be taken to the *New Pull Request* page. Here, you can see the changes that were made to the file. Click on the *New Pull Request* button to create the pull request.
+You will be taken to the *New Pull Request* page. Here, you can see the changes that were made to the file, just changing the replicas of the `vote-ui` deployment. Click on the *New Pull Request* button to create the pull request.
 
 image::gitops-prod-kustomization-3.png[]
 
-Now, you'll see a new page to create a pull request. Here, you can see the details of the pull request. Click on the *Create pull request* button to create the pull request.
+Here, you can see the details of the pull request, and to save time, we can skip adding details to this PR. Simply select the *Create Pull Request* button to create the pull request.
 
 image::gitops-prod-kustomization-4.png[]
 
-With the new pull request created, let's go ahead and merge the pull request. Click on the *Create merge commit* button to merge the pull request.
+With the new pull request created, let's go ahead and merge the pull request into the main branch, where Argo CD is currently tracking our repository. Click on the *Create merge commit* button to merge the pull request.
 
 image::gitops-prod-kustomization-5.png[]
 
 ## Viewing the application and detecting drift
 
-Now, let's go ahead and check the status of the application in the OpenShift console. Click on the *Developer* perspective, then click on the *Topology* view. Ensure you're in the `vote-app-prod-%USERID%` application, and you should see the `vote-ui` deployed, now with 2 replicas.
+Now, let's go ahead and check the status of the application in the OpenShift Web Console. Select the *Developer* perspective, then click on the *Topology* view. Ensure you're in the `vote-app-prod-%USERID%` application, and you should see the `vote-ui` deployed, now with 2 replicas.
 
 image::app-prod-topology-3.png[]
 
@@ -181,10 +188,10 @@ Click on the `vote-ui` deployment, and click *Details* to see the details of the
 
 image::app-prod-topology-4.png[]
 
-Automatically, the application will sync, Argo CD uses the manifests in the `vote-app-gitops` repository to detect these drifts and keep us at `2` replicas. We can also see this in Argo CD, where auto sync is enabled.
+Automatically, the application will sync, and we're not able to keep the `vote-ui` pod replicas at `1`. Argo CD uses the manifests in the `vote-app-gitops` repository and uses Git as the single source of truth, detecting these application drifts and keeping our resource at `2` replicas. We can also see this in Argo CD, where auto sync is enabled.
 
 image::argocd-new-app-6.png[]
 
 ## Conclusion
 
-In this section, we learned how to use Tekton GitOps to deploy an application from a development to a production environment, and how to use Argo CD to detect drift in the application and auto-heal the application.
+In this section, we learned how to use OpenShift GitOps to deploy an application from a development to a production environment, and how to use Argo CD to detect drift in the application and ensure high-availability.
