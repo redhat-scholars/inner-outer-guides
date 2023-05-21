@@ -194,7 +194,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Welcome to the Red Hat Summit 2023 Vote App Lab, we&#8217;re glad to have you here with us!</p>
+<p>Welcome to the Red Hat Summit 2023, and the <strong>Vote application: A complete end-to-end story from code to production</strong> workshop! We&#8217;re glad to have you here with us!</p>
 </div>
 </div>
 </div>
@@ -202,13 +202,12 @@
 <h2 id="_about_this_lab"><a class="anchor" href="#_about_this_lab"></a>About this lab</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This lab will guide you through the process of inner and outer loop development, using <a href="https://developers.redhat.com/products/openshift-dev-spaces/overview">OpenShift Dev Spaces</a> to code and push changes to a Git repository, as well as start Tekton pipelines using <a href="https://catalog.redhat.com/software/container-stacks/detail/5ec54a4628834587a6b85ca5">OpenShift Pipelines</a>. Then, we&#8217;ll use Argo CD with <a href="https://www.redhat.com/en/technologies/cloud-computing/openshift/gitops">OpenShift GitOps</a> to sync our application in both development and production environments. Through this lab, you&#8217;ll learn how to set up and manage the entire application lifecycle within a Red Hat OpenShift cluster.</p>
+<p>This workshop provides you with your own <a href="https://www.redhat.com/en/technologies/cloud-computing/openshift"><strong>Red Hat OpenShift</strong></a> cluster, and a series of exercises that teach you how to apply GitOps principles to a sample application. You will learn how to use <a href="https://catalog.redhat.com/software/container-stacks/detail/5ec54a4628834587a6b85ca5"><strong>OpenShift Pipelines</strong></a> to create a CI/CD pipeline, and how to use <a href="https://www.redhat.com/en/technologies/cloud-computing/openshift/gitops"><strong>OpenShift GitOps</strong></a> to deploy your application to multiple environments. You will also learn how to use <a href="https://developers.redhat.com/products/openshift-dev-spaces/overview"><strong>OpenShift Dev Spaces</strong></a> to develop and test your application locally, within the web browser.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/demo-architecture.png" alt="Architecture">
 </div>
-<div class="title">Figure 1. Lab Architecture</div>
 </div>
 </div>
 </div>
@@ -222,7 +221,7 @@
 <div class="content">
 <img src="_images/vote-app.png" alt="Vote App">
 </div>
-<div class="title">Figure 2. Vote App</div>
+<div class="title">Figure 1. Vote App</div>
 </div>
 <div class="paragraph">
 <p>The goal of this lab is to demonstrate how to create a seamless CI/CD pipeline using OpenShift, Tekton, Argo CD, and OpenShift Dev Spaces. By the end of this lab, you will have a better understanding of:</p>
@@ -242,6 +241,25 @@
 <p>Ensuring high-availability of our application using Argo CD in a production environment</p>
 </li>
 </ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_is_openshift"><a class="anchor" href="#_what_is_openshift"></a>What is OpenShift?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://www.redhat.com/en/technologies/cloud-computing/openshift">Red Hat OpenShift</a>, the industry&#8217;s leading hybrid cloud application platform powered by Kubernetes, brings together tested and trusted services to reduce the friction of developing, modernizing, deploying, running, and managing applications. OpenShift delivers a consistent experience across public cloud, on-premise, hybrid cloud, or edge architecture.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_is_gitops"><a class="anchor" href="#_what_is_gitops"></a>What is GitOps</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://www.redhat.com/en/topics/devops/what-is-gitops">GitOps</a> is a declarative way to implement continuous deployment for cloud native applications. You can use GitOps to create repeatable processes for managing OpenShift clusters and applications across multi-cluster Kubernetes environments. GitOps handles and automates complex deployments at a fast pace, saving time during deployment and release cycles.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/openshift-gitops-graphic.png" alt="openshift gitops graphic"></span></p>
 </div>
 </div>
 </div>

@@ -195,7 +195,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this section, we&#8217;ll take a look at the setup of this OpenShift cluster we&#8217;re using for today&#8217;s lab.</p>
+<p>In this section, we&#8217;ll take a look at the setup of the OpenShift cluster we&#8217;re using for today&#8217;s lab. This includes the OpenShift Operators that have been installed, as well as the projects that have been created for you. We&#8217;ll also take a look at the tools we&#8217;ll be using throughout the lab, including OpenShift Dev Spaces, OpenShift Pipelines, and OpenShift GitOps.</p>
 </div>
 </div>
 </div>
@@ -203,16 +203,12 @@
 <h2 id="_red_hat_developer_tools"><a class="anchor" href="#_red_hat_developer_tools"></a>Red Hat Developer Tools</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Before we begin, we can take a look at some of the inner and outer loop developer flow tools that Red Hat provides.</p>
+<p>Let&#8217;s take a look at some of the inner and outer loop developer flow tools that Red Hat provides. This includes tools for building, testing, deploying, and running applications. These tools are integrated and work together to provide a seamless developer experience. We can break these tools down as shown below.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/developer-flow.png" alt="Developer Flow">
 </div>
-<div class="title">Figure 1. Red Hat Developer Flow</div>
-</div>
-<div class="paragraph">
-<p>Red Hat Developer Tools provides a set of tools that help developers to build, test, deploy, and run applications. These tools are integrated and work together to provide a seamless developer experience. The tools we&#8217;ll be using in this lab are:</p>
 </div>
 <div class="sect2">
 <h3 id="_inner_loop_openshift_dev_spaces"><a class="anchor" href="#_inner_loop_openshift_dev_spaces"></a>Inner Loop: OpenShift Dev Spaces</h3>
@@ -265,7 +261,7 @@ Everything has already been pre-installed on your cluster, so there&#8217;s no n
 </table>
 </div>
 <div class="paragraph">
-<p>You&#8217;ll be using your own OpenShift 4.12 cluster throughout this lab. This cluster has been pre-configured with the below OpenShift Operators. You can think of Operators as addons to an OpenShift or Kubernetes cluster that provide it with extended features/capabilities. We&#8217;ve attached a screenshot of each operator&#8217;s details page as only the cluster <strong>admin</strong> account can view these details.</p>
+<p>You&#8217;ll have your own account on a OpenShift 4.12 cluster throughout this lab. This cluster has been pre-configured with the below OpenShift Operators in order to save time. You can think of Operators as addons to an OpenShift or Kubernetes cluster that provide it with extended features/capabilities. We&#8217;ve attached a screenshot of each operator&#8217;s details page as only the cluster <strong>admin</strong> account can view these details.</p>
 </div>
 <div class="sect2">
 <h3 id="_operator_openshift_pipelines"><a class="anchor" href="#_operator_openshift_pipelines"></a>Operator: OpenShift Pipelines</h3>
@@ -303,7 +299,7 @@ Everything has already been pre-installed on your cluster, so there&#8217;s no n
 <div class="sect2">
 <h3 id="_operator_openshift_web_terminal"><a class="anchor" href="#_operator_openshift_web_terminal"></a>Operator: OpenShift Web Terminal</h3>
 <div class="paragraph">
-<p>Finally, the <strong>Web Terminal</strong> is a web-based terminal for OpenShift. It allows users to access a terminal in a pod from the OpenShift Web Console.</p>
+<p>Finally, the <strong>Web Terminal</strong> is a web-based terminal for OpenShift. It allows users to access a terminal in a pod from the OpenShift Web Console, and it&#8217;ll help us work within our cluster without having to download the <a href="https://docs.openshift.com/container-platform/4.12/cli_reference/openshift_cli/getting-started-cli.html" class="params-link" target="_blank" rel="noopener"><strong>OpenShift CLI (oc)</strong></a>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -317,36 +313,6 @@ Everything has already been pre-installed on your cluster, so there&#8217;s no n
 <h2 id="_lab_checks"><a class="anchor" href="#_lab_checks"></a>Lab Checks</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_openshift_operators"><a class="anchor" href="#_openshift_operators"></a>OpenShift Operators</h3>
-<div class="paragraph">
-<p>This OpenShift cluster has been pre-configured with the operators listed above, cluster-wide, and from the <strong>admin</strong> account, we can confirm this. Firstly, navigate to the <strong>Administrator</strong> perspective, and click on <strong>Operators</strong> from within the left-hand menu. Now, click on <strong>Installed Operators</strong> from the sub-menu.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/operators-button.png" alt="Operators Button">
-</div>
-</div>
-<div class="paragraph">
-<p>Here, we can view the operators that have been installed to our cluster, as well as various details about their installation, etc.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/installed-operators.png" alt="Installed Operators">
-</div>
-</div>
-<div class="paragraph">
-<p>By clicking on one of these operators, we can view the CustomResourceDefinitions they have defined, documentation, and much more.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/gitops-operator-details.png" alt="Operator Details">
-</div>
-</div>
-<div class="paragraph">
-<p>While we won&#8217;t be using the <strong>admin</strong> account during this lab, it&#8217;s still important to understand these operators as they help extend the functionality of OpenShift and allow us to perform this lab.</p>
-</div>
-</div>
-<div class="sect2">
 <h3 id="_argo_cd"><a class="anchor" href="#_argo_cd"></a>Argo CD</h3>
 <div class="paragraph">
 <p>Let&#8217;s take a look at <strong>Argo CD</strong>, a declarative, GitOps continuous delivery tool for Kubernetes provided in the OpenShift GitOps Operator. While you can access Argo CD from the <strong>Lab Guides</strong>, you can also visit Argo CD from your OpenShift cluster. Within the <strong>Developer</strong> perspective, navigate to the <code>argocd-%USERID%</code> project, and visit the <strong>Topology</strong> page.</p>
@@ -357,7 +323,7 @@ Everything has already been pre-installed on your cluster, so there&#8217;s no n
 </div>
 </div>
 <div class="paragraph">
-<p><a href="https://argocd-server-argocd-%USERID%.%SUBDOMAIN%" class="params-link" target="_blank" rel="noopener"><strong>Argo CD</strong></a> is a declarative, GitOps continuous delivery tool for Kubernetes provided in the OpenShift GitOps Operator. From your OpenShift cluster, you can access the ArgoCD dashboard.</p>
+<p>From your project&#8217;s <strong>Topology</strong> page, click on the <strong>Argo CD</strong> route to visit the Argo CD dashboard. You&#8217;ll be prompted to login to Argo CD, and you can use the OpenShift login button to do so.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -433,25 +399,10 @@ Everything has already been pre-installed on your cluster, so there&#8217;s no n
 </div>
 </div>
 <div class="sect1">
-<h2 id="_lab_overview"><a class="anchor" href="#_lab_overview"></a>Lab overview</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>We also have a repository that contains the Argo CD application manifests for the Vote App.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops" class="params-link" target="_blank" rel="noopener">Vote App GitOps</a></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
 <h2 id="_next_steps"><a class="anchor" href="#_next_steps"></a>Next steps</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Your cluster is already configured with the appropriate OpenShift project, configured secrets and service accounts, and necessary Git repositories. From here, we can wrap up the introduction and begin our lab!</p>
+<p>Your environment is now ready to go! The cluster has been pre-configured with the necessary OpenShift Operators, and you have access Argo CD and the necessary Git repositories. From here, we can wrap up the introduction and begin our lab!</p>
 </div>
 </div>
 </div>
