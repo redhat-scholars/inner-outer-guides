@@ -195,7 +195,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now, it&#8217;s time to push our application to production. We&#8217;ll be using one last pipeline, <code>promote-to-prod</code>, to tag our image, push it to the <code>vote-app-prod-%USERID%</code> environment, then update the repository with this new image digest. Then, we&#8217;ll use Argo CD to create a new <code>prod</code> application with self-healing enabled. Finally, we&#8217;ll use Git to modify the application, scaling up the deployment replicas and viewing this high-availability in real-time from the OpenShift Web Console.</p>
+<p>Now, it&#8217;s time to push our application to production. We&#8217;ll use one last Pipeline, <code>promote-to-prod</code>, to tag our image, push it to the <code>vote-app-prod-%USERID%</code> environment, then update the repository with this new image digest. Then, we&#8217;ll use Argo CD to create a new production application with self-healing enabled. Finally, we&#8217;ll use Git to modify the application, scaling up the deployment replicas and viewing this high availability in real-time from the OpenShift Web Console.</p>
 </div>
 </div>
 </div>
@@ -203,7 +203,7 @@
 <h2 id="_viewing_the_promote_to_prod_pipeline"><a class="anchor" href="#_viewing_the_promote_to_prod_pipeline"></a>Viewing the <code>promote-to-prod</code> pipeline</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Firstly, ensure that you&#8217;re currently using the <code>vote-app-ci-%USERID%</code> project. This is where our pipeline manifests have been created, and where we&#8217;ll be running the pipeline from.</p>
+<p>Firstly, ensure that you&#8217;re currently using the <code>vote-app-ci-%USERID%</code> project. This is where our pipeline manifests have been created and where we&#8217;ll run the Pipeline from.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -211,7 +211,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Within this Pipelines dashboard, you will see a list of pipelines. Click on the <code>promote-to-prod</code> pipeline to see the details of the pipeline.</p>
+<p>Within the <strong>Pipelines</strong> dashboard, we can select the <code>promote-to-prod</code> pipeline to see the details of the Pipeline.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -219,18 +219,15 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Here, you can go through the pipeline steps and see what each step is doing. You can also see the pipeline resources that are being used. In addition, you can see the pipeline parameters that are being used.  These parameters are used to pass in the name of the image that will be built, and the name of the image that will be pushed to the registry.</p>
-</div>
-<div class="paragraph">
-<p>For reference, here&#8217;s the pipeline steps:</p>
+<p>Here, you can review the pipeline steps and see what each step is doing. You can also see the pipeline resources that are being used. In addition, you can see the pipeline parameters that are being used. These parameters are used to pass in the name of the image that will be built and the name of the image that will be pushed to the registry. For reference, here are the pipeline steps:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>tag-to-prod</code>: This step tags the image from the <code>dev</code> project and pushes it to the <code>prod</code> project.</p>
+<p><code>tag-to-prod</code>: This step tags the image from the <code>vote-app-dev-%USERID%</code> project and pushes it to the <code>vote-app-prod-%USERID%</code> project.</p>
 </li>
 <li>
-<p><code>image-tag-to-digest</code>: This step tags the image with the digest of the image that was pushed to the <code>prod</code> project.</p>
+<p><code>image-tag-to-digest</code>: This step tags the image with the digest of the image that was pushed to the <code>vote-app-prod-%USERID%</code> project.</p>
 </li>
 <li>
 <p><code>git-update-deployment</code>: This step updates the <code>vote-app-gitops</code> repository with the new image digest.</p>
@@ -243,7 +240,7 @@
 <h2 id="_running_the_promote_to_prod_pipeline"><a class="anchor" href="#_running_the_promote_to_prod_pipeline"></a>Running the <code>promote-to-prod</code> pipeline</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Here, we can go ahead and start the Pipeline. Click on the top-right <strong>Actions</strong> then <strong>Start</strong> button to start the pipeline. The steps are the same as the previous pipelines, so we won&#8217;t go through them again.</p>
+<p>Now, let&#8217;s go ahead and start the Pipeline. Click on the top-right <strong>Actions</strong> and then the <strong>Start</strong> button to start the Pipeline. The steps are the same as the previous pipelines so we won&#8217;t go through them again.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -251,7 +248,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>You will be prompted to enter the values for the pipeline parameters, however the default values are already set for you. You&#8217;ll need to specify a <strong>Empty Directory</strong> for the <code>app-source</code> parameter. This is because we&#8217;re not building the application from source, we&#8217;re using the image that was built in the <code>dev</code> project. Click on the <strong>Start</strong> button to start the pipeline.</p>
+<p>You will be prompted to enter the values for the pipeline parameters. However, the default values are already set for you. At the bottom of the menu, we can specify an <strong>Empty Directory</strong> for the <code>app-source</code> parameter. This is because we&#8217;re not building the application from the source; we&#8217;re using the image that was built in the <code>dev</code> project. Click on the <strong>Start</strong> button to start the Pipeline.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -259,7 +256,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Now that the <code>promote-to-prod</code> pipeline has been started, let&#8217;s go ahead and check the status of the pipeline.</p>
+<p>Now that the <code>promote-to-prod</code> PipelineRun has been started, let&#8217;s go ahead and check the status of the Pipeline.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -267,7 +264,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Once the pipeline has completed, you&#8217;ll notice that the <code>vote-app-gitops</code> repo has been updated with a new hash of an image. This is the image that was built in the <code>dev</code> project, and pushed to the <code>prod</code> project, and referenced in the <code>environments/prod/kustomization.yaml</code> file that can be found <a href="https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops/src/branch/main/environments/prod/kustomization.yaml" class="params-link" target="_blank" rel="noopener"><strong>here</strong></a>.</p>
+<p>Once the Pipeline has been completed, you&#8217;ll notice that the <code>vote-app-gitops</code> repo has been updated with a new hash of an image. This is the image that was built in the <code>dev</code> project, pushed to the <code>prod</code> project, and referenced in the <code>environments/prod/kustomization.yaml</code> file that can be found <a href="https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops/src/branch/main/environments/prod/kustomization.yaml" class="params-link" target="_blank" rel="noopener"><strong>here</strong></a>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -280,7 +277,7 @@
 <h2 id="_deploying_the_application_to_production_using_argo_cd"><a class="anchor" href="#_deploying_the_application_to_production_using_argo_cd"></a>Deploying the application to production using Argo CD</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Within the <a href="https://argocd-server-argocd-%USERID%.%SUBDOMAIN%" class="params-link" target="_blank" rel="noopener"><strong>Argo CD</strong></a> dashboard, click on the <code>+ New App</code> button.</p>
+<p>Let&#8217;s head to the <a href="https://argocd-server-argocd-%USERID%.%SUBDOMAIN%" class="params-link" target="_blank" rel="noopener"><strong>Argo CD</strong></a> dashboard, and click on the <code>+ New App</code> button to begin creating our production application.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -308,8 +305,17 @@
 <p>Auto-create Namespace: <code>Enabled</code></p>
 </li>
 <li>
-<p>Repository URL: <code><a href="http://gitea.gitea.svc:3000/%USERID%/vote-app-gitops" class="bare">http://gitea.gitea.svc:3000/%USERID%/vote-app-gitops</a></code></p>
+<p>Repository URL:</p>
 </li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">http://gitea.gitea.svc:3000/%USERID%/vote-app-gitops</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p>Revision: <code>main</code></p>
 </li>
@@ -335,7 +341,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Click on the <strong>Create</strong> button to create the application. You will be taken to the application details page. Here, you can see the application&#8217;s health, sync status, and associated resources. Currently, the application is syncing, so the status is <code>OutOfSync</code>. Once the application is synced, the status will change to a green <code>Synced</code>.</p>
+<p>When finished, click the <strong>CREATE</strong> button in the top left-hand corner to create the application. You will be taken to the application details page. Here, you can see the application&#8217;s health, sync status, and associated resources. Currently, the application is syncing, so the status is <code>OutOfSync</code>. Once the application is synced, the status will change to a green <code>Synced</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -348,7 +354,7 @@
 <h2 id="_reviewing_syncwaves_in_argo_cd"><a class="anchor" href="#_reviewing_syncwaves_in_argo_cd"></a>Reviewing SyncWaves in Argo CD</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Argo CD has a feature called <a href="https://argoproj.github.io/argo-cd/user-guide/sync-waves/" target="_blank" rel="noopener">Syncwaves</a>, which allows you to deploy applications in a staggered fashion. This is useful when you have multiple applications that are dependent on each other, and you want to deploy them in a specific order. For example, you may have a database application that you want to deploy first, then your application that depends on the database. You can use SyncWaves to deploy the database application first, then the application that depends on the database.</p>
+<p>Argo CD has a feature called <a href="https://argoproj.github.io/argo-cd/user-guide/sync-waves/" target="_blank" rel="noopener">Syncwaves</a>, which allows you to deploy applications in a staggered fashion. This is useful when you have multiple applications that are dependent on each other and you want to deploy them in a specific order. For example, you may have a database application you want to deploy first, then your application depends on the database. SyncWaves can deploy the database application first, then the application that depends on the database.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -356,7 +362,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>In our case, let&#8217;s see SyncWaves in action. Let&#8217;s visit the <code>vote-app-gitops</code> production kustomization.yaml file <a href="https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops/src/branch/main/environments/prod/kustomization.yaml" class="params-link" target="_blank" rel="noopener"><strong>here</strong></a>.</p>
+<p>In our case, we see SyncWaves in action, as we need the <code>vote-api</code> to be deployed before <code>vote-ui</code>. Let&#8217;s visit the <code>vote-app-gitops</code> production kustomization.yaml file <a href="https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops/src/branch/main/environments/prod/kustomization.yaml" class="params-link" target="_blank" rel="noopener"><strong>here</strong></a>.</p>
 </div>
 <div class="listingblock console-output">
 <div class="content">
@@ -418,20 +424,20 @@ patchesJson6902: <i class="conum" data-value="1"></i><b>(1)</b>
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Here we are using Kustomize to add SyncWaves as annotations to the Kubernetes manifests for production</td>
+<td>Here, we are using Kustomize to add SyncWaves as annotations to the Kubernetes manifests for production</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>The SyncWaves cardinality defines the order of deployment, in this case we want to deploy first the backend and then the frontend</td>
+<td>The SyncWaves cardinality defines the order of deployment; in this case, we want to deploy first the backend and then the frontend</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>With Kustomize we can define which manifest to match for the patch, in this case Deployments, Services and Routes.</td>
+<td>With Kustomize, we can define which manifest to match for the patch: Deployments, Services, and Routes.</td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>With our configuration currently, SyncWaves allow for a controlled rollout of resources by setting a sequence in which they should be deployed. In this case, we have multiple resources, <code>vote-api</code> and <code>vote-ui</code>. The <code>vote-api</code> resources have syncwaves of <code>0</code> and <code>1</code>, whereas the <code>vote-ui</code> resources have a syncwave of <code>2</code>, <code>3</code> and <code>4</code>. This means that the <code>vote-api</code> resource will be deployed first, then the <code>vote-ui</code> resource will be deployed second.</p>
+<p>With our configuration currently, SyncWaves allow for a controlled rollout of resources by setting a sequence in which they should be deployed. In this case, we have multiple resources, <code>vote-api</code> and <code>vote-ui</code>. The <code>vote-api</code> resources have syncwaves of <code>0</code> and <code>1</code>, whereas the <code>vote-ui</code> resources have a syncwave of <code>2</code>, <code>3</code>, and <code>4</code>. This means that the <code>vote-api</code> resource will be deployed first, then the <code>vote-ui</code> resource will be deployed second.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -444,7 +450,7 @@ patchesJson6902: <i class="conum" data-value="1"></i><b>(1)</b>
 <h2 id="_viewing_the_application_and_detecting_drift"><a class="anchor" href="#_viewing_the_application_and_detecting_drift"></a>Viewing the application and detecting drift</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now that the application has been deployed to production, let&#8217;s go ahead and view the application in the OpenShift console. Click on the <strong>Developer</strong> perspective, then click on the <strong>Topology</strong> view. Ensure you&#8217;re in the <code>vote-app-prod-%USERID%</code> application, and you should see the application deployed.</p>
+<p>Now that the application has been deployed to production let&#8217;s go ahead and view the application in the OpenShift console. Click on the <strong>Developer</strong> perspective, then select the <strong>Topology</strong> view. Ensure you&#8217;re in the <code>vote-app-prod-%USERID%</code> project, and you should see the application deployed.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -452,7 +458,7 @@ patchesJson6902: <i class="conum" data-value="1"></i><b>(1)</b>
 </div>
 </div>
 <div class="paragraph">
-<p>Click on the <code>vote-ui</code> deployment, and click <strong>Details</strong> to see the details of the deployment. Here, you see how Argo CD will auto-detect drift in the application. Let&#8217;s go ahead and change the number of replicas to <code>2</code>, and see how Argo CD detects the drift and auto-heals.</p>
+<p>Click on the <code>vote-ui</code> deployment, and click <strong>Details</strong> to see the deployment details. Here, you see how Argo CD will auto-detect drift in the application. Let&#8217;s go ahead and change the number of replicas to <code>2</code> and see how Argo CD detects the drift and auto-heals.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -460,7 +466,7 @@ patchesJson6902: <i class="conum" data-value="1"></i><b>(1)</b>
 </div>
 </div>
 <div class="paragraph">
-<p>Almost immediately after scaling up the replicas for the <code>vote-ui</code> deployment, Argo CD notices this drift, and auto-corrects us back to <code>1</code> replicas. Pretty neat!</p>
+<p>Almost immediately after scaling up the replicas for the <code>vote-ui</code> deployment, Argo CD notices this drift and auto-corrects us back to <code>1</code> replicas. Pretty neat!</p>
 </div>
 </div>
 </div>
@@ -468,7 +474,7 @@ patchesJson6902: <i class="conum" data-value="1"></i><b>(1)</b>
 <h2 id="_using_git_to_modify_the_application"><a class="anchor" href="#_using_git_to_modify_the_application"></a>Using Git to modify the application</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now, let&#8217;s go ahead and make a change to the application. We&#8217;ll change the number of replicas to <code>2</code>, and see how Argo CD detects the drift and auto-heals. To do this, let&#8217;s go ahead and modify the <code>environments/prod/kustomization.yaml</code> file in the <code>vote-app-gitops</code> repository. You can do this by clicking on the <strong>Code</strong> tab, then clicking on the <code>environments/prod/kustomization.yaml</code> file <a href="https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops/src/branch/main/environments/prod/kustomization.yaml" class="params-link" target="_blank" rel="noopener"><strong>here</strong></a>, then clicking on the <strong>Edit</strong> button.</p>
+<p>Now, let&#8217;s go ahead and make a change to the application. We&#8217;ll change the number of replicas to <code>2</code> and see how Argo CD detects the drift and auto-heals. To do this, let&#8217;s go ahead and modify the <code>environments/prod/kustomization.yaml</code> file in the <code>vote-app-gitops</code> repository <a href="https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops/src/branch/main/environments/prod/kustomization.yaml" class="params-link" target="_blank" rel="noopener"><strong>here</strong></a>. Now, within the <strong>Code</strong> tab, click on the <strong>Edit</strong> button to edit within the web page.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -476,7 +482,7 @@ patchesJson6902: <i class="conum" data-value="1"></i><b>(1)</b>
 </div>
 </div>
 <div class="paragraph">
-<p>Change the number of replicas on line 4 to <code>2</code>, then navigate to the <strong>Commit changes</strong> section at the bottom of the page. Here, we can select <strong>Create a new branch for this commit and start a pull request</strong>. We will create a new branch, <code>%USERID%-feature-id</code> and start a pull request to merge the changes into the <code>main</code> branch. Click on the <strong>Propose file change</strong> button to create the pull request.</p>
+<p>Change the number of replicas on line 4 to <code>2</code>, then navigate to the <strong>Commit changes</strong> section at the bottom of the page. Here, we can select <strong>Create a new branch for this commit and start a pull request</strong>. We will create a new branch, <code>%USERID%-feature-ha</code> and start a pull request to merge the changes into the <code>main</code> branch. This can be helpful if we want to easily roll back changes to our cluster using GitOps. Click on the <strong>Propose file change</strong> button to create the pull request.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -484,7 +490,7 @@ patchesJson6902: <i class="conum" data-value="1"></i><b>(1)</b>
 </div>
 </div>
 <div class="paragraph">
-<p>You will be taken to the <strong>New Pull Request</strong> page. Here, you can see the changes that were made to the file. Click on the <strong>New Pull Request</strong> button to create the pull request.</p>
+<p>You will be taken to the <strong>New Pull Request</strong> page. Here, you can see the changes that were made to the file, just changing the replicas of the <code>vote-ui</code> deployment. Click on the <strong>New Pull Request</strong> button to create the pull request.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -492,7 +498,7 @@ patchesJson6902: <i class="conum" data-value="1"></i><b>(1)</b>
 </div>
 </div>
 <div class="paragraph">
-<p>Now, you&#8217;ll see a new page to create a pull request. Here, you can see the details of the pull request. Click on the <strong>Create pull request</strong> button to create the pull request.</p>
+<p>Here, you can see the pull request details; to save time, we can skip adding details to this PR. Select the <strong>Create Pull Request</strong> button to create the pull request.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -500,7 +506,7 @@ patchesJson6902: <i class="conum" data-value="1"></i><b>(1)</b>
 </div>
 </div>
 <div class="paragraph">
-<p>With the new pull request created, let&#8217;s go ahead and merge the pull request. Click on the <strong>Create merge commit</strong> button to merge the pull request.</p>
+<p>With the new pull request created, let&#8217;s go ahead and merge the pull request into the main branch, where Argo CD is currently tracking our repository. Click the <strong>Create merge commit</strong> button to merge the pull request.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -513,7 +519,7 @@ patchesJson6902: <i class="conum" data-value="1"></i><b>(1)</b>
 <h2 id="_viewing_the_application_and_detecting_drift_2"><a class="anchor" href="#_viewing_the_application_and_detecting_drift_2"></a>Viewing the application and detecting drift</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now, let&#8217;s go ahead and check the status of the application in the OpenShift console. Click on the <strong>Developer</strong> perspective, then click on the <strong>Topology</strong> view. Ensure you&#8217;re in the <code>vote-app-prod-%USERID%</code> application, and you should see the <code>vote-ui</code> deployed, now with 2 replicas.</p>
+<p>Now, let&#8217;s go ahead and check the application status in the OpenShift Web Console. Select the <strong>Developer</strong> perspective, then click on the <strong>Topology</strong> view. Ensure you&#8217;re in the <code>vote-app-prod-%USERID%</code> application, and you should see the <code>vote-ui</code> deployed, now with <code>2</code> replicas.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -521,7 +527,7 @@ patchesJson6902: <i class="conum" data-value="1"></i><b>(1)</b>
 </div>
 </div>
 <div class="paragraph">
-<p>Click on the <code>vote-ui</code> deployment, and click <strong>Details</strong> to see the details of the deployment. Here, you see how Argo CD will auto-detect drift in the application. Let&#8217;s go ahead and change the number of replicas to <code>1</code>, and see how Argo CD detects the drift and auto-heals.</p>
+<p>Click on the <code>vote-ui</code> deployment, and click <strong>Details</strong> to see the deployment details. Here, you see how Argo CD will auto-detect drift in the application. Let&#8217;s go ahead and change the number of replicas to <code>1</code> and see how Argo CD detects the drift and auto-heals.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -529,7 +535,7 @@ patchesJson6902: <i class="conum" data-value="1"></i><b>(1)</b>
 </div>
 </div>
 <div class="paragraph">
-<p>Automatically, the application will sync, Argo CD uses the manifests in the <code>vote-app-gitops</code> repository to detect these drifts and keep us at <code>2</code> replicas. We can also see this in Argo CD, where auto sync is enabled.</p>
+<p>Automatically, the application will sync, and we cannot keep the <code>vote-ui</code> pod replicas at <code>1</code>. Argo CD uses the manifests in the <code>vote-app-gitops</code> repository and Git as the single source of truth, detecting these application drifts and keeping our resource at <code>2</code> replicas. We can also see this in Argo CD, where auto sync is enabled.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -542,7 +548,7 @@ patchesJson6902: <i class="conum" data-value="1"></i><b>(1)</b>
 <h2 id="_conclusion"><a class="anchor" href="#_conclusion"></a>Conclusion</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this section, we learned how to use Tekton GitOps to deploy an application from a development to a production environment, and how to use Argo CD to detect drift in the application and auto-heal the application.</p>
+<p>In this section, we learned how to use OpenShift GitOps to deploy an application from a development to a production environment and how to use Argo CD to detect drift in the application and ensure high availability.</p>
 </div>
 </div>
 </div>

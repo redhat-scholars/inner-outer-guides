@@ -195,7 +195,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>With the Vote Application deployed to our <code>vote-app-dev-%USERID%</code> project, we can now use OpenShift Dev Spaces to develop and test our application. Dev Spaces is a browser-based IDE that allows you to develop in the cloud. It provides a ready-to-use development stack with a web-based IDE, terminal, and version control support. It also provides pre-built developer workspaces that allow you to start coding immediately, which we&#8217;ll be using in this lab. We&#8217;ll make a quick change to the source code of our <code>vote-ui</code> application, see the results in real-time, and push these changes to our repository.</p>
+<p>With the Vote Application deployed to our <code>vote-app-dev-%USERID%</code> project, we can now use OpenShift Dev Spaces to develop and test our application. <a href="https://developers.redhat.com/products/openshift-dev-spaces/overview" target="_blank" rel="noopener">OpenShift Dev Spaces</a> is a browser-based IDE that allows you to develop in the cloud. It provides a ready-to-use development stack with a web-based IDE, terminal, and version control support. It also provides pre-built developer workspaces that allow you to start coding immediately, which we&#8217;ll use in this lab. We&#8217;ll quickly change the source code of our <code>vote-ui</code> application, see the results in real-time, and push these changes to our repository.</p>
 </div>
 </div>
 </div>
@@ -203,7 +203,7 @@
 <h2 id="_getting_setup_with_dev_spaces"><a class="anchor" href="#_getting_setup_with_dev_spaces"></a>Getting setup with Dev Spaces</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Let&#8217;s start out with getting more familiar with the Dev Spaces interface. To do this, we can begin with navigating to Dev Spaces from the OpenShift Console. To do this, click on the menu icon on the top right corner and select <code>Red Hat OpenShift Dev Spaces</code>.</p>
+<p>Let&#8217;s start by getting more familiar with the Dev Spaces interface. We can begin by navigating to Dev Spaces from the OpenShift Console to do this. To do this, click on the application launcher at the top right corner of the OpenShift Web Console and select <strong>Red Hat OpenShift Dev Spaces</strong>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -211,15 +211,31 @@
 </div>
 </div>
 <div class="paragraph">
-<p>This will open up the Dev Spaces interface. You&#8217;ll need to firstly authorize Dev Spaces to access your OpenShift cluster. Next, you&#8217;ll see the <code>vote-ui</code> workspace from within the Dev Spaces dashboard. Click on the <code>vote-ui</code> workspace and hit <strong>Actions</strong> from the top right corner, then click <strong>Start</strong> to enter the Dev Spaces IDE.</p>
+<p>This will open up the Dev Spaces interface. You&#8217;ll need to first authorize Dev Spaces to access your OpenShift cluster by selecting <strong>Allow selected permissions</strong>.</p>
 </div>
-<div class="imageblock unresolved">
+<div class="imageblock">
 <div class="content">
-<img src="devspaces-workspaces.png" alt="Dev Spaces Workspaces">
+<img src="_images/devspaces-auth.png" alt="Dev Spaces Auth">
 </div>
 </div>
 <div class="paragraph">
-<p>From here, we can begin to make our changes to the Vote Application. But first, let&#8217;s get familiar with the powerful features of Dev Spaces.</p>
+<p>After authorizing, you&#8217;ll see the Dev Spaces dashboard. From here, you can see the workspaces that are available to you. For this lab, we&#8217;ll use the <code>vote-ui</code> workspace, a pre-built workspace containing the Vote Application source code. Within a minute, the <code>vote-ui</code> workspace will be ready to use, and you can click <strong>Open</strong> on the right-hand side to enter the Dev Spaces IDE.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devspaces-workspaces.png" alt="Dev Spaces Workspaces">
+</div>
+</div>
+<div class="paragraph">
+<p>Once the Dev Spaces interface opens, we&#8217;ll have to hit <strong>Trust Workspace &amp; Install</strong> and <strong>Yes, I trust the authors</strong> to install the required components and enable permissions needed for this lab.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devspaces-permissions.png" alt="Dev Spaces Permissions">
+</div>
+</div>
+<div class="paragraph">
+<p>There may be some <em>Get Started</em> tabs in the dashboard that you can close, but from here, we can begin to make changes to the Vote Application. But first, let&#8217;s get familiar with the powerful features of Dev Spaces.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -229,7 +245,7 @@
 <div class="sect2">
 <h3 id="_extension_support"><a class="anchor" href="#_extension_support"></a>Extension support</h3>
 <div class="paragraph">
-<p>Built from the open Eclipse Che project, Dev Spaces provides support for Microsoft Visual Studio Code extensions and Language Server Protocol. This means that you can use your favorite Visual Studio Code extensions in Dev Spaces. You can also use the Language Server Protocol to provide language features like auto-complete, go-to-definition, and hover support.</p>
+<p>Built from the open source <a href="https://www.eclipse.org/che/" target="_blank" rel="noopener">Eclipse Che</a> project, Dev Spaces supports Microsoft Visual Studio Code extensions and Language Server Protocol. This means you can use your favorite Visual Studio Code extensions in Dev Spaces. You can also use the Language Server Protocol to provide language features like auto-complete, go-to-definition, and hover support.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -240,7 +256,7 @@
 <div class="sect2">
 <h3 id="_terminal_support"><a class="anchor" href="#_terminal_support"></a>Terminal support</h3>
 <div class="paragraph">
-<p>Dev Spaces also provides a terminal that allows you to run commands in your workspace. This is useful for running commands like <code>mvn clean package</code> or <code>npm install</code> to build your application. You can also use the terminal to run commands within your OpenShift cluster without needing to authenticate again.</p>
+<p>Dev Spaces also provides a terminal that allows you to run commands in your workspace. This is useful for running commands like <code>mvn clean package</code> or <code>npm install</code> to build your application. You can also use the terminal to run commands within your OpenShift cluster without needing to authenticate, just like the OpenShift Web Terminal.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -248,13 +264,21 @@
 </div>
 </div>
 <div class="paragraph">
-<p>With the terminal, let&#8217;s run the following command to test out a bit of Python code, as Python has been installed in our workspace.</p>
+<p>With the Dev Spaces built-in terminal, let&#8217;s run the following commands to test a bit of Python code to print some text in our terminal.</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">python
-print("Hello from Summit 2023!")
-quit()</code></pre>
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">Python</code></pre>
+</div>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">print("Hello from Summit 2023!")</code></pre>
+</div>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">quit()</code></pre>
 </div>
 </div>
 <div class="imageblock">
@@ -282,7 +306,7 @@ quit()</code></pre>
 <div class="sect2">
 <h3 id="_installing_the_application_dependencies"><a class="anchor" href="#_installing_the_application_dependencies"></a>Installing the application dependencies</h3>
 <div class="paragraph">
-<p>Let&#8217;s first setup the dependencies for our application and run the Vote Application locally. From the top right corner, we can select <strong>Terminal</strong> and then <strong>Run Task</strong>.</p>
+<p>Let&#8217;s first set up the dependencies for our application and run the Vote Application locally. From the top left corner, we can select <strong>Terminal</strong> and then <strong>Run Task</strong>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -290,7 +314,7 @@ quit()</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>From here, we can select <strong>Show all tasks</strong> and <strong>devfile: Install dependencies</strong>. This will install the dependencies for the Vote Application.</p>
+<p>We can select <strong>Show all tasks</strong> and <strong>devfile: Install dependencies</strong> from here. This will install the necessary Python dependencies for the Vote Application.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -298,7 +322,7 @@ quit()</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Next, we can select <strong>Terminal</strong> and then <strong>Run Task</strong> again. From here, we can select <strong>Show all tasks</strong> and <strong>devfile: Run Python App</strong>. This will run the Vote Application in development.</p>
+<p>Next, we can select <strong>Terminal</strong> and then <strong>Run Task</strong> again. We can select <strong>Show all tasks</strong> and <strong>devfile: Run Python App</strong> from here. This will run the Vote Application in development.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -306,7 +330,7 @@ quit()</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You&#8217;ll now see a pop-up in the lower right corner about a new process running on port 8080. Using this, we will be able to see live code changes to the Vote Application running in the browser.</p>
+<p>Click on the <strong>Open in New Tab</strong> button to open the Vote Application in a new browser tab. You&#8217;ll now see a pop-up in the lower right corner about a new process running on port 8080. We can see live code changes to the Vote Application running in the browser using this.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -314,7 +338,7 @@ quit()</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>From here, we can click on the <strong>Open</strong> button to open the Vote Application in a new browser tab. It may take a few seconds, but you should see the Vote Application running.</p>
+<p>From here, we can click the <strong>Yes</strong> button to open the Vote Application in a new browser tab. It may take a few seconds, but you should see the Vote Application running.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -322,7 +346,7 @@ quit()</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>From the Dev Spaces interface, we can now begin to make changes to the Vote Application. To do this, we can edit the <code>index.html</code> file in the <code>templates</code> directory.</p>
+<p>We can now begin to make changes to the Vote Application from the Dev Spaces interface. We can edit the <code>index.html</code> file in the <code>templates</code> directory to do this.</p>
 </div>
 </div>
 <div class="sect2">
@@ -333,11 +357,11 @@ quit()</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Here, on line 16, we can change the text from <code>{{option_a}} vs {{option_b}}!</code> to <code>{{option_a}} vs {{option_b}}! - Red Hat Summit 2023</code>. This will change the title of the Vote Application to <code>Vote App - Red Hat Summit 2023</code>. Feel free to copy the below code and insert it within the <code>&lt;h1&gt;&lt;/h1&gt;</code> blocks.</p>
+<p>Here, on line 16, we can change the text from <code>{{option_a}} vs {{option_b}}!</code> to <code>{{option_a}} vs {{option_b}}! - Red Hat Summit 2023</code>. This will change the title of the Vote Application to <strong>Vote App - Red Hat Summit 2023</strong>. Feel free to copy the below code and insert it on line 16.</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">{{option_a}} vs {{option_b}}! - Red Hat Summit 2023</code></pre>
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">&lt;h1&gt;{{option_a}} vs {{option_b}}! - Red Hat Summit 2023&lt;/h1&gt;</code></pre>
 </div>
 </div>
 <div class="imageblock">
@@ -346,7 +370,7 @@ quit()</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Now, if we return to our new tab with the local Vote Application running, we can see the new changes we&#8217;ve made, live.</p>
+<p>Now, if we return to our new tab with the local Vote Application running, we can see the new changes we&#8217;ve made updated automatically.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -360,10 +384,10 @@ quit()</code></pre>
 <h2 id="_performing_a_security_scan"><a class="anchor" href="#_performing_a_security_scan"></a>Performing a security scan</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now that we&#8217;ve made our changes to the Vote Application, we can analyze our dependencies by performing a security scan. Dependency Analytics is powered by Snyk Intel Vulnerability DB, the most advanced and accurate open source vulnerability database in the industry.</p>
+<p>Now that we&#8217;ve made changes to the Vote Application, we can secure our application and analyze our dependencies by performing a security scan. Dependency Analytics is powered by the <a href="https://security.snyk.io/" target="_blank" rel="noopener">Snyk Intel Vulnerability DB</a>, the industry&#8217;s most advanced and accurate open-source vulnerability database.</p>
 </div>
 <div class="paragraph">
-<p>To do this, we can right click the <strong>requirements.txt</strong> file from the left menu. From here, we can select <strong>Dependency Analytics Report</strong> to perform a security scan on the Vote Application.</p>
+<p>We can right-click the <strong>requirements.txt</strong> file from the left menu to do this. From here, we can select <strong>Dependency Analytics Report</strong> to perform a security scan on the Vote Application.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -371,7 +395,7 @@ quit()</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This will open up a new tab in the browser with the results of the security scan. Here, we can see information about security issues, dependencies, licenses, and add-ons.</p>
+<p>This will open up a new tab in Dev Spaces with the security scan results. Here, we can see information about security issues, dependencies, licenses, and add-ons.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -384,7 +408,7 @@ quit()</code></pre>
 <h2 id="_pushing_changes_to_the_git_repository"><a class="anchor" href="#_pushing_changes_to_the_git_repository"></a>Pushing changes to the Git repository</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now that we&#8217;ve tested our changes, we can push our changes to the Git repository. To do this, we can select the <strong>Source Control</strong> tab from the left menu. From here, we can select the <strong>✓ Commit</strong> button to stage all of our changes. We can then enter a commit message (ex. <code>Modified index.html header</code>) and commit, as well as push our changes to the Git repository.</p>
+<p>Now that we&#8217;ve tested our changes, we can push our changes to the Git repository. We can select the <strong>Source Control</strong> tab from the left menu to do this. We can first enter a commit message (ex. <code>Modified index.html header</code>), and from here, we can select the dropdown to the right of the ✓ Commit button to <strong>Commit &amp; Push</strong> our changes to the Git repository,</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -392,17 +416,12 @@ quit()</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Finally, you&#8217;ll be prompted to enter your credentials to push your changes to the Git repository. To recall, your credentials are:</p>
+<p>You&#8217;ll then see a prompt about staging and committing your changes. We can select <strong>Yes</strong> from here to stage and commit our changes.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Username: <code>%USERID%</code></p>
-</li>
-<li>
-<p>Password: <code>openshift</code></p>
-</li>
-</ul>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devspaces-commit-2.png" alt="Dev Spaces Commit">
+</div>
 </div>
 </div>
 </div>
@@ -410,7 +429,7 @@ quit()</code></pre>
 <h2 id="_syncing_changes_to_the_vote_application"><a class="anchor" href="#_syncing_changes_to_the_vote_application"></a>Syncing changes to the Vote Application</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now that we&#8217;ve pushed our changes to the Git repository, and with the webhook configured, our changes will be automatically deployed to the Vote Application. To see this, we can navigate to the OpenShift Console and select the <code>vote-app-ci-%USERID%</code> project. From here, we can select <strong>Pipelines</strong> from the left menu. We should see the pipeline <code>vote-app-ci-pipeline</code> running and rebuilding the Vote Application.</p>
+<p>Now that we&#8217;ve pushed our changes to the Git repository and with the webhook configured, our changes trigger a rebuild of the <code>vote-ui</code> application image. To see this in real-time, we can navigate to the OpenShift Web Console and select the <code>vote-app-ci-%USERID%</code> project. From here, we can select <strong>Pipelines</strong> from the left menu. We should see the pipeline <code>vote-app-ui-pipeline</code> running and rebuilding the Vote Application.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -418,7 +437,7 @@ quit()</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Once the pipeline has completed, in the <a href="https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops/" class="params-link" target="_blank" rel="noopener">vote-app-gitops</a>] repository, there will be a new commit from Tekton that will contain the new hash for the Vote Application image.</p>
+<p>Once the pipeline has completed, in the <a href="https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops/" class="params-link" target="_blank" rel="noopener">vote-app-gitops</a> repository, there will be a new commit from Tekton that will contain the new hash for the Vote Application image.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -426,11 +445,11 @@ quit()</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Now, Argo CD will automatically pick up on these changes from the repository. To deploy the new image to the <code>vote-app-dev-%USERID%</code> project, head back to Argo CD and select the <code>vote-app-dev-%USERID%</code> application. You&#8217;ll see that the application is now out of sync, and hasn&#8217;t updated, as we declared in our <code>Application</code> resource that we didn&#8217;t want <em>self-healing</em> enabled. From the top menu, click on <strong>Sync</strong>.</p>
+<p>Now, Argo CD will automatically pick up on these changes from the repository. To deploy the new image to the <code>vote-app-dev-%USERID%</code> project, head back to Argo CD and select the <code>vote-app-dev-%USERID%</code> application. You&#8217;ll see that the application is now out of sync, and hasn&#8217;t been updated, as we declared in our <code>Application</code> resource that we didn&#8217;t want <em>self-healing</em> enabled. However, to view the new changes from the top menu, click on <strong>Sync</strong>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/argocd-sync.png" alt="Argo CD Sync">
+<img src="_images/devspaces-argocd-sync.png" alt="Dev Spaces Argo CD Sync">
 </div>
 </div>
 <div class="paragraph">
@@ -438,7 +457,7 @@ quit()</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/devspaces-argocd-sync.png" alt="Dev Spaces Argo CD Sync">
+<img src="_images/argocd-sync.png" alt="Argo CD Sync">
 </div>
 </div>
 </div>
@@ -447,7 +466,7 @@ quit()</code></pre>
 <h2 id="_next_steps"><a class="anchor" href="#_next_steps"></a>Next steps</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Making these changes manually is a good solution for our development environment, but let&#8217;s push this application to production and automate all of this. For this, we can use a separate pipeline that will deploy the application to the <code>vote-app-prod-%USERID%</code> project.</p>
+<p>Making these changes manually is a good solution for our development environment, but let&#8217;s move this application to production and automate all of this. For this, we can use a separate pipeline to deploy the application to the <code>vote-app-prod-%USERID%</code> project.</p>
 </div>
 </div>
 </div>

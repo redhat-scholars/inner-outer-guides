@@ -195,7 +195,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now, the next step is to deploy the Vote App to the <code>vote-app-dev-%USERID%</code> environment using Argo CD. This will allow us to view the application before it reaches production, and make necessary changes throughout our development flow. We&#8217;ll also use the OpenShift Web Terminal to scale up the replicas for one of the deployments, and learn how to use Argo CD to manage application drifts and syncing.</p>
+<p>The next step is to deploy the Vote App to the <code>vote-app-dev-%USERID%</code> environment using Argo CD. This will allow us to view the application before it reaches production and make necessary changes throughout our development flow. We&#8217;ll also use the OpenShift Web Terminal to scale up the replicas for one of the deployments and learn how to use Argo CD to manage application drifts and syncing.</p>
 </div>
 </div>
 </div>
@@ -203,7 +203,7 @@
 <h2 id="_creating_a_new_application_using_argo_cd"><a class="anchor" href="#_creating_a_new_application_using_argo_cd"></a>Creating a new application using Argo CD</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Let&#8217;s use Argo CD to create a new application. While you can use this <a href="https://argocd-server-argocd-%USERID%.%SUBDOMAIN%" class="params-link" target="_blank" rel="noopener">Argo CD</a>. link to login to the Argo CD dashboard, you can also head to Argo CD from within your cluster by visiting the <code>argocd-%USERID%</code> project in the OpenShift web console.</p>
+<p>Let&#8217;s use Argo CD to create a new application. While you can access Argo CD from the <strong>Lab Guides</strong> or by using this <a href="https://argocd-server-argocd-%USERID%.%SUBDOMAIN%" class="params-link" target="_blank" rel="noopener"><strong>Argo CD link</strong></a>. You can also visit Argo CD from your OpenShift cluster. Within the <strong>Developer</strong> perspective, navigate to the <code>argocd-%USERID%</code> project, and visit the <strong>Topology</strong> page.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -211,7 +211,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Then, click on the <strong>Login with OpenShift</strong> button.</p>
+<p>Click on the <strong>Argo CD</strong> route to visit the Argo CD dashboard. You&#8217;ll be prompted to log in to Argo CD, and you can use the <strong>Login with OpenShift</strong> button to do so.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -219,7 +219,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Within the Argo CD web console, click on the <strong>+ New App</strong> button.</p>
+<p>Within the Argo CD web console, click the <strong>+ New App</strong> button. This will open the <strong>New Application</strong> form, where we can fill in the necessary information to create a new application in our development environment.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -235,20 +235,29 @@
 <p>Application Name: <code>vote-app-dev-%USERID%</code></p>
 </li>
 <li>
-<p>Project: <code>default</code></p>
+<p>Project Name: <code>default</code></p>
 </li>
 <li>
 <p>Sync Policy: <code>Automatic</code></p>
 </li>
 <li>
-<p>Self-Healing: <code>Disabled</code></p>
+<p>Self Heal: <code>Disabled</code></p>
 </li>
 <li>
-<p>Auto-create Namespace: <code>Enabled</code></p>
+<p>Auto-Create Namespace: <code>Enabled</code></p>
 </li>
 <li>
-<p>Repository URL: <code><a href="http://gitea.gitea.svc:3000/%USERID%/vote-app-gitops" class="bare">http://gitea.gitea.svc:3000/%USERID%/vote-app-gitops</a></code></p>
+<p>Repository URL:</p>
 </li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">http://gitea.gitea.svc:3000/%USERID%/vote-app-gitops</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p>Revision: <code>main</code></p>
 </li>
@@ -274,7 +283,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>When finished, click on the <strong>CREATE</strong> button.</p>
+<p>When finished, click the <strong>CREATE</strong> button in the top left-hand corner. This will create the application in Argo CD and begin the syncing process.</p>
 </div>
 </div>
 </div>
@@ -282,7 +291,7 @@
 <h2 id="_viewing_the_application_in_argo_cd"><a class="anchor" href="#_viewing_the_application_in_argo_cd"></a>Viewing the application in Argo CD</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now, let&#8217;s view the application in Argo CD. After creating the application, you should be redirected to the application details page. If not, click on the application&#8217;s name to view the application details.</p>
+<p>Now, let&#8217;s view the application in the Argo CD dashboard. After creating the application, you should be redirected to the application details page. If not, click on the application&#8217;s name to view the application details.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -290,12 +299,15 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Here, you&#8217;ll see the <code>vote-app-dev-%USERID%</code> application&#8217;s health, sync status, and associated resources. Currently, the application is syncing, so the status is <code>OutOfSync</code>. Once the application is synced, the status will change to a green <code>Synced</code>.</p>
+<p>Here, you&#8217;ll see the <code>vote-app-dev-%USERID%</code> application&#8217;s health, sync status, and associated resources. Your application may sync very quickly, with a green <code>Synced</code> status, however, you may see a yellow <code>OutOfSync</code> status.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd-app-details-2.png" alt="Argo CD App Details Continued">
 </div>
+</div>
+<div class="paragraph">
+<p>We can see the associated resources within the <code>vote-app-dev-%USERID%</code> application, including the <code>vote-ui</code> deployment, <code>vote-api</code> deployment, and <code>vote-ui</code> route. We can also see the services associated with each deployment.</p>
 </div>
 </div>
 </div>
@@ -303,7 +315,7 @@
 <h2 id="_viewing_the_application_in_the_openshift_web_console"><a class="anchor" href="#_viewing_the_application_in_the_openshift_web_console"></a>Viewing the application in the OpenShift web console</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now, let&#8217;s <a href="https://vote-ui-vote-app-dev-%USERID%.%SUBDOMAIN%" class="params-link" target="_blank" rel="noopener"><strong>view the application</strong></a> in the OpenShift web console. From the OpenShift web console in the <code>vote-app-dev-%USERID%</code> project, click on the <code>Topology</code> tab.</p>
+<p>You might be wondering what creating your Application in Argo CD achieved. From the OpenShift web console in the <code>vote-app-dev-%USERID%</code> project, click on the <strong>Topology</strong> tab. Here, we can view the <strong>vote-app</strong> application group and view the <code>vote-ui</code> deployment in our browser by <a href="https://vote-ui-vote-app-dev-%USERID%.%SUBDOMAIN%" class="params-link" target="_blank" rel="noopener"><strong>clicking the route</strong></a>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -311,7 +323,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>To access the application, click on the <code>vote-ui</code> route icon, which will open the application in a new tab.</p>
+<p>This will open the application in a new tab, and we can view the deployed application!</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -319,7 +331,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Great! Looks like we&#8217;re able to see the newly deployed Vote App in our browser through this development environment.</p>
+<p>Great! We&#8217;re able to see the newly deployed Vote App in our browser through this development environment.</p>
 </div>
 </div>
 </div>
@@ -327,7 +339,7 @@
 <h2 id="_using_the_web_terminal_to_modify_the_development_project"><a class="anchor" href="#_using_the_web_terminal_to_modify_the_development_project"></a>Using the Web Terminal to modify the development project</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now, let&#8217;s use the web terminal to modify the development project and demonstrate that we have not yet put in place self-healing or high availability just yet. From the OpenShift web console in the <code>vote-app-dev-%USERID%</code> project, click on the <strong>Terminal</strong> icon from the top right of the page.</p>
+<p>Now, let&#8217;s use the OpenShift Web Terminal to modify a deployment and demonstrate that we still need to establish self-healing or high availability. From the OpenShift Web Console in the <code>vote-app-dev-%USERID%</code> project, click on the <strong>Terminal</strong> icon from the top right of the page.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -335,11 +347,11 @@
 </div>
 </div>
 <div class="paragraph">
-<p>From the web terminal, run the following command scale up the <code>vote-ui</code> deployment to 2 replicas:</p>
+<p>This is the OpenShift Web Terminal, which allows us a terminal in a pod from the OpenShift Web Console and run commands directly within the cluster. Let&#8217;s run the following command to scale up the <code>vote-ui</code> deployment to 2 replicas:</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">kubectl scale deployment vote-ui --replicas=2</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc scale deployment vote-ui --replicas=2</code></pre>
 </div>
 </div>
 <div class="imageblock">
@@ -348,7 +360,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>This command will scale up the <code>vote-ui</code> deployment to 2 replicas. Now, we can return to Argo CD to see how the application is out of sync.</p>
+<p>This command will scale up the <code>vote-ui</code> deployment to 2 replicas. Now, we can return to the Argo CD <code>vote-app-dev-%USERID%</code> application to see how the application has automatically been determined to be out of sync.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -356,7 +368,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Now, click <strong>Sync</strong> and select <strong>Synchronize</strong> to sync the application back to the manifests in the <a href="https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops" class="params-link" target="_blank" rel="noopener">Gitea Vote App GitOps</a> repository.</p>
+<p>As this is our development project, we specified Argo CD to not manually adjust our application when drift is detected, however, in our production environment, we&#8217;ll enable this for high availability. For now, click <strong>Sync</strong> and select <strong>Synchronize</strong> to sync the application back to the manifests in the <a href="https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops" class="params-link" target="_blank" rel="noopener">Vote App GitOps</a> repository.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -369,7 +381,7 @@
 <h2 id="_next_steps"><a class="anchor" href="#_next_steps"></a>Next Steps</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now that you have deployed the Vote App to the dev environment using Argo CD, we can use OpenShift DevSpaces to develop and test the application locally before moving to the <code>vote-app-prod-%USERID%</code> environment and implementing self-healing and high availability.</p>
+<p>Now that you have deployed the Vote App to the development environment using Argo CD, we can use OpenShift Dev Spaces to develop and test the application locally before moving to the production module and deploying the application in the <code>vote-app-prod-%USERID%</code> project.</p>
 </div>
 </div>
 </div>

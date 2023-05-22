@@ -195,7 +195,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this section, you will learn how to use a Tekton pipeline resource and trigger the pipeline to run. The pipeline will firstly clone the git repository source code of the <code>vote-api</code> and <code>vote-ui</code> repositories. The pipeline will then build the application and push the image to the internal image registry. Finally, the pipeline will then update the deployment in the <code>vote-app-gitops</code> repository with the new image. We&#8217;ll also later add a webhook to the <code>vote-ui</code> to trigger when a commit is made to the Git repository.</p>
+<p>In this section, you will learn how to use a Tekton pipeline resource and trigger the Pipeline to run. The Pipeline will first clone the git repository source code of the <code>vote-api</code> and <code>vote-ui</code> repositories. The Pipeline will then build the application and push the image to the internal image registry. We&#8217;ll also later add a webhook to the <code>vote-ui</code> to trigger when a commit is made to the Git repository. Finally, the Pipeline will update the deployment in the <code>vote-app-gitops</code> repository with the new image.</p>
 </div>
 </div>
 </div>
@@ -203,7 +203,7 @@
 <h2 id="_viewing_the_pipelines"><a class="anchor" href="#_viewing_the_pipelines"></a>Viewing the pipelines</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Let&#8217;s use the OpenShift Console to view the pipelines that have been created for you. Within the <strong>Developer</strong> perspective of the OpenShift Console, click on the <strong>Pipelines</strong> link in the left navigation menu. You can also use <a href="https://console-openshift-console.apps.%SUBDOMAIN%/dev-pipelines/all-namespaces" class="params-link" target="_blank" rel="noopener"><strong>this link</strong></a> to head to the Pipelines page directly.</p>
+<p>Let&#8217;s use the OpenShift Console to view the pipelines created for you. Within the <strong>Developer</strong> perspective of the OpenShift Console, click on the <strong>Pipelines</strong> link in the left navigation menu. You can also use <a href="https://console-openshift-console.apps.%SUBDOMAIN%/dev-pipelines/all-namespaces" class="params-link" target="_blank" rel="noopener"><strong>this link</strong></a> to head to the Pipelines page directly.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -211,17 +211,38 @@
 </div>
 </div>
 <div class="paragraph">
-<p>While the actual Tekton pipelines has been created for you, you will need to create a pipeline resource and trigger the pipeline to run. Before we begin, ensure you&#8217;ve switched to the <strong>Developer</strong> perspective.</p>
+<p>Here, we will select the <code>vote-app-ci-%USERID%</code> project, where the pipelines have been created. This section details all the pipelines we&#8217;ll be using in the workshop, details about the last pipeline run, the status of the tasks, and more relevant details about the Pipeline. You should see three pipelines, <code>promote-to-prod</code>, <code>vote-app-api-pipeline</code>, and <code>vote-app-ui-pipeline</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipelines-default.png" alt="pipelines default">
+</div>
 </div>
 <div class="paragraph">
-<p>Before we start the pipelines, let&#8217;s take a look at the pipelines that have been created for you. These pipelines are created in the <code>vote-app-ci-%USERID%</code> namespace. To view the pipelines, click on the <strong>Pipelines</strong> link in the left navigation menu.</p>
+<p>Before we start the pipelines, let&#8217;s look at one of the pipeline contents. Click on the <code>vote-app-api-pipeline</code> pipeline to view the pipeline details. Select <strong>YAML</strong> to view the pipeline definition in <a href="https://www.redhat.com/en/topics/automation/what-is-yaml" target="_blank" rel="noopener"><strong>YAML format</strong></a>. You should see the pipeline definition, along with the tasks that are defined in the Pipeline.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipeline-yaml.png" alt="pipeline yaml">
+</div>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s also take a look at the contents of the pipelines:</p>
+<p>This Pipeline YAML defines the tasks to be run in the Pipeline and also defines the parameters used in the Pipeline, such as the git repository URL, the image name, and more.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipeline-yaml-content.png" alt="pipeline yaml content">
+</div>
+</div>
+<div class="paragraph">
+<p>We can also view the pipeline content below. The last YAML definition is a task that helps to bundle multiple actions together, including cloning the git repository, updating image digests, and committing changes.</p>
 </div>
 <div class="paragraph">
 <p><strong>vote-app-api-pipeline</strong></p>
 </div>
+<details>
+<summary class="title">Details</summary>
+<div class="content">
 <div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: tekton.dev/v1beta1
@@ -313,9 +334,14 @@ spec:
       workspace: app-source</code></pre>
 </div>
 </div>
+</div>
+</details>
 <div class="paragraph">
 <p><strong>vote-app-ui-pipeline</strong></p>
 </div>
+<details>
+<summary class="title">Details</summary>
+<div class="content">
 <div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: tekton.dev/v1beta1
@@ -407,9 +433,14 @@ spec:
       workspace: app-source</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>promote-to-prod**</p>
 </div>
+</details>
+<div class="paragraph">
+<p><strong>promote-to-prod</strong></p>
+</div>
+<details>
+<summary class="title">Details</summary>
+<div class="content">
 <div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: tekton.dev/v1beta1
@@ -482,9 +513,14 @@ spec:
     - name: app-source</code></pre>
 </div>
 </div>
+</div>
+</details>
 <div class="paragraph">
 <p><strong>git-update-deployment-task</strong></p>
 </div>
+<details>
+<summary class="title">Details</summary>
+<div class="content">
 <div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: tekton.dev/v1beta1
@@ -576,20 +612,14 @@ spec:
 </div>
 </div>
 </div>
+</details>
+</div>
 </div>
 <div class="sect1">
 <h2 id="_starting_the_vote_app_api_pipeline"><a class="anchor" href="#_starting_the_vote_app_api_pipeline"></a>Starting the <code>vote-app-api</code> pipeline</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Firstly, ensure that you&#8217;re currently using the <code>vote-app-ci-%USERID%</code> project. This is where the pipeline manifests have been created, and where we&#8217;ll be running the pipeline from.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/switch-project.png" alt="switch project">
-</div>
-</div>
-<div class="paragraph">
-<p>Within this Pipelines dashboard, you will see a list of pipelines.  Click on the <code>vote-app-api-pipeline</code> pipeline to see the details of the pipeline.</p>
+<p>Let&#8217;s start these pipelines by using a <a href="https://tekton.dev/docs/pipelines/pipelineruns/" target="_blank" rel="noopener">PipelineRun</a>, which is a custom resource that allows you to start a pipeline. This PipelineRun will start the <code>vote-app-api-pipeline</code> pipeline, which will build the <code>vote-api</code> image, and push it to the local registry. From the <strong>Pipelines</strong> view, select the <code>vote-app-api-pipeline</code> pipeline.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -597,20 +627,7 @@ spec:
 </div>
 </div>
 <div class="paragraph">
-<p>Here, you can go through the pipeline steps and see what each step is doing.  You can also see the pipeline resources that are being used. In addition, you can see the pipeline parameters that are being used.  These parameters are used to pass in the name of the image that will be built, and the name of the image that will be pushed to the registry. For reference, here&#8217;s the pipeline steps:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>git-clone</code>: This step clones the local Gitea repository that contains the source code for the application. We&#8217;re able to do so because of a <code>gitea-gitops</code> secret that was created for you. This secret contains the username and password to access the Gitea repository.</p>
-</li>
-<li>
-<p><code>build-and-push</code>: This step builds the image and pushes it to the internal OpenShift registry.  The image name is passed in as a parameter.</p>
-</li>
-<li>
-<p><code>git-update-deployment</code>: This final step updates the deployment manifests in the Git repository.</p>
-</li>
-</ul>
+<p>Here, you can review the pipeline steps and see what each step is doing. You can also see the pipeline resources that are being used.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -618,7 +635,39 @@ spec:
 </div>
 </div>
 <div class="paragraph">
-<p>Now, let&#8217;s start the pipeline.  Click on the top-right <strong>Actions</strong> then <strong>Start</strong> button to start the pipeline. You will be prompted to enter the values for the pipeline parameters, however the default values are already set for you. You&#8217;ll still need to select a workspace, so select <strong>Persistent Volume Claim</strong> and choose the <code>workspace-app-api-source</code> PVC. Now, click on the <strong>Start</strong> button.</p>
+<p>For reference, here are the pipeline steps:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>git-clone</code>: This step clones the local Git repository that contains the source code for the application. We&#8217;re able to do so because of a <code>gitea-gitops</code> secret that was created for you. This secret contains the username and password to access the Gitea repository.</p>
+</li>
+<li>
+<p><code>build-and-push</code>: This step builds the image and pushes it to the internal OpenShift registry. The image name is passed in as a parameter.</p>
+</li>
+<li>
+<p><code>git-update-deployment</code>: This final step updates the deployment manifests in the Git repository.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Now, let&#8217;s start the Pipeline. Click on the top-right <strong>Actions</strong> then <strong>Start</strong> button to start the Pipeline.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipeline-start-button.png" alt="pipeline start button">
+</div>
+</div>
+<div class="paragraph">
+<p>You will be prompted to enter the values for the pipeline parameters, however the default values are already set for you. This includes the source Git repository, image name to build, and GitOps manifest repository.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipeline-start-params.png" alt="pipeline start params">
+</div>
+</div>
+<div class="paragraph">
+<p>You&#8217;ll still need to select a workspace, so scroll to the bottom of the form, select <strong>Persistent Volume Claim</strong>, and choose the <code>workspace-app-api-source</code> PVC. This <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/" target="_blank" rel="noopener">Persistent Volume Claim (PVC)</a> workspace gives us persistent storage that the Pipeline can access even in a containerized environment. Now, click on the <strong>Start</strong> button.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -626,7 +675,12 @@ spec:
 </div>
 </div>
 <div class="paragraph">
-<p>Now that the <code>vote-app-api</code> pipeline has been started, let&#8217;s start the <code>vote-app-ui</code> pipeline.</p>
+<p>Now that the <code>vote-app-api</code> pipeline has been started, we can view it in action from the <strong>PipelineRuns</strong> view. We&#8217;ll need to wait for this first PipelineRun to finish before we can start the <code>vote-app-ui-pipeline</code> pipeline, which should take about 1-2 minutes.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipelinerun-list-api.png" alt="pipelinerun list api">
+</div>
 </div>
 </div>
 </div>
@@ -634,15 +688,15 @@ spec:
 <h2 id="_starting_the_vote_app_ui_pipeline"><a class="anchor" href="#_starting_the_vote_app_ui_pipeline"></a>Starting the <code>vote-app-ui</code> pipeline</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Let&#8217;s repeat the same steps for the <code>vote-app-ui-pipeline</code> pipeline.  Click on the <code>vote-app-ui-pipeline</code> pipeline from the <strong>Pipelines</strong> left-hand tab to see the details of the pipeline.</p>
+<p>With the <code>vote-app-api-pipeline</code> PipelineRun completed, we can now start the <code>vote-app-ui-pipeline</code> pipeline. Let&#8217;s repeat the same steps for this other Pipeline, first selecting it from the <strong>Pipelines</strong> view.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/pipeline-ui-list.png" alt="pipeline ui list">
+<img src="_images/pipeline-ui-list-dashboard.png" alt="pipeline ui list dashboard">
 </div>
 </div>
 <div class="paragraph">
-<p>Here, we can go ahead and start the Pipeline. Click on the top-right <strong>Actions</strong> then <strong>Start</strong> button to start the pipeline. The steps are the same as the <code>vote-app-api</code> pipeline, so we won&#8217;t go through them again.</p>
+<p>Here, we can go ahead and start the Pipeline. The tasks are essentially the same as the <code>vote-app-api</code>, so we can click the top-right <strong>Actions</strong> then <strong>Start</strong> button to start the Pipeline.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -650,7 +704,15 @@ spec:
 </div>
 </div>
 <div class="paragraph">
-<p>You will be prompted to enter the values for the pipeline parameters, however the default values are already set for you. You&#8217;ll still need to select a workspace, so select <strong>Persistent Volume Claim</strong> and choose the <code>workspace-ui-app-source</code> PVC.</p>
+<p>You&#8217;ll notice that the only change here is the difference in the source Git repository and image name to build.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipeline-ui-start-params.png" alt="pipeline ui start params">
+</div>
+</div>
+<div class="paragraph">
+<p>Although the default values are already set for you, you&#8217;ll still need to select a workspace, so select <strong>Persistent Volume Claim</strong> and choose the <code>workspace-ui-app-source</code> PVC. Now, click on the <strong>Start</strong> button.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -658,7 +720,12 @@ spec:
 </div>
 </div>
 <div class="paragraph">
-<p>Now that the <code>vote-app-ui</code> pipeline has been started, let&#8217;s go ahead and check the status of the pipelines.</p>
+<p>Now that the <code>vote-app-ui</code> pipeline has been started, let&#8217;s go ahead and check the status of this Pipeline. We should be at the <strong>PipelineRuns</strong> view, and after a minute or two, the <code>vote-app-ui-pipeline</code> PipelineRun should be completed.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipelinerun-finish-ui.png" alt="pipelinerun finish ui">
+</div>
 </div>
 </div>
 </div>
@@ -666,15 +733,7 @@ spec:
 <h2 id="_checking_the_status_of_the_pipelines"><a class="anchor" href="#_checking_the_status_of_the_pipelines"></a>Checking the status of the pipelines</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To check the status of the pipelines, click on the <strong>Pipelines</strong> left-hand tab. You will see the list of pipelines that are currently running. You can click on the pipeline to see the details of the pipeline.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/pipeline-status.png" alt="pipeline status">
-</div>
-</div>
-<div class="paragraph">
-<p>You can also click on the <strong>PipelineRuns</strong> section tab to see the list of PipelineRuns that have been created. You can click on the PipelineRun to see the details of the PipelineRun.</p>
+<p>From the <strong>PipelineRuns</strong> section, we can examine various details about the specific PipelineRun, such as the YAML executed, each TaskRun executed, parameters used for the PipelineRun, and logs from each Task.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -682,11 +741,11 @@ spec:
 </div>
 </div>
 <div class="paragraph">
-<p>Here, you can view each step of the pipeline and see the status of each step. You can also view the logs of the PipelineRun and the logs of each step.</p>
+<p>For example, viewing the logs from the <code>build-and-push</code> Task, we can see the output from the <em>build</em> and <em>push</em> actions, which use the <a href="https://buildah.io/" target="_blank" rel="noopener">Buildah</a> <code>bud</code> command.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/pipelinerun-status-2.png" alt="pipelinerun status 2">
+<img src="_images/pipelinerun-logs.png" alt="pipelinerun logs">
 </div>
 </div>
 </div>
@@ -695,7 +754,7 @@ spec:
 <h2 id="_checking_the_status_of_the_applications"><a class="anchor" href="#_checking_the_status_of_the_applications"></a>Checking the status of the applications</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now that the pipelines have been started, let&#8217;s check the status of the deployments. Click on the <strong>Topology</strong> left-hand tab to see the list of deployments that have been created. You can click on the deployment to see the details of the deployment.</p>
+<p>Now that the pipelines have been started let&#8217;s check the status of the deployments. Click on the <strong>Topology</strong> left-hand tab to see the list of deployments that have been created. We now have a new application called <strong>Triggers</strong> which contains two deployments, one for the <code>vote-api</code> and one for the <code>vote-ui</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -703,7 +762,12 @@ spec:
 </div>
 </div>
 <div class="paragraph">
-<p>Here, you can see the status of the deployment. You can also see the status of the pods that are running.</p>
+<p>You can click on a deployment to see the details of the deployment, including the pods that are running, which is an event listener, allowing us to trigger a new build of the application when a change is made to the Git repository.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/deployment-details-el.png" alt="deployment details el">
+</div>
 </div>
 </div>
 </div>
@@ -711,13 +775,7 @@ spec:
 <h2 id="_start_vote_ui_with_a_webhook"><a class="anchor" href="#_start_vote_ui_with_a_webhook"></a>Start <code>vote-ui</code> with a Webhook</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Tekton supports Tekton Triggers to enable automation and web hooks to Pipelines. All settings have been already installed from previous command, and both pipelines support web hooks.</p>
-</div>
-<div class="paragraph">
-<p>Now that the <code>vote-ui</code> deployment is running, let&#8217;s add a webhook. This webhook will be used to trigger a new build of the application when a change is made to the Git repository.</p>
-</div>
-<div class="paragraph">
-<p>From the Topology view, click on the <code>el-eventlistener-ui</code> Deployment. From there, navigate to the Routes section and copy the <code>el-eventlistener-ui</code> Route URL.</p>
+<p>Tekton supports <a href="https://tekton.dev/docs/triggers/" target="_blank" rel="noopener">Triggers</a> to enable automation and webhooks. Now that the <code>vote-ui</code> deployment is running, let&#8217;s add a webhook to the Gitea repository to trigger a new build of the application when changes are made to the repository. From the <strong>Topology</strong> view, click on the <code>el-eventlistener-ui</code> deployment. From there, navigate to the <strong>Routes</strong> section and copy the <code>el-eventlistener-ui</code> Route URL from the bottom right-hand corner.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -725,7 +783,7 @@ spec:
 </div>
 </div>
 <div class="paragraph">
-<p>Once you have the URL copied to your clipboard, navigate to the code repository fork that you have on <a href="https://gitea.%SUBDOMAIN%/%USERID%/pipelines-vote-ui" class="params-link" target="_blank" rel="noopener"><strong>Gitea</strong></a>. From your fork page, click on the Settings menu in the top-right corner. From the top right-side menu, click on <strong>Settings</strong>, then <strong>Webhooks</strong>. Then, click on Add webhook from the right-side menu.</p>
+<p>Once you have the URL copied to your clipboard, navigate to the <code>pipelines-vote-ui</code> code repository that you have on <a href="https://gitea.%SUBDOMAIN%/%USERID%/pipelines-vote-ui" class="params-link" target="_blank" rel="noopener"><strong>Gitea</strong></a>. From your repository page, click on the Settings menu in the top-right corner. From the top right-side menu, click on <strong>Settings</strong>, then <strong>Webhooks</strong>. Then, click on <strong>Add Webhook</strong> from the right-side menu.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -733,10 +791,7 @@ spec:
 </div>
 </div>
 <div class="paragraph">
-<p>In the next screen, paste the copied Route URL into the <strong>Target URL</strong> field. You can leave the other fields blank, just ensure the Content Type is set to <code>application/json</code>.</p>
-</div>
-<div class="paragraph">
-<p>Finally, click on <strong>Add webhook</strong> to create the webhook.</p>
+<p>Paste the copied Route URL into the <strong>Target URL</strong> field in the next screen. You can leave the other fields blank; just ensure the Content Type is set to <code>application/json</code>. Finally, click on <strong>Add Webhook</strong> to create the webhook.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -744,7 +799,7 @@ spec:
 </div>
 </div>
 <div class="paragraph">
-<p>To verify that everything is working, let&#8217;s make some changes in the OpenShift Dev Spaces section to the source code and push the changes to your forked repository. This should trigger the pipeline to start automatically.</p>
+<p>Great, now we have a webhook that will trigger a new build of the application when changes are made to the Git repository. Later on in this module, we&#8217;ll make some changes to the source code using OpenShift Dev Spaces and push the changes to the Git repository to trigger a new build.</p>
 </div>
 </div>
 </div>

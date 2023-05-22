@@ -205,7 +205,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>We&#8217;ll start by running two CI/CD pipelines using Tekton provided by OpenShift Pipelines, and afterwards enable automation using a git webhook for our pipeline.</p>
+<p>We&#8217;ll start by running two CI/CD pipelines using Tekton provided by OpenShift Pipelines and afterward enable automation using a git webhook for our pipeline.</p>
 </li>
 <li>
 <p>Next, we will pre-deploy the application to our <code>vote-app-dev-%USERID%</code> environment using Argo CD through OpenShift GitOps.</p>
@@ -214,10 +214,10 @@
 <p>After, we can make changes to the code and push them to the repository using OpenShift Dev Spaces. We&#8217;ll see how Tekton automatically detects the changes and triggers a new build.</p>
 </li>
 <li>
-<p>Argo CD will then detect a drift between what is declared in Git and what it is available in the cluster, and we&#8217;ll manually sync the application.</p>
+<p>Argo CD will then detect a drift between what is declared in Git and what is available in the cluster, and we&#8217;ll manually sync the application.</p>
 </li>
 <li>
-<p>Finally, we will use the OpenShift Web Terminal to scale the deployment manually, being that we haven&#8217;t implemented high-availability.</p>
+<p>Finally, we will use the OpenShift Web Terminal to manually scale the deployment, as we still need to implement high-availability in the next module.</p>
 </li>
 </ul>
 </div>

@@ -195,7 +195,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this section, we&#8217;ll take a look at the setup of the OpenShift cluster we&#8217;re using for today&#8217;s lab. This includes the OpenShift Operators that have been installed, as well as the projects that have been created for you. We&#8217;ll also take a look at the tools we&#8217;ll be using throughout the lab, including OpenShift Dev Spaces, OpenShift Pipelines, and OpenShift GitOps.</p>
+<p>In this section, we&#8217;ll look at the setup of the OpenShift cluster we&#8217;re using for today&#8217;s lab. This includes the OpenShift Operators that have been installed and the projects that have been created for you. We&#8217;ll also look at the tools we&#8217;ll be using throughout the lab, including OpenShift Dev Spaces, OpenShift Pipelines, and OpenShift GitOps.</p>
 </div>
 </div>
 </div>
@@ -203,7 +203,7 @@
 <h2 id="_red_hat_developer_tools"><a class="anchor" href="#_red_hat_developer_tools"></a>Red Hat Developer Tools</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Let&#8217;s take a look at some of the inner and outer loop developer flow tools that Red Hat provides. This includes tools for building, testing, deploying, and running applications. These tools are integrated and work together to provide a seamless developer experience. We can break these tools down as shown below.</p>
+<p>Let&#8217;s look at some of the inner and outer loop developer flow tools Red Hat provides. This includes tools for building, testing, deploying, and running applications. These tools are integrated and work together to provide a seamless developer experience. We can break these tools down as shown below.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -213,7 +213,7 @@
 <div class="sect2">
 <h3 id="_inner_loop_openshift_dev_spaces"><a class="anchor" href="#_inner_loop_openshift_dev_spaces"></a>Inner Loop: OpenShift Dev Spaces</h3>
 <div class="paragraph">
-<p><a href="https://developers.redhat.com/products/openshift-dev-spaces/overview" class="params-link" target="_blank" rel="noopener"><strong>OpenShift Dev Spaces</strong></a> is a cloud and container-native development environment that provides a fast, secure, and zero-configuration development environment for Kubernetes and OpenShift. It allows developers to quickly bootstrap their development environment and start coding.</p>
+<p><a href="https://developers.redhat.com/products/openshift-dev-spaces/overview" target="_blank" rel="noopener"><strong>OpenShift Dev Spaces</strong></a> is a cloud and container-native development environment that provides a fast, secure, and zero-configuration development environment for Kubernetes and OpenShift. It allows developers to bootstrap their development environment and start coding quickly.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -224,7 +224,7 @@
 <div class="sect2">
 <h3 id="_outer_loop_openshift_pipelines"><a class="anchor" href="#_outer_loop_openshift_pipelines"></a>Outer Loop: OpenShift Pipelines</h3>
 <div class="paragraph">
-<p><a href="https://catalog.redhat.com/software/container-stacks/detail/5ec54a4628834587a6b85ca5" class="params-link" target="_blank" rel="noopener"><strong>OpenShift Pipelines</strong></a> is a cloud-native, continuous integration and delivery (CI/CD) solution for building pipelines using <a href="https://tekton.dev" class="params-link" target="_blank" rel="noopener"><strong>Tekton</strong></a>. Tekton is a flexible, Kubernetes-native, open-source CI/CD framework that enables automating deployments across multiple platforms (Kubernetes, serverless, VMs, etc) by abstracting away the underlying implementation details.</p>
+<p><a href="https://catalog.redhat.com/software/container-stacks/detail/5ec54a4628834587a6b85ca5" target="_blank" rel="noopener"><strong>OpenShift Pipelines</strong></a> is a cloud-native, continuous integration and delivery (CI/CD) solution for building pipelines using <a href="https://tekton.dev" target="_blank" rel="noopener"><strong>Tekton</strong></a>. Tekton is a flexible, Kubernetes-native, open-source CI/CD framework that enables automating deployments across multiple platforms (Kubernetes, serverless, VMs, etc.) by abstracting away the underlying implementation details.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -235,7 +235,7 @@
 <div class="sect2">
 <h3 id="_outer_loop_openshift_gitops"><a class="anchor" href="#_outer_loop_openshift_gitops"></a>Outer Loop: OpenShift GitOps</h3>
 <div class="paragraph">
-<p><a href="https://docs.openshift.com/container-platform/4.12/cicd/pipelines/understanding-openshift-pipelines.html" class="params-link" target="_blank" rel="noopener"><strong>OpenShift GitOps</strong></a> is a GitOps solution for OpenShift that provides a declarative, GitOps-centric approach to managing applications and their delivery based on <a href="https://argoproj.github.io/cd/" class="params-link" target="_blank" rel="noopener"><strong>Argo CD</strong></a>. It provides a set of tools that allow developers to manage the application lifecycle, including deploying, updating, and deleting applications using Git as the source of truth.</p>
+<p><a href="https://docs.openshift.com/container-platform/4.12/cicd/pipelines/understanding-openshift-pipelines.html" target="_blank" rel="noopener"><strong>OpenShift GitOps</strong></a> is a GitOps solution for OpenShift that provides a declarative, GitOps-centric approach to managing applications and their delivery based on <a href="https://argoproj.github.io/cd/" target="_blank" rel="noopener"><strong>Argo CD</strong></a>. It provides a set of tools that allow developers to manage the application lifecycle, including deploying, updating, and deleting applications using Git as the source of truth.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -261,12 +261,12 @@ Everything has already been pre-installed on your cluster, so there&#8217;s no n
 </table>
 </div>
 <div class="paragraph">
-<p>You&#8217;ll have your own account on a OpenShift 4.12 cluster throughout this lab. This cluster has been pre-configured with the below OpenShift Operators in order to save time. You can think of Operators as addons to an OpenShift or Kubernetes cluster that provide it with extended features/capabilities. We&#8217;ve attached a screenshot of each operator&#8217;s details page as only the cluster <strong>admin</strong> account can view these details.</p>
+<p>Throughout this lab, you&#8217;ll have your own account on an OpenShift 4.12 cluster. To save time, this cluster has been pre-configured with the below OpenShift Operators. You can think of Operators as add-ons to an OpenShift or Kubernetes cluster that provide extended features/capabilities. We&#8217;ve attached screenshots of each operator&#8217;s details page, as only the cluster <strong>admin</strong> account can view these details.</p>
 </div>
 <div class="sect2">
 <h3 id="_operator_openshift_pipelines"><a class="anchor" href="#_operator_openshift_pipelines"></a>Operator: OpenShift Pipelines</h3>
 <div class="paragraph">
-<p>We&#8217;ll be using <strong>OpenShift Pipelines</strong> to pull our code from Git, build it, and update the Git repository with the new image tag.</p>
+<p>We&#8217;ll use <strong>OpenShift Pipelines</strong> to pull our code from Git, build it, and update the Git repository with the new image tag.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -277,7 +277,7 @@ Everything has already been pre-installed on your cluster, so there&#8217;s no n
 <div class="sect2">
 <h3 id="_operator_openshift_gitops"><a class="anchor" href="#_operator_openshift_gitops"></a>Operator: OpenShift GitOps</h3>
 <div class="paragraph">
-<p>We&#8217;ll be using <strong>OpenShift GitOps</strong> to deploy our application to the cluster and to manage the application lifecycle. Our two projects, <code>vote-app-dev-%USERID%</code> and <code>vote-app-prod-%USERID%</code>, will be managed by ArgoCD, and we&#8217;ll be able to demonstrate high-availability using GitOps.</p>
+<p>We&#8217;ll use <strong>OpenShift GitOps</strong> to deploy our application to the cluster and manage the application lifecycle. Our two projects, <code>vote-app-dev-%USERID%</code> and <code>vote-app-prod-%USERID%</code>, will be managed by ArgoCD, and we&#8217;ll be able to demonstrate high availability using GitOps.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -288,7 +288,7 @@ Everything has already been pre-installed on your cluster, so there&#8217;s no n
 <div class="sect2">
 <h3 id="_operator_openshift_dev_spaces"><a class="anchor" href="#_operator_openshift_dev_spaces"></a>Operator: OpenShift Dev Spaces</h3>
 <div class="paragraph">
-<p>We&#8217;ll use <strong>OpenShift Dev Spaces</strong> to quickly bootstrap our development environment and start coding. We&#8217;ll be able to make changes to our code and see them reflected in the cluster in real-time, as well as commit our changes to Git.</p>
+<p>We&#8217;ll use <strong>OpenShift Dev Spaces</strong> to bootstrap our development environment quickly and start coding. We&#8217;ll be able to make changes to our code and see them reflected in the cluster in real time and commit our changes to Git.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -299,7 +299,7 @@ Everything has already been pre-installed on your cluster, so there&#8217;s no n
 <div class="sect2">
 <h3 id="_operator_openshift_web_terminal"><a class="anchor" href="#_operator_openshift_web_terminal"></a>Operator: OpenShift Web Terminal</h3>
 <div class="paragraph">
-<p>Finally, the <strong>Web Terminal</strong> is a web-based terminal for OpenShift. It allows users to access a terminal in a pod from the OpenShift Web Console, and it&#8217;ll help us work within our cluster without having to download the <a href="https://docs.openshift.com/container-platform/4.12/cli_reference/openshift_cli/getting-started-cli.html" class="params-link" target="_blank" rel="noopener"><strong>OpenShift CLI (oc)</strong></a>.</p>
+<p>Finally, the <strong>Web Terminal</strong> is a web-based terminal for OpenShift. It allows users to access a terminal in a pod from the OpenShift Web Console, and it&#8217;ll help us work within our cluster without having to download the <a href="https://docs.openshift.com/container-platform/4.12/cli_reference/openshift_cli/getting-started-cli.html" target="_blank" rel="noopener"><strong>OpenShift CLI (oc)</strong></a>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -315,7 +315,7 @@ Everything has already been pre-installed on your cluster, so there&#8217;s no n
 <div class="sect2">
 <h3 id="_openshift"><a class="anchor" href="#_openshift"></a>OpenShift</h3>
 <div class="paragraph">
-<p>First off, let&#8217;s ensure that we&#8217;re logged into the <strong>OpenShift</strong> cluster. You can access the OpenShift Console from the <strong>Lab Guides</strong>, or you can visit the OpenShift Console using this <a href="https://console-openshift-console.apps.%SUBDOMAIN%" class="params-link" target="_blank" rel="noopener"><strong>OpenShift Web Console Link</strong></a>.</p>
+<p>First, let&#8217;s ensure we&#8217;re logged into the <strong>OpenShift</strong> cluster. You can access the OpenShift Console from the <strong>Lab Guides</strong>, or you can visit the OpenShift Console using this <a href="https://console-openshift-console.apps.%SUBDOMAIN%" class="params-link" target="_blank" rel="noopener"><strong>OpenShift Web Console Link</strong></a>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -323,7 +323,7 @@ Everything has already been pre-installed on your cluster, so there&#8217;s no n
 </div>
 </div>
 <div class="paragraph">
-<p>You&#8217;ll be prompted to login to OpenShift, and you can use the OpenShift login button to do so. As a reference, here are your credentials:</p>
+<p>You&#8217;ll be prompted to log in to OpenShift, and you can use the OpenShift login button to do so. As a reference, here are your credentials:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -341,7 +341,7 @@ Everything has already been pre-installed on your cluster, so there&#8217;s no n
 </div>
 </div>
 <div class="paragraph">
-<p>Once you&#8217;re logged in, you&#8217;ll be at the OpenShift dashboard. From here, if you aren&#8217;t already, you can navigate to the <strong>Developer</strong> perspective, which is where we&#8217;ll be spending most of our time.</p>
+<p>Once you&#8217;re logged in, you&#8217;ll be at the OpenShift dashboard. If you aren&#8217;t already, you can navigate to the <strong>Developer</strong> perspective, where we&#8217;ll be spending most of our time.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -352,7 +352,7 @@ Everything has already been pre-installed on your cluster, so there&#8217;s no n
 <div class="sect2">
 <h3 id="_argo_cd"><a class="anchor" href="#_argo_cd"></a>Argo CD</h3>
 <div class="paragraph">
-<p>Let&#8217;s take a look at <strong>Argo CD</strong>, a declarative, GitOps continuous delivery tool for Kubernetes provided in the OpenShift GitOps Operator. While you can access Argo CD from the <strong>Lab Guides</strong> or by using this <a href="https://argocd-server-argocd-%USERID%.%SUBDOMAIN%" class="params-link" target="_blank" rel="noopener"><strong>Argo CD link</strong></a>. You can also visit Argo CD from your OpenShift cluster. Within the <strong>Developer</strong> perspective, navigate to the <code>argocd-%USERID%</code> project, and visit the <strong>Topology</strong> page.</p>
+<p>Let&#8217;s look at <strong>Argo CD</strong>, a declarative, GitOps continuous delivery tool for Kubernetes provided in the OpenShift GitOps Operator. While you can access Argo CD from the <strong>Lab Guides</strong> or by using this <a href="https://argocd-server-argocd-%USERID%.%SUBDOMAIN%" class="params-link" target="_blank" rel="noopener"><strong>Argo CD link</strong></a>. You can also visit Argo CD from your OpenShift cluster. Within the <strong>Developer</strong> perspective, navigate to the <code>argocd-%USERID%</code> project, and visit the <strong>Topology</strong> page.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -360,7 +360,7 @@ Everything has already been pre-installed on your cluster, so there&#8217;s no n
 </div>
 </div>
 <div class="paragraph">
-<p>From your project&#8217;s <strong>Topology</strong> page, click on the <strong>Argo CD</strong> route to visit the Argo CD dashboard. You&#8217;ll be prompted to login to Argo CD, and you can use the OpenShift login button to do so.</p>
+<p>From your project&#8217;s <strong>Topology</strong> page, click on the <strong>Argo CD</strong> route to visit the Argo CD dashboard. You&#8217;ll be prompted to log in to Argo CD, and you can use the OpenShift login button to do so.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -381,7 +381,15 @@ Everything has already been pre-installed on your cluster, so there&#8217;s no n
 </ul>
 </div>
 <div class="paragraph">
-<p>You&#8217;ll need to authorize the Argo CD application to access your OpenShift cluster. Click on the <strong>Allow selected permissions</strong> button to authorize Argo CD to access your OpenShift cluster. Finally, you&#8217;ll be at the Argo CD dashboard.</p>
+<p>You&#8217;ll need to authorize the Argo CD application to access your OpenShift cluster. Click the <strong>Allow selected permissions</strong> button to authorize Argo CD to access your OpenShift cluster.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd-allow.png" alt="Argo CD Allow">
+</div>
+</div>
+<div class="paragraph">
+<p>Now, you&#8217;ll be directed to the Argo CD dashboard.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -392,7 +400,7 @@ Everything has already been pre-installed on your cluster, so there&#8217;s no n
 <div class="sect2">
 <h3 id="_vote_app_repository"><a class="anchor" href="#_vote_app_repository"></a>Vote App Repository</h3>
 <div class="paragraph">
-<p>You&#8217;ll also have access to multiple <strong>Gitea</strong> repositories that contains the Vote App source code and Argo CD application manifests. You can access Gitea from the <strong>Lab Guides</strong>, or you can visit Gitea using this <a href="https://gitea.%SUBDOMAIN%" class="params-link" target="_blank" rel="noopener"><strong>Gitea Link</strong></a>. As a reference, here are your credentials:</p>
+<p>You can access Gitea from the <strong>Lab Guides</strong>, or you can visit Gitea using this <a href="https://gitea.%SUBDOMAIN%" class="params-link" target="_blank" rel="noopener"><strong>Gitea Link</strong></a>. You&#8217;ll also have access to multiple <strong>Gitea</strong> repositories that contain the Vote App source code and Argo CD application manifests. As a reference, here are your credentials:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -439,7 +447,7 @@ Everything has already been pre-installed on your cluster, so there&#8217;s no n
 <h2 id="_next_steps"><a class="anchor" href="#_next_steps"></a>Next steps</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Your environment is now ready to go! The cluster has been pre-configured with the necessary OpenShift Operators, and you have access Argo CD and the necessary Git repositories. From here, we can wrap up the introduction and begin our lab!</p>
+<p>Your environment is now ready to go! The cluster has been pre-configured with the necessary OpenShift Operators, and you have access to Argo CD and the necessary Git repositories. From here, we can wrap up the introduction and begin our lab!</p>
 </div>
 </div>
 </div>
