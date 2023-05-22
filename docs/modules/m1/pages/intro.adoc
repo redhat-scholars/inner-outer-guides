@@ -4,7 +4,7 @@ Welcome to the Red Hat Summit 2023 and the *Vote application: A complete end-to-
 
 ## About this lab
 
-This workshop provides you with your own link:https://www.redhat.com/en/technologies/cloud-computing/openshift[*Red Hat OpenShift*,role='params-link',window='_blank'] cluster, and a series of exercises that teach you how to apply GitOps principles to a demo application. You will learn how to use link:https://catalog.redhat.com/software/container-stacks/detail/5ec54a4628834587a6b85ca5[*OpenShift Pipelines*,role='params-link',window='_blank'] to create a CI/CD pipeline, and how to use link:https://www.redhat.com/en/technologies/cloud-computing/openshift/gitops[*OpenShift GitOps*,role='params-link',window='_blank'] to deploy your application to multiple environments. You will also learn how to use link:https://developers.redhat.com/products/openshift-dev-spaces/overview[*OpenShift Dev Spaces*,role='params-link',window='_blank'] to develop and test your application locally, within the web browser.
+This workshop provides you with your own link:https://www.redhat.com/en/technologies/cloud-computing/openshift[*Red Hat OpenShift*,role='params-link',window='_blank'] cluster, and a series of exercises that teach you how to apply GitOps principles to a sample application. You will learn how to use link:https://catalog.redhat.com/software/container-stacks/detail/5ec54a4628834587a6b85ca5[*OpenShift Pipelines*,role='params-link',window='_blank'] to create a CI/CD pipeline, and how to use link:https://www.redhat.com/en/technologies/cloud-computing/openshift/gitops[*OpenShift GitOps*,role='params-link',window='_blank'] to deploy your application to multiple environments. You will also learn how to use link:https://developers.redhat.com/products/openshift-dev-spaces/overview[*OpenShift Dev Spaces*,role='params-link',window='_blank'] to develop and test your application locally, within the web browser.
 
 image::demo-architecture.png[Architecture]
 
@@ -17,12 +17,15 @@ The Vote App is a simple application that allows users to vote for their favorit
 .Vote App
 image::vote-app.png[Vote App]
 
-This lab aims to demonstrate how to create a seamless CI/CD pipeline using OpenShift, Tekton, Argo CD, and OpenShift Dev Spaces. By the end of this lab, you will have a better understanding of GitOps by:
+This lab aims to demonstrate how to create a seamless CI/CD pipeline using OpenShift, Tekton, Argo CD, and OpenShift Dev Spaces. By the end of this lab, you will have a better understanding of GitOps and have learned how to:
 
-- Understanding Tekton pipeline manifests, starting them manually, and connecting webhooks for automation
-- Using Argo CD to deploy our application to a development environment
-- Development and local testing of application code using OpenShift Dev Spaces within the web browser
-- Ensuring high availability of our application using Argo CD in a production environment
+- Set up an OpenShift cluster and prepare it for a GitOps workflow.
+- Work with Tekton to run multiple Pipelines to manage our image building process.
+- Use webhooks to trigger pipelines automatically with Git.
+- Deploy and manage the `vote-api` and `vote-ui` applications using Argo CD.
+- Work with OpenShift Dev Spaces for an integrated development experience.
+- Implement GitOps principles for managing your application environments.
+- Monitor and manage drifts in your applications and environments.
 
 == What is OpenShift?
 
