@@ -1,32 +1,32 @@
 # Vote App Lab Development - Dev Spaces
 
-With the Vote Application deployed to our `vote-app-dev-%USERID%` project, we can now use OpenShift Dev Spaces to develop and test our application. link:https://developers.redhat.com/products/openshift-dev-spaces/overview[OpenShift Dev Spaces,role='params-link',window='_blank'] is a browser-based IDE that allows you to develop in the cloud. It provides a ready-to-use development stack with a web-based IDE, terminal, and version control support. It also provides pre-built developer workspaces that allow you to start coding immediately, which we'll be using in this lab. We'll make a quick change to the source code of our `vote-ui` application, see the results in real-time, and push these changes to our repository.
+With the Vote Application deployed to our `vote-app-dev-%USERID%` project, we can now use OpenShift Dev Spaces to develop and test our application. link:https://developers.redhat.com/products/openshift-dev-spaces/overview[OpenShift Dev Spaces,role='params-link',window='_blank'] is a browser-based IDE that allows you to develop in the cloud. It provides a ready-to-use development stack with a web-based IDE, terminal, and version control support. It also provides pre-built developer workspaces that allow you to start coding immediately, which we'll use in this lab. We'll quickly change the source code of our `vote-ui` application, see the results in real-time, and push these changes to our repository.
 
 ## Getting setup with Dev Spaces
 
-Let's start out with getting more familiar with the Dev Spaces interface. To do this, we can begin with navigating to Dev Spaces from the OpenShift Console. To do this, click on the application launcher at the top right corner of the OpenShift Web Console and select *Red Hat OpenShift Dev Spaces*.
+Let's start by getting more familiar with the Dev Spaces interface. We can begin by navigating to Dev Spaces from the OpenShift Console to do this. To do this, click on the application launcher at the top right corner of the OpenShift Web Console and select *Red Hat OpenShift Dev Spaces*.
 
 image::devspaces-button.png[Dev Spaces Button]
 
-This will open up the Dev Spaces interface. You'll need to firstly authorize Dev Spaces to access your OpenShift cluster by selecting *Allow selected permissions*.
+This will open up the Dev Spaces interface. You'll need to first authorize Dev Spaces to access your OpenShift cluster by selecting *Allow selected permissions*.
 
 image::devspaces-auth.png[Dev Spaces Auth]
 
-After authorizing, you'll see the Dev Spaces dashboard. From here, you can see the workspaces that are available to you. For this lab, we'll be using the `vote-ui` workspace, which is a pre-built workspace that contains the Vote Application source code. Within a minute, the `vote-ui` workspace will be ready to use, and you can click *Open* on the right hand side to enter the Dev Spaces IDE.
+After authorizing, you'll see the Dev Spaces dashboard. From here, you can see the workspaces that are available to you. For this lab, we'll use the `vote-ui` workspace, a pre-built workspace containing the Vote Application source code. Within a minute, the `vote-ui` workspace will be ready to use, and you can click *Open* on the right-hand side to enter the Dev Spaces IDE.
 
 image::devspaces-workspaces.png[Dev Spaces Workspaces]
 
-Once the Dev Spaces interface opens, we'll have to hit *Trust Workspace & Install* as well as *Yes, I trust the authors* to install the required components and enable permissions needed for this lab.
+Once the Dev Spaces interface opens, we'll have to hit *Trust Workspace & Install* and *Yes, I trust the authors* to install the required components and enable permissions needed for this lab.
 
 image::devspaces-permissions.png[Dev Spaces Permissions]
 
-There may be some _Get Started_ tabs in the dashboard that you can close, but from here, we can begin to make our changes to the Vote Application. But first, let's get familiar with the powerful features of Dev Spaces.
+There may be some _Get Started_ tabs in the dashboard that you can close, but from here, we can begin to make changes to the Vote Application. But first, let's get familiar with the powerful features of Dev Spaces.
 
 image::devspaces-interface.png[Dev Spaces Interface]
 
 ### Extension support
 
-Built from the open source link:https://www.eclipse.org/che/[Eclipse Che,role='params-link',window='_blank'] project, Dev Spaces provides support for Microsoft Visual Studio Code extensions and Language Server Protocol. This means that you can use your favorite Visual Studio Code extensions in Dev Spaces. You can also use the Language Server Protocol to provide language features like auto-complete, go-to-definition, and hover support.
+Built from the open source link:https://www.eclipse.org/che/[Eclipse Che,role='params-link',window='_blank'] project, Dev Spaces supports Microsoft Visual Studio Code extensions and Language Server Protocol. This means you can use your favorite Visual Studio Code extensions in Dev Spaces. You can also use the Language Server Protocol to provide language features like auto-complete, go-to-definition, and hover support.
 
 image::devspaces-extensions.png[Dev Spaces Extensions]
 
@@ -36,12 +36,12 @@ Dev Spaces also provides a terminal that allows you to run commands in your work
 
 image::devspaces-terminal.png[Dev Spaces Terminal]
 
-With the Dev Spaces built-in terminal, let's run the following commands to test out a bit of Python code to print some text in our terminal.
+With the Dev Spaces built-in terminal, let's run the following commands to test a bit of Python code to print some text in our terminal.
 
 [.console-input]
 [source,python,subs="+attributes,macros+"]
 ----
-python
+Python
 ----
 
 [.console-input]
@@ -68,27 +68,27 @@ image::devspaces-git.png[Dev Spaces Git]
 
 ### Installing the application dependencies
 
-Let's first setup the dependencies for our application and run the Vote Application locally. From the top left corner, we can select *Terminal* and then *Run Task*. 
+Let's first set up the dependencies for our application and run the Vote Application locally. From the top left corner, we can select *Terminal* and then *Run Task*. 
 
 image::devspaces-run-task.png[Dev Spaces Run Task]
 
-From here, we can select *Show all tasks* and *devfile: Install dependencies*. This will install the necessary Python dependencies for the Vote Application.
+We can select *Show all tasks* and *devfile: Install dependencies*from here. This will install the necessary Python dependencies for the Vote Application.
 
 image::devspaces-run-task-2.png[Dev Spaces Run Task]
 
-Next, we can select *Terminal* and then *Run Task* again. From here, we can select *Show all tasks* and *devfile: Run Python App*. This will run the Vote Application in development.
+Next, we can select *Terminal* and then *Run Task* again. We can select *Show all tasks* and *devfile: Run Python App* from here. This will run the Vote Application in development.
 
 image::devspaces-run-app.png[Dev Spaces Run App]
 
-You'll now see a pop-up in the lower right corner about a new process running on port 8080. Using this, we will be able to see live code changes to the Vote Application running in the browser. Click on the *Open in New Tab* button to open the Vote Application in a new browser tab.
+Click on the *Open in New Tab* button to open the Vote Application in a new browser tab. You'll now see a pop-up in the lower right corner about a new process running on port 8080. We can see live code changes to the Vote Application running in the browser using this.
 
 image::devspaces-run-app-browser.png[Dev Spaces Run App Browser]
 
-From here, we can click on the *Yes* button to open the Vote Application in a new browser tab. It may take a few seconds, but you should see the Vote Application running.
+From here, we can click the *Yes* button to open the Vote Application in a new browser tab. It may take a few seconds, but you should see the Vote Application running.
 
 image::devspaces-run-app-browser-1.png[Dev Spaces Run App Browser]
 
-From the Dev Spaces interface, we can now begin to make changes to the Vote Application. To do this, we can edit the `index.html` file in the `templates` directory. 
+We can now begin to make changes to the Vote Application from the Dev Spaces interface. We can edit the `index.html` file in the `templates` directory to do this. 
 
 ### Live coding within Dev Spaces
 
@@ -104,35 +104,35 @@ Here, on line 16, we can change the text from `{{option_a}} vs {{option_b}}!` to
 
 image::devspaces-edit-title.png[Dev Spaces Edit Title]
 
-Now, if we return to our new tab with the local Vote Application running, we can see the new changes we've made, updated automatically.
+Now, if we return to our new tab with the local Vote Application running, we can see the new changes we've made updated automatically.
 
 image::devspaces-run-app-browser-2.png[Dev Spaces Run App Browser]
 
 ## Performing a security scan
 
-Now that we've made our changes to the Vote Application, we can secure our application and analyze our dependencies by performing a security scan. Dependency Analytics is powered by link:https://security.snyk.io/[Snyk Intel Vulnerability DB,window='_blank'], the most advanced and accurate open source vulnerability database in the industry.
+Now that we've made changes to the Vote Application, we can secure our application and analyze our dependencies by performing a security scan. Dependency Analytics is powered by the link:https://security.snyk.io/[Snyk Intel Vulnerability DB,window='_blank'], the industry's most advanced and accurate open-source vulnerability database.
 
-To do this, we can right click the *requirements.txt* file from the left menu. From here, we can select *Dependency Analytics Report* to perform a security scan on the Vote Application.
+We can right-click the *requirements.txt* file from the left menu to do this. From here, we can select *Dependency Analytics Report* to perform a security scan on the Vote Application.
 
 image::devspaces-snyk.png[Dev Spaces Snyk]
 
-This will open up a new tab in Dev Spaces with the results of the security scan. Here, we can see information about security issues, dependencies, licenses, and add-ons.
+This will open up a new tab in Dev Spaces with the security scan results. Here, we can see information about security issues, dependencies, licenses, and add-ons.
 
 image::devspaces-snyk-report.png[Dev Spaces Snyk Report]
 
 ## Pushing changes to the Git repository
 
-Now that we've tested our changes, we can push our changes to the Git repository. To do this, we can select the *Source Control* tab from the left menu. We can first enter a commit message (ex. `Modified index.html header`), and from here, we can select the dropdown to the right of the ✓ Commit button to *Commit & Push* our changes to the Git repository, 
+Now that we've tested our changes, we can push our changes to the Git repository. We can select the *Source Control* tab from the left menu to do this. We can first enter a commit message (ex. `Modified index.html header`), and from here, we can select the dropdown to the right of the ✓ Commit button to *Commit & Push* our changes to the Git repository, 
 
 image::devspaces-commit.png[Dev Spaces Commit]
 
-You'll then see a prompt about staging and committing your changes. From here, we can select *Yes* to stage and commit our changes.
+You'll then see a prompt about staging and committing your changes. We can select *Yes* from here to stage and commit our changes.
 
 image::devspaces-commit-2.png[Dev Spaces Commit]
 
 ## Syncing changes to the Vote Application
 
-Now that we've pushed our changes to the Git repository, and with the webhook configured, our changes trigger a rebuild of the `vote-ui` application image. To see this in real time, we can navigate to the OpenShift Web Console and select the `vote-app-ci-%USERID%` project. From here, we can select *Pipelines* from the left menu. We should see the pipeline `vote-app-ui-pipeline` running and rebuilding the Vote Application.
+Now that we've pushed our changes to the Git repository and with the webhook configured, our changes trigger a rebuild of the `vote-ui` application image. To see this in real-time, we can navigate to the OpenShift Web Console and select the `vote-app-ci-%USERID%` project. From here, we can select *Pipelines* from the left menu. We should see the pipeline `vote-app-ui-pipeline` running and rebuilding the Vote Application.
 
 image::devspaces-pipeline.png[Dev Spaces Pipeline]
 
@@ -140,7 +140,7 @@ Once the pipeline has completed, in the link:https://gitea.%SUBDOMAIN%/%USERID%/
 
 image::devspaces-gitops-commit.png[Dev Spaces GitOps Commit]
 
-Now, Argo CD will automatically pick up on these changes from the repository. To deploy the new image to the `vote-app-dev-%USERID%` project, head back to Argo CD and select the `vote-app-dev-%USERID%` application. You'll see that the application is now out of sync, and hasn't updated, as we declared in our `Application` resource that we didn't want _self healing_ enabled. To view the new changes however, from the top menu, click on *Sync*.
+Now, Argo CD will automatically pick up on these changes from the repository. To deploy the new image to the `vote-app-dev-%USERID%` project, head back to Argo CD and select the `vote-app-dev-%USERID%` application. You'll see that the application is now out of sync, and hasn't been updated, as we declared in our `Application` resource that we didn't want _self-healing_ enabled. However, to view the new changes from the top menu, click on *Sync*.
 
 image::devspaces-argocd-sync.png[Dev Spaces Argo CD Sync]
 
@@ -150,4 +150,4 @@ image::argocd-sync.png[Argo CD Sync]
 
 ## Next steps
 
-Making these changes manually is a good solution for our development environment, but let's move this application to production and automate all of this. For this, we can use a separate pipeline that will deploy the application to the `vote-app-prod-%USERID%` project.
+Making these changes manually is a good solution for our development environment, but let's move this application to production and automate all of this. For this, we can use a separate pipeline to deploy the application to the `vote-app-prod-%USERID%` project.

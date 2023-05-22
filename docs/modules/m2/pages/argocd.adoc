@@ -1,6 +1,6 @@
 # Vote App Lab Development - Argo CD
 
-Now, the next step is to deploy the Vote App to the `vote-app-dev-%USERID%` environment using Argo CD. This will allow us to view the application before it reaches production, and make necessary changes throughout our development flow. We'll also use the OpenShift Web Terminal to scale up the replicas for one of the deployments, and learn how to use Argo CD to manage application drifts and syncing.
+The next step is to deploy the Vote App to the `vote-app-dev-%USERID%` environment using Argo CD. This will allow us to view the application before it reaches production and make necessary changes throughout our development flow. We'll also use the OpenShift Web Terminal to scale up the replicas for one of the deployments and learn how to use Argo CD to manage application drifts and syncing.
 
 ## Creating a new application using Argo CD
 
@@ -8,11 +8,11 @@ Let's use Argo CD to create a new application. While you can access Argo CD from
 
 image::argocd-button.png[Argo CD Button]
 
-Now, click on the *Argo CD* route to visit the Argo CD dashboard. You'll be prompted to login to Argo CD, and you can use the *Login with OpenShift* button to do so.
+Click on the *Argo CD* route to visit the Argo CD dashboard. You'll be prompted to log in to Argo CD, and you can use the *Login with OpenShift* button to do so.
 
 image::argocd-login.png[Argo CD Login]
 
-Within the Argo CD web console, click on the *+ New App* button. This will open the *New Application* form, where we can fill in the necessary information to create a new application in our development environment.
+Within the Argo CD web console, click the *+ New App* button. This will open the *New Application* form, where we can fill in the necessary information to create a new application in our development environment.
 
 image::argocd-new-app.png[Argo CD New App]
 
@@ -40,7 +40,7 @@ http://gitea.gitea.svc:3000/%USERID%/vote-app-gitops
 image::argocd-new-app-form.png[Argo CD New App Form]
 image::argocd-new-app-form-2.png[Argo CD New App Form Continued]
 
-When finished, click on the *CREATE* button on the top left hand corner. This will create the application in Argo CD, and will begin the syncing process.
+When finished, click the *CREATE* button in the top left-hand corner. This will create the application in Argo CD and begin the syncing process.
 
 ## Viewing the application in Argo CD
 
@@ -48,16 +48,16 @@ Now, let's view the application in the Argo CD dashboard. After creating the app
 
 image::argocd-app-details.png[Argo CD App Details]
 
-Here, you'll see the `vote-app-dev-%USERID%` application's health, sync status, and associated resources. Your application may sync very quickly, with a green `Synced` status, however you may see a yellow `OutOfSync` status.
+Here, you'll see the `vote-app-dev-%USERID%` application's health, sync status, and associated resources. Your application may sync very quickly, with a green `Synced` status, however, you may see a yellow `OutOfSync` status.
 
 image::argocd-app-details-2.png[Argo CD App Details Continued]
 
-Within the `vote-app-dev-%USERID%` application, we can see the associated resources, including the `vote-ui` deployment, `vote-api` deployment, and `vote-ui` route. We can also see the services associated with each deployment.
+We can see the associated resources within the `vote-app-dev-%USERID%` application, including the `vote-ui` deployment, `vote-api` deployment, and `vote-ui` route. We can also see the services associated with each deployment.
 
 ## Viewing the application in the OpenShift web console
 
 
-You might be wondering what creating your Application in Argo CD achieved. From the OpenShift web console in the `vote-app-dev-%USERID%` project, click on the *Topology* tab. Here, we can view the *vote-app* application group, and view the `vote-ui` deployment in our browser by link:https://vote-ui-vote-app-dev-%USERID%.%SUBDOMAIN%[*clicking the route*,role='params-link',window='_blank'].
+You might be wondering what creating your Application in Argo CD achieved. From the OpenShift web console in the `vote-app-dev-%USERID%` project, click on the *Topology* tab. Here, we can view the *vote-app* application group and view the `vote-ui` deployment in our browser by link:https://vote-ui-vote-app-dev-%USERID%.%SUBDOMAIN%[*clicking the route*,role='params-link',window='_blank'].
 
 image::dev-topology.png[OpenShift Topology]
 
@@ -65,15 +65,15 @@ This will open the application in a new tab, and we can view the deployed applic
 
 image::vote-app-access.png[Voting App Access]
 
-Great! Looks like we're able to see the newly deployed Vote App in our browser through this development environment.
+Great! We're able to see the newly deployed Vote App in our browser through this development environment.
 
 ## Using the Web Terminal to modify the development project
 
-Now, let's use the OpenShift Web Terminal to modify a deployment and demonstrate that we have not yet put in place self-healing or high availability just yet. From the OpenShift Web Console in the `vote-app-dev-%USERID%` project, click on the *Terminal* icon from the top right of the page.
+Now, let's use the OpenShift Web Terminal to modify a deployment and demonstrate that we still need to establish self-healing or high availability. From the OpenShift Web Console in the `vote-app-dev-%USERID%` project, click on the *Terminal* icon from the top right of the page.
 
 image::terminal-icon.png[Web Terminal Icon]
 
-This is the OpenShift Web Terminal, which allows us a terminal in a pod from the OpenShift Web Console, and run commands directly within the cluster. Let's run the following command scale up the `vote-ui` deployment to 2 replicas:
+This is the OpenShift Web Terminal, which allows us a terminal in a pod from the OpenShift Web Console and run commands directly within the cluster. Let's run the following command to scale up the `vote-ui` deployment to 2 replicas:
 
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
@@ -87,7 +87,7 @@ This command will scale up the `vote-ui` deployment to 2 replicas. Now, we can r
 
 image::argocd-app-details-3.png[Argo CD App Details]
 
-As this is our development project, we specified Argo CD to not manually adjust our application when drift is detected, however in our production environment we'll enable this for high availability. For now, click *Sync* and select *Synchronize* to sync the application back to the manifests in the link:https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops[Vote App GitOps,role='params-link',window='_blank'] repository.
+As this is our development project, we specified Argo CD to not manually adjust our application when drift is detected, however, in our production environment, we'll enable this for high availability. For now, click *Sync* and select *Synchronize* to sync the application back to the manifests in the link:https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops[Vote App GitOps,role='params-link',window='_blank'] repository.
 
 image::argocd-sync.png[Argo CD Sync]
 

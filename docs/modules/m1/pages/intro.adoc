@@ -20,7 +20,7 @@ image::vote-app.png[Vote App]
 This lab aims to demonstrate how to create a seamless CI/CD pipeline using OpenShift, Tekton, Argo CD, and OpenShift Dev Spaces. By the end of this lab, you will have a better understanding of GitOps and have learned how to:
 
 - Set up an OpenShift cluster and prepare it for a GitOps workflow.
-- Work with Tekton to run multiple Pipelines to manage our image building process.
+- Work with Tekton to run multiple Pipelines to manage our image-building process.
 - Use webhooks to trigger pipelines automatically with Git.
 - Deploy and manage the `vote-api` and `vote-ui` applications using Argo CD.
 - Work with OpenShift Dev Spaces for an integrated development experience.

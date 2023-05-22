@@ -4,11 +4,11 @@ In this module, we'll perform a few steps during our development phase of the Vo
 
 ## Development Module Flow
 
-- We'll start by running two CI/CD pipelines using Tekton provided by OpenShift Pipelines and afterwards enable automation using a git webhook for our pipeline. 
+- We'll start by running two CI/CD pipelines using Tekton provided by OpenShift Pipelines and afterward enable automation using a git webhook for our pipeline. 
 - Next, we will pre-deploy the application to our `vote-app-dev-%USERID%` environment using Argo CD through OpenShift GitOps. 
 - After, we can make changes to the code and push them to the repository using OpenShift Dev Spaces. We'll see how Tekton automatically detects the changes and triggers a new build. 
 - Argo CD will then detect a drift between what is declared in Git and what is available in the cluster, and we'll manually sync the application.
-- Finally, we will use the OpenShift Web Terminal to manually scale the deployment, as we haven't implemented high-availability.
+- Finally, we will use the OpenShift Web Terminal to manually scale the deployment, as we still need to implement high-availability in the next module.
 
 ## Next Steps 
 
