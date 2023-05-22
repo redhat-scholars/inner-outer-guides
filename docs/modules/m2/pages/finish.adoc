@@ -1,6 +1,6 @@
 # Vote App Lab Development - Finish
 
-Congratulations on completing the first half of the lab! You have successfully deployed the Vote App to OpenShift using Tekton pipelines and Argo CD. You have also learned how to use OpenShift Dev Spaces to develop cloud-native applications, and make changes locally in real time. Thus far, you have:
+Congratulations on completing the first half of the lab! You have successfully deployed the Vote App to OpenShift using Tekton pipelines and Argo CD. You have also learned how to use OpenShift Dev Spaces to develop cloud-native applications and make changes locally in real-time. Thus far, you have:
 
 - Set up a GitOps workflow using OpenShift, Tekton, and Argo CD.
 - Deploy applications using Tekton pipelines and synchronized environments with Argo CD.
@@ -9,4 +9,4 @@ Congratulations on completing the first half of the lab! You have successfully d
 
 ## Next Steps
 
-The second half of the lab will focus on GitOps and how to use Argo CD to synchronize environments with high availability. You will also learn how to use Argo CD to manage application drifts.
+The remainder of the lab will focus on GitOps and how to use Argo CD to synchronize environments with high availability. You will also learn how to use Argo CD to manage application drifts. Let's begin!

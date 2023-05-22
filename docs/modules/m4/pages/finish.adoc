@@ -1,17 +1,17 @@
 # Vote App Lab Conclusion - Finish
 
-Thank you for participating in the Red Hat Summit 2023 Vote App Lab! We hope that you enjoyed building a CI/CD pipeline using OpenShift, Tekton, Argo CD, and Dev Spaces. This lab provided a hands-on experience that allowed you to explore the powerful capabilities of these tools in creating, managing, and deploying applications.
+Thank you for participating in the Red Hat Summit 2023: *Vote application: A complete end-to-end story from code to production* lab! We hope you enjoyed building a CI/CD pipeline using OpenShift, Tekton, Argo CD, and Dev Spaces. This lab provided a hands-on experience that allowed you to explore the powerful capabilities of these tools in creating, managing, and deploying applications.
 
 ## Summary
 
-In this lab, you learned how to:
+In this lab, you learned a wide variety of topics, including:
 
 - Set up an OpenShift cluster and prepare it for a GitOps workflow.
-- Configure Tekton and Argo CD to create and manage your CI/CD pipeline.
-- Deploy and manage the `vote-api` and `vote-ui` applications using OpenShift.
-- Use webhooks to trigger pipelines automatically.
-- Implement GitOps principles for managing your application environments.
+- Work with Tekton to run multiple Pipelines to manage our image-building process.
+- Use webhooks to trigger pipelines automatically with Git.
+- Deploy and manage the `vote-api` and `vote-ui` applications using Argo CD.
 - Work with OpenShift Dev Spaces for an integrated development experience.
+- Implement GitOps principles for managing your application environments.
 - Monitor and manage drifts in your applications and environments.
 
 ## Resources
