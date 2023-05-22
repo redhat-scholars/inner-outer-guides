@@ -8,7 +8,7 @@ Let's use Argo CD to create a new application. While you can access Argo CD from
 
 image::argocd-button.png[Argo CD Button]
 
-Now, click on the *Argo CD* route to visit the Argo CD dashboard. You'll be prompted to login to Argo CD, and you can use the *Login with OpenShift* button. to do so.
+Now, click on the *Argo CD* route to visit the Argo CD dashboard. You'll be prompted to login to Argo CD, and you can use the *Login with OpenShift* button to do so.
 
 image::argocd-login.png[Argo CD Login]
 
@@ -57,7 +57,7 @@ Within the `vote-app-dev-%USERID%` application, we can see the associated resour
 ## Viewing the application in the OpenShift web console
 
 
-You might be wondering what creating your Application in Argo CD achieved. From the OpenShift web console in the `vote-app-dev-%USERID%` project, click on the `Topology` tab. Here, we can view the *vote-app* application group, and view the `vote-ui` deployment in our browser by link:https://vote-ui-vote-app-dev-%USERID%.%SUBDOMAIN%[*clicking the route*,role='params-link',window='_blank'].
+You might be wondering what creating your Application in Argo CD achieved. From the OpenShift web console in the `vote-app-dev-%USERID%` project, click on the *Topology* tab. Here, we can view the *vote-app* application group, and view the `vote-ui` deployment in our browser by link:https://vote-ui-vote-app-dev-%USERID%.%SUBDOMAIN%[*clicking the route*,role='params-link',window='_blank'].
 
 image::dev-topology.png[OpenShift Topology]
 
@@ -69,7 +69,7 @@ Great! Looks like we're able to see the newly deployed Vote App in our browser t
 
 ## Using the Web Terminal to modify the development project
 
-Now, let's use the web terminal to modify a deployment and demonstrate that we have not yet put in place self-healing or high availability just yet. From the OpenShift Web Console in the `vote-app-dev-%USERID%` project, click on the *Terminal* icon from the top right of the page.
+Now, let's use the OpenShift Web Terminal to modify a deployment and demonstrate that we have not yet put in place self-healing or high availability just yet. From the OpenShift Web Console in the `vote-app-dev-%USERID%` project, click on the *Terminal* icon from the top right of the page.
 
 image::terminal-icon.png[Web Terminal Icon]
 

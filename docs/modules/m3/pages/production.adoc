@@ -78,7 +78,7 @@ Argo CD has a feature called https://argoproj.github.io/argo-cd/user-guide/sync-
 image::app-diagram.png[]
 
 
-In our case, let's see SyncWaves in action. Let's visit the `vote-app-gitops` production kustomization.yaml file link:https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops/src/branch/main/environments/prod/kustomization.yaml[*here*,role='params-link',window='_blank'].
+In our case, we see SyncWaves in action, as we need the `vote-api` to be deployed before `vote-ui`. Let's visit the `vote-app-gitops` production kustomization.yaml file link:https://gitea.%SUBDOMAIN%/%USERID%/vote-app-gitops/src/branch/main/environments/prod/kustomization.yaml[*here*,role='params-link',window='_blank'].
 
 [.console-output]
 [source,yaml,subs="attributes+,+macros"]

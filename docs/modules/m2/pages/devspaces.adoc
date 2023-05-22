@@ -4,11 +4,15 @@ With the Vote Application deployed to our `vote-app-dev-%USERID%` project, we ca
 
 ## Getting setup with Dev Spaces
 
-Let's start out with getting more familiar with the Dev Spaces interface. To do this, we can begin with navigating to Dev Spaces from the OpenShift Console. To do this, click on the application launcher at the top right corner of the OpenShift Web Console and select `Red Hat OpenShift Dev Spaces`.
+Let's start out with getting more familiar with the Dev Spaces interface. To do this, we can begin with navigating to Dev Spaces from the OpenShift Console. To do this, click on the application launcher at the top right corner of the OpenShift Web Console and select *Red Hat OpenShift Dev Spaces*.
 
 image::devspaces-button.png[Dev Spaces Button]
 
-This will open up the Dev Spaces interface. You'll need to firstly authorize Dev Spaces to access your OpenShift cluster. Next, you'll see the `vote-ui` workspace from within the Dev Spaces dashboard. Click on the `vote-ui` workspace and hit *Actions* from the top right corner, then click *Start* to enter the Dev Spaces IDE.
+This will open up the Dev Spaces interface. You'll need to firstly authorize Dev Spaces to access your OpenShift cluster by selecting *Allow selected permissions*.
+
+image::devspaces-auth.png[Dev Spaces Auth]
+
+After authorizing, you'll see the Dev Spaces dashboard. From here, you can see the workspaces that are available to you. For this lab, we'll be using the `vote-ui` workspace, which is a pre-built workspace that contains the Vote Application source code. Within a minute, the `vote-ui` workspace will be ready to use, and you can click *Open* on the right hand side to enter the Dev Spaces IDE.
 
 image::devspaces-workspaces.png[Dev Spaces Workspaces]
 
@@ -22,8 +26,7 @@ image::devspaces-interface.png[Dev Spaces Interface]
 
 ### Extension support
 
-// Add a link here
-Built from the open Eclipse Che project, Dev Spaces provides support for Microsoft Visual Studio Code extensions and Language Server Protocol. This means that you can use your favorite Visual Studio Code extensions in Dev Spaces. You can also use the Language Server Protocol to provide language features like auto-complete, go-to-definition, and hover support.
+Built from the open source link:https://www.eclipse.org/che/[Eclipse Che,role='params-link',window='_blank'] project, Dev Spaces provides support for Microsoft Visual Studio Code extensions and Language Server Protocol. This means that you can use your favorite Visual Studio Code extensions in Dev Spaces. You can also use the Language Server Protocol to provide language features like auto-complete, go-to-definition, and hover support.
 
 image::devspaces-extensions.png[Dev Spaces Extensions]
 
@@ -77,11 +80,11 @@ Next, we can select *Terminal* and then *Run Task* again. From here, we can sele
 
 image::devspaces-run-app.png[Dev Spaces Run App]
 
-You'll now see a pop-up in the lower right corner about a new process running on port 8080. Using this, we will be able to see live code changes to the Vote Application running in the browser.
+You'll now see a pop-up in the lower right corner about a new process running on port 8080. Using this, we will be able to see live code changes to the Vote Application running in the browser. Click on the *Open in New Tab* button to open the Vote Application in a new browser tab.
 
 image::devspaces-run-app-browser.png[Dev Spaces Run App Browser]
 
-From here, we can click on the *Open* button to open the Vote Application in a new browser tab. It may take a few seconds, but you should see the Vote Application running.
+From here, we can click on the *Yes* button to open the Vote Application in a new browser tab. It may take a few seconds, but you should see the Vote Application running.
 
 image::devspaces-run-app-browser-1.png[Dev Spaces Run App Browser]
 
@@ -107,8 +110,7 @@ image::devspaces-run-app-browser-2.png[Dev Spaces Run App Browser]
 
 ## Performing a security scan
 
-// TODO: Add a link here
-Now that we've made our changes to the Vote Application, we can secure our application and analyze our dependencies by performing a security scan. Dependency Analytics is powered by Snyk Intel Vulnerability DB, the most advanced and accurate open source vulnerability database in the industry.
+Now that we've made our changes to the Vote Application, we can secure our application and analyze our dependencies by performing a security scan. Dependency Analytics is powered by link:https://security.snyk.io/[Snyk Intel Vulnerability DB,window='_blank'], the most advanced and accurate open source vulnerability database in the industry.
 
 To do this, we can right click the *requirements.txt* file from the left menu. From here, we can select *Dependency Analytics Report* to perform a security scan on the Vote Application.
 
@@ -120,14 +122,13 @@ image::devspaces-snyk-report.png[Dev Spaces Snyk Report]
 
 ## Pushing changes to the Git repository
 
-Now that we've tested our changes, we can push our changes to the Git repository. To do this, we can select the *Source Control* tab from the left menu. From here, we can select the *✓ Commit* button to stage all of our changes. We can then enter a commit message (ex. `Modified index.html header`) and commit, as well as push our changes to the Git repository.
+Now that we've tested our changes, we can push our changes to the Git repository. To do this, we can select the *Source Control* tab from the left menu. We can first enter a commit message (ex. `Modified index.html header`), and from here, we can select the dropdown to the right of the ✓ Commit button to *Commit & Push* our changes to the Git repository, 
 
 image::devspaces-commit.png[Dev Spaces Commit]
 
-Finally, you'll be prompted to enter your credentials to push your changes to the Git repository. To recall, your credentials are:
+You'll then see a prompt about staging and committing your changes. From here, we can select *Yes* to stage and commit our changes.
 
-- Username: `%USERID%`
-- Password: `openshift`
+image::devspaces-commit-2.png[Dev Spaces Commit]
 
 ## Syncing changes to the Vote Application
 
