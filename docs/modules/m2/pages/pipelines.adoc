@@ -12,7 +12,7 @@ Here, we will select the `vote-app-ci-%USERID%` project, where the pipelines hav
 
 image::pipelines-default.png[]
 
-Before we start the pipelines, let's look at one of the pipeline contents. Click on the `vote-app-api-pipeline` pipeline to view the pipeline details. Select *YAML* to view the pipeline definition in link:https://www.redhat.com/en/topics/automation/what-is-yaml[*YAML format*,role='params-link',window='_blank']. You should see the pipeline definition, along with the tasks that are defined in the Pipeline.
+Before we start the pipelines, let's look at one of the pipeline contents. Click on the `vote-app-api-pipeline` pipeline to view the pipeline details. Select *YAML* to view the pipeline definition in link:https://www.redhat.com/en/topics/automation/what-is-yaml[*YAML format*,window='_blank']. You should see the pipeline definition, along with the tasks that are defined in the Pipeline.
 
 image::pipeline-yaml.png[]
 
@@ -392,7 +392,7 @@ spec:
 
 ## Starting the `vote-app-api` pipeline
 
-Let's start these pipelines by using a link:https://tekton.dev/docs/pipelines/pipelineruns/[PipelineRun,role='params-link',window='_blank'], which is a custom resource that allows you to start a pipeline. This PipelineRun will start the `vote-app-api-pipeline` pipeline, which will build the `vote-api` image, and push it to the local registry. From the *Pipelines* view, select the `vote-app-api-pipeline` pipeline.
+Let's start these pipelines by using a link:https://tekton.dev/docs/pipelines/pipelineruns/[PipelineRun,window='_blank'], which is a custom resource that allows you to start a pipeline. This PipelineRun will start the `vote-app-api-pipeline` pipeline, which will build the `vote-api` image, and push it to the local registry. From the *Pipelines* view, select the `vote-app-api-pipeline` pipeline.
 
 image::pipeline-list.png[]
 
@@ -414,11 +414,11 @@ You will be prompted to enter the values for the pipeline parameters, however th
 
 image::pipeline-start-params.png[]
 
-You'll still need to select a workspace, so scroll to the bottom of the form, select *Persistent Volume Claim*, and choose the `workspace-app-api-source` PVC. This link:https://kubernetes.io/docs/concepts/storage/persistent-volumes/[Persistent Volume Claim (PVC),role='params-link',window='_blank'] workspace gives us persistent storage that the Pipeline can access even in a containerized environment. Now, click on the *Start* button.
+You'll still need to select a workspace, so scroll to the bottom of the form, select *Persistent Volume Claim*, and choose the `workspace-app-api-source` PVC. This link:https://kubernetes.io/docs/concepts/storage/persistent-volumes/[Persistent Volume Claim (PVC),window='_blank'] workspace gives us persistent storage that the Pipeline can access even in a containerized environment. Now, click on the *Start* button.
 
 image::pipeline-start.png[]
 
-Now that the `vote-app-api` pipeline has been started, we can view it in action from the *PipelineRuns* view. We'll need to wait for this first PipelineRun to finish before we can start the `vote-app-ui-pipeline` pipeline, which should take about 2-3 minutes.
+Now that the `vote-app-api` pipeline has been started, we can view it in action from the *PipelineRuns* view. We'll need to wait for this first PipelineRun to finish before we can start the `vote-app-ui-pipeline` pipeline, which should take about 1-2 minutes.
 
 image::pipelinerun-list-api.png[]
 
@@ -450,7 +450,7 @@ From the *PipelineRuns* section, we can examine various details about the specif
 
 image::pipelinerun-status.png[]
 
-For example, viewing the logs from the `build-and-push` Task, we can see the output from the _build_ and _push_ actions, which use the link:https://buildah.io/[Buildah,role='params-link',window='_blank'] `bud` command.
+For example, viewing the logs from the `build-and-push` Task, we can see the output from the _build_ and _push_ actions, which use the link:https://buildah.io/[Buildah,window='_blank'] `bud` command.
 
 image::pipelinerun-logs.png[]
 
@@ -466,7 +466,7 @@ image::deployment-details-el.png[]
 
 ## Start `vote-ui` with a Webhook
 
-Tekton supports link:https://tekton.dev/docs/triggers/[Triggers,role='params-link',window='_blank'] to enable automation and webhooks. Now that the `vote-ui` deployment is running, let's add a webhook to the Gitea repository to trigger a new build of the application when changes are made to the repository. From the *Topology* view, click on the `el-eventlistener-ui` deployment. From there, navigate to the *Routes* section and copy the `el-eventlistener-ui` Route URL from the bottom right-hand corner.
+Tekton supports link:https://tekton.dev/docs/triggers/[Triggers,window='_blank'] to enable automation and webhooks. Now that the `vote-ui` deployment is running, let's add a webhook to the Gitea repository to trigger a new build of the application when changes are made to the repository. From the *Topology* view, click on the `el-eventlistener-ui` deployment. From there, navigate to the *Routes* section and copy the `el-eventlistener-ui` Route URL from the bottom right-hand corner.
 
 image::trigger-vote-ui.png[Trigger Vote UI]
 

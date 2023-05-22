@@ -10,19 +10,19 @@ image::developer-flow.png[Developer Flow]
 
 ### Inner Loop: OpenShift Dev Spaces
 
-link:https://developers.redhat.com/products/openshift-dev-spaces/overview[*OpenShift Dev Spaces*,role='params-link',window='_blank'] is a cloud and container-native development environment that provides a fast, secure, and zero-configuration development environment for Kubernetes and OpenShift. It allows developers to bootstrap their development environment and start coding quickly.
+link:https://developers.redhat.com/products/openshift-dev-spaces/overview[*OpenShift Dev Spaces*,window='_blank'] is a cloud and container-native development environment that provides a fast, secure, and zero-configuration development environment for Kubernetes and OpenShift. It allows developers to bootstrap their development environment and start coding quickly.
 
 image::devspaces-interface.png[OpenShift Dev Spaces]
 
 ### Outer Loop: OpenShift Pipelines
 
-link:https://catalog.redhat.com/software/container-stacks/detail/5ec54a4628834587a6b85ca5[*OpenShift Pipelines*,role='params-link',window='_blank'] is a cloud-native, continuous integration and delivery (CI/CD) solution for building pipelines using link:https://tekton.dev[*Tekton*,role='params-link',window='_blank']. Tekton is a flexible, Kubernetes-native, open-source CI/CD framework that enables automating deployments across multiple platforms (Kubernetes, serverless, VMs, etc.) by abstracting away the underlying implementation details.
+link:https://catalog.redhat.com/software/container-stacks/detail/5ec54a4628834587a6b85ca5[*OpenShift Pipelines*,window='_blank'] is a cloud-native, continuous integration and delivery (CI/CD) solution for building pipelines using link:https://tekton.dev[*Tekton*,window='_blank']. Tekton is a flexible, Kubernetes-native, open-source CI/CD framework that enables automating deployments across multiple platforms (Kubernetes, serverless, VMs, etc.) by abstracting away the underlying implementation details.
 
 image::pipeline-details.png[OpenShift Pipelines]
 
 ### Outer Loop: OpenShift GitOps
 
-link:https://docs.openshift.com/container-platform/4.12/cicd/pipelines/understanding-openshift-pipelines.html[*OpenShift GitOps*,role='params-link',window='_blank'] is a GitOps solution for OpenShift that provides a declarative, GitOps-centric approach to managing applications and their delivery based on link:https://argoproj.github.io/cd/[*Argo CD*,role='params-link',window='_blank']. It provides a set of tools that allow developers to manage the application lifecycle, including deploying, updating, and deleting applications using Git as the source of truth.
+link:https://docs.openshift.com/container-platform/4.12/cicd/pipelines/understanding-openshift-pipelines.html[*OpenShift GitOps*,window='_blank'] is a GitOps solution for OpenShift that provides a declarative, GitOps-centric approach to managing applications and their delivery based on link:https://argoproj.github.io/cd/[*Argo CD*,window='_blank']. It provides a set of tools that allow developers to manage the application lifecycle, including deploying, updating, and deleting applications using Git as the source of truth.
 
 // to pull our code from Gitea, build it, and update the Gitea repository with the new image tag. Follow these instructions in order to install OpenShift Pipelines on OpenShift via the OperatorHub:
 
@@ -50,7 +50,7 @@ We'll use *OpenShift Dev Spaces* to bootstrap our development environment quickl
 image::devspaces-operator-details.png[Dev Spaces Details]
 
 ### Operator: OpenShift Web Terminal
-Finally, the *Web Terminal* is a web-based terminal for OpenShift. It allows users to access a terminal in a pod from the OpenShift Web Console, and it'll help us work within our cluster without having to download the link:https://docs.openshift.com/container-platform/4.12/cli_reference/openshift_cli/getting-started-cli.html[*OpenShift CLI (oc)*,role='params-link',window='_blank'].
+Finally, the *Web Terminal* is a web-based terminal for OpenShift. It allows users to access a terminal in a pod from the OpenShift Web Console, and it'll help us work within our cluster without having to download the link:https://docs.openshift.com/container-platform/4.12/cli_reference/openshift_cli/getting-started-cli.html[*OpenShift CLI (oc)*,window='_blank'].
 
 image::webterminal-operator-details.png[Web Terminal Details]
 

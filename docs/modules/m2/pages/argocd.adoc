@@ -93,4 +93,4 @@ image::argocd-sync.png[Argo CD Sync]
 
 ## Next Steps
 
-Now that you have deployed the Vote App to the development environment using Argo CD, we can use OpenShift DevSpaces to develop and test the application locally before moving to the production module and deploying the application in the `vote-app-prod-%USERID%` project. 
+Now that you have deployed the Vote App to the development environment using Argo CD, we can use OpenShift Dev Spaces to develop and test the application locally before moving to the production module and deploying the application in the `vote-app-prod-%USERID%` project. 
