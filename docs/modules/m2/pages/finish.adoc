@@ -9,4 +9,4 @@ Congratulations on completing the first half of the lab! You have successfully d
 
 ## Next Steps
 
-The second half of the lab will focus on GitOps and how to use Argo CD to synchronize environments with high availability. You will also learn how to use Argo CD to manage application drifts.
+The remainer of the lab will focus on GitOps and how to use Argo CD to synchronize environments with high availability. You will also learn how to use Argo CD to manage application drifts. Let's begin!
