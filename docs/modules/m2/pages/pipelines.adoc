@@ -4,7 +4,7 @@ In this section, you will learn how to use a Tekton pipeline resource and trigge
 
 ## Viewing the pipelines
 
-Let's use the OpenShift Console to view the pipelines created for you. Within the *Developer* perspective of the OpenShift Console, click on the *Pipelines* link in the left navigation menu. You can also use link:https://console-openshift-console.apps.%SUBDOMAIN%/dev-pipelines/all-namespaces[*this link*,role='params-link',window='_blank'] to head to the Pipelines page directly.
+Let's use the OpenShift Console to view the pipelines created for you. Within the *Developer* perspective of the OpenShift Console, click on the *Pipelines* link in the left navigation menu. You can also use link:https://console-openshift-console.%SUBDOMAIN%/dev-pipelines/all-namespaces[*this link*,role='params-link',window='_blank'] to head to the Pipelines page directly.
 
 image::switch-perspective.png[]
 
