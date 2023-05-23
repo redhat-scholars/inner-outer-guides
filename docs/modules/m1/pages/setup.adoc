@@ -74,7 +74,7 @@ image::webterminal-operator-details.png[Web Terminal Details]
 
 ### OpenShift
 
-First, let's ensure we're logged into the *OpenShift* cluster. You can access the OpenShift Console from the *Lab Guides*, or you can visit the OpenShift Console using this link:https://console-openshift-console.apps.%SUBDOMAIN%[*OpenShift Web Console Link*,role='params-link',window='_blank']. 
+First, let's ensure we're logged into the *OpenShift* cluster. You can access the OpenShift Console from the *Lab Guides*, or you can visit the OpenShift Console using this link:https://console-openshift-console.%SUBDOMAIN%[*OpenShift Web Console Link*,role='params-link',window='_blank']. 
 
 image::openshift-login.png[OpenShift Page Login]
 
