@@ -41,7 +41,7 @@ With the Dev Spaces built-in terminal, let's run the following commands to test 
 [.console-input]
 [source,python,subs="+attributes,macros+"]
 ----
-Python
+python
 ----
 
 [.console-input]

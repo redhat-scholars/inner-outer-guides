@@ -418,13 +418,13 @@ You'll still need to select a workspace, so scroll to the bottom of the form, se
 
 image::pipeline-start.png[]
 
-Now that the `vote-app-api` pipeline has been started, we can view it in action from the *PipelineRuns* view. We'll need to wait for this first PipelineRun to finish before we can start the `vote-app-ui-pipeline` pipeline, which should take about 1-2 minutes.
+Now that the `vote-app-api` pipeline has been started, we can view it in action from the *PipelineRuns* view. We'll need to wait for this first PipelineRun to finish before we can start the `vote-ui-app-pipeline` pipeline, which should take about 1-2 minutes.
 
 image::pipelinerun-list-api.png[]
 
 ## Starting the `vote-app-ui` pipeline
 
-With the `vote-app-api-pipeline` PipelineRun completed, we can now start the `vote-app-ui-pipeline` pipeline. Let's repeat the same steps for this other Pipeline, first selecting it from the *Pipelines* view.
+With the `vote-app-api-pipeline` PipelineRun completed, we can now start the `vote-ui-app-pipeline` pipeline. Let's repeat the same steps for this other Pipeline, first selecting it from the *Pipelines* view.
 
 image::pipeline-ui-list-dashboard.png[]
 
@@ -440,7 +440,7 @@ Although the default values are already set for you, you'll still need to select
 
 image::pipeline-ui-start-2.png[]
 
-Now that the `vote-app-ui` pipeline has been started, let's go ahead and check the status of this Pipeline. We should be at the *PipelineRuns* view, and after a minute or two, the `vote-app-ui-pipeline` PipelineRun should be completed.
+Now that the `vote-app-ui` pipeline has been started, let's go ahead and check the status of this Pipeline. We should be at the *PipelineRuns* view, and after a minute or two, the `vote-ui-app-pipeline` PipelineRun should be completed.
 
 image::pipelinerun-finish-ui.png[]
 
