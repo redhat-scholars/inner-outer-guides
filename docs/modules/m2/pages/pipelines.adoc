@@ -414,7 +414,7 @@ You will be prompted to enter the values for the pipeline parameters, however th
 
 image::pipeline-start-params.png[]
 
-You'll still need to select a workspace, so scroll to the bottom of the form, select *Persistent Volume Claim*, and choose the `workspace-app-api-source` PVC. This link:https://kubernetes.io/docs/concepts/storage/persistent-volumes/[Persistent Volume Claim (PVC),window='_blank'] workspace gives us persistent storage that the Pipeline can access even in a containerized environment. Now, click on the *Start* button.
+You'll still need to select a workspace, so scroll to the bottom of the form, select *Persistent Volume Claim*, and choose the `workspace-api-app-source` PVC. This link:https://kubernetes.io/docs/concepts/storage/persistent-volumes/[Persistent Volume Claim (PVC),window='_blank'] workspace gives us persistent storage that the Pipeline can access even in a containerized environment. Now, click on the *Start* button.
 
 image::pipeline-start.png[]
 
