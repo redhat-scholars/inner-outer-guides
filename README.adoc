@@ -1,6 +1,6 @@
 # OpenShift Inner & Outer Loop Development Guides
 
-This repository contains the source for the OpenShift Inner & Outer Loop Development Guides. The guides are built using [Antora](https://antora.org/). 
+This repository contains the source for the OpenShift Inner & Outer Loop Development Guides.
 
 ## Local development
 
@@ -17,16 +17,16 @@ gulp
 
 [source,bash]
 ----
-podman build -t localhost/vote-app-guides .
-podman run --rm --name guides -d -p 4000:8080 localhost/vote-app-guides
+podman build -t localhost/inner-outer-tutorial .
+podman run --rm --name guides -d -p 4000:8080 localhost/inner-outer-tutorial
 ----
 
 ## Deploy to OpenShift
 
 [source,bash]
 ----
-oc new-app https://github.com/blues-man/vote-app-guides.git --strategy=docker
- oc create route edge vote-app-guides --service=vote-app-guides
+oc new-app https://github.com/redhat-scholars/inner-outer-tutorial.git --strategy=docker
+ oc create route edge inner-outer-tutorial --service=inner-outer-tutorial
 # To rebuild after changes pushed to git
-oc start-build vote-app-guides --follow
+oc start-build inner-outer-tutorial --follow
 ----
