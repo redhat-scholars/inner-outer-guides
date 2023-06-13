@@ -1,4 +1,4 @@
-# Vote App Lab Overview - Setup
+# Workshop Overview - Setup
 
 In this section, we'll look at the setup of the OpenShift cluster we're using for today's lab. This includes the OpenShift Operators that have been installed and the projects that have been created for you. We'll also look at the tools we'll be using throughout the lab, including OpenShift Dev Spaces, OpenShift Pipelines, and OpenShift GitOps.
 

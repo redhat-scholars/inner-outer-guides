@@ -1,4 +1,4 @@
-# Vote App Lab Production - Pushing to Production
+# Workshop Production - Pushing to Production
 
 Now, it's time to push our application to production. We'll use one last Pipeline, `promote-to-prod`, to tag our image, push it to the `vote-app-prod-%USERID%` environment, then update the repository with this new image digest. Then, we'll use Argo CD to create a new production application with self-healing enabled. Finally, we'll use Git to modify the application, scaling up the deployment replicas and viewing this high availability in real-time from the OpenShift Web Console.
 

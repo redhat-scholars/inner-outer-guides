@@ -1,4 +1,4 @@
-# Vote App Lab Development - Pipelines
+# Workshop Development - Pipelines
 
 In this section, you will learn how to use a Tekton pipeline resource and trigger the Pipeline to run. The Pipeline will first clone the git repository source code of the `vote-api` and `vote-ui` repositories. The Pipeline will then build the application and push the image to the internal image registry. We'll also later add a webhook to the `vote-ui` to trigger when a commit is made to the Git repository. Finally, the Pipeline will update the deployment in the `vote-app-gitops` repository with the new image.
 

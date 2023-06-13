@@ -2,8 +2,8 @@ runtime:
   cache_dir: ./.cache/antora
 
 site:
-  title: Vote App Lab Guides
-  start_page: vote-app-guides:m1:intro.adoc
+  title: Inner & Outer Development Guides
+  start_page: inner-outer-guides:m1:intro.adoc
 
 content:
   sources:

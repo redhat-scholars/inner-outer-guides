@@ -1,5 +1,5 @@
-name: vote-app-guides
-title: Vote App Lab Guides
+name: inner-outer-guides
+title: Inner & Outer Development Guides
 version: main
 nav:
   - modules/m1/nav.adoc

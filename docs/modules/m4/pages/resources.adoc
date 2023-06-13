@@ -1,4 +1,4 @@
-# Vote App Lab Conclusion - Resources
+# Workshop Conclusion - Resources
 
 Thank you once again for participating in the Red Hat Summit 2023: *Vote application: A complete end-to-end story from code to production* lab! As you continue to explore and apply the concepts and tools learned in this lab, we would like to provide you with some valuable resources that will support your ongoing GitOps journey and help you gain a deeper understanding of OpenShift, Tekton, Argo CD, and OpenShift Dev Spaces.
 

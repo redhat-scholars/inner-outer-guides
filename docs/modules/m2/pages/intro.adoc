@@ -1,4 +1,4 @@
-# Vote App Lab Development - Introduction
+# Workshop Development - Introduction
 
 In this module, we'll perform a few steps during our development phase of the Vote App deployment.
 

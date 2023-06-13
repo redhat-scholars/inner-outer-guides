@@ -1,4 +1,6 @@
-# Vote App Lab Guides
+# OpenShift Inner & Outer Loop Development Guides
+
+This repository contains the source for the OpenShift Inner & Outer Loop Development Guides. The guides are built using [Antora](https://antora.org/). 
 
 ## Local development
 

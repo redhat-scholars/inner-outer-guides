@@ -1,6 +1,6 @@
-# Vote App Lab Overview - Introduction
+# Workshop Overview - Introduction
 
-Welcome to the Red Hat Summit 2023 and the *Vote application: A complete end-to-end story from code to production* lab! We're glad to have you here with us!
+Welcome to the *OpenShift Inner and Outer Loop Development* workshop! We're glad to have you here with us!
 
 ## About this lab
 
