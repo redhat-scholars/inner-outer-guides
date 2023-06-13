@@ -47,7 +47,7 @@ python
 [.console-input]
 [source,python,subs="+attributes,macros+"]
 ----
-print("Hello from Summit 2023!")
+print("Hello from Dev Spaces")
 ----
 
 [.console-input]
@@ -94,12 +94,12 @@ We can now begin to make changes to the Vote Application from the Dev Spaces int
 
 image::devspaces-edit.png[Dev Spaces Edit]
 
-Here, on line 16, we can change the text from `{{option_a}} vs {{option_b}}!` to `{{option_a}} vs {{option_b}}! - Red Hat Summit 2023`. This will change the title of the Vote Application to *Vote App - Red Hat Summit 2023*. Feel free to copy the below code and insert it on line 16.
+Here, on line 16, we can change the text from `{{option_a}} vs {{option_b}}!` to `{{option_a}} vs {{option_b}}! - OpenShift Dev Spaces`. This will change the title of the Vote Application to *Vote App - OpenShift Dev Spaces*. Feel free to copy the below code and insert it on line 16.
 
 [.console-input]
 [source,python,subs="+attributes,macros+"]
 ----
-<h1>{{option_a}} vs {{option_b}}! - Red Hat Summit 2023</h1>
+<h1>{{option_a}} vs {{option_b}}! - OpenShift Dev Spaces</h1>
 ----
 
 image::devspaces-edit-title.png[Dev Spaces Edit Title]

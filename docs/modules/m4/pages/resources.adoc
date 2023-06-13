@@ -1,6 +1,6 @@
 # Workshop Conclusion - Resources
 
-Thank you once again for participating in the Red Hat Summit 2023: *Vote application: A complete end-to-end story from code to production* lab! As you continue to explore and apply the concepts and tools learned in this lab, we would like to provide you with some valuable resources that will support your ongoing GitOps journey and help you gain a deeper understanding of OpenShift, Tekton, Argo CD, and OpenShift Dev Spaces.
+Thank you once again for participating in the *OpenShift Inner and Outer Loop Development* workshop! As you continue to explore and apply the concepts and tools learned in this lab, we would like to provide you with some valuable resources that will support your ongoing GitOps journey and help you gain a deeper understanding of OpenShift, Tekton, Argo CD, and OpenShift Dev Spaces.
 
 ## Red Hat Developer Resources
 
@@ -30,4 +30,4 @@ image::gitops-cookbook.png[GitOps Cookbook]
 
 ## Wrapping Up
 
-We hope that these resources will be helpful in your journey to mastering the concepts and tools covered in the Vote App Lab. Good luck, and happy learning!
+We hope that these resources will be helpful in your journey to mastering the concepts and tools covered in the workshop. Good luck, and happy learning!

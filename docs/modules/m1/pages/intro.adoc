@@ -12,7 +12,7 @@ image::demo-architecture.png[Architecture]
 
 ## Introduction
 
-The Vote App is a simple application that allows users to vote for their favorite option, currently a cat or dog, and view the results. In this lab, you will work with two main components: the `vote-api` (Go) and the `vote-ui` (Python).
+This workshop's demo application is a simple app that allows users to vote for their favorite option, currently a cat or dog, and view the results. In this lab, you will work with two main components: the `vote-api` (Go) and the `vote-ui` (Python).
 
 .Vote App
 image::vote-app.png[Vote App]
