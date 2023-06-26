@@ -36,7 +36,7 @@ jobs:
         id: build-image
         uses: redhat-actions/buildah-build@v2
         with:
-          image: vote-app-guides
+          image: inner-outer-guides
           tags: latest ${{ github.ref_name }}
           dockerfiles: |
             ./Dockerfile
