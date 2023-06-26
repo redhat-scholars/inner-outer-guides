@@ -17,16 +17,16 @@ gulp
 
 [source,bash]
 ----
-podman build -t localhost/inner-outer-tutorial .
-podman run --rm --name guides -d -p 4000:8080 localhost/inner-outer-tutorial
+podman build -t localhost/inner-outer-guides .
+podman run --rm --name guides -d -p 4000:8080 localhost/inner-outer-guides
 ----
 
 ## Deploy to OpenShift
 
 [source,bash]
 ----
-oc new-app https://github.com/redhat-scholars/inner-outer-tutorial.git --strategy=docker
- oc create route edge inner-outer-tutorial --service=inner-outer-tutorial
+oc new-app https://github.com/redhat-scholars/inner-outer-guides.git --strategy=docker
+ oc create route edge inner-outer-guides --service=inner-outer-guides
 # To rebuild after changes pushed to git
-oc start-build inner-outer-tutorial --follow
+oc start-build inner-outer-guides --follow
 ----
