@@ -1,4 +1,4 @@
-# VWorkshop Overview - Inner & Outer Loop
+# Workshop Overview - Inner & Outer Loop
 
 To understand the flow of the lab, let's learn a bit about the inner and outer loop of development. This is a critical part of a developer's workflow when using the various technologies in this workshop. The development cycle is typically organized in two loops, one closer to the developer's inner loop; where you code, test, and debug iteratively, and one further away, the outer loop; where your code runs inside a container image you have to build, push and deploy.
 
