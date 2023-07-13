@@ -27,9 +27,11 @@ This lab aims to demonstrate how to create a seamless CI/CD pipeline using OpenS
 - Implement GitOps principles for managing your application environments.
 - Monitor and manage drifts in your applications and environments.
 
-== What is OpenShift?
+== What is OpenShift
 
 link:https://www.redhat.com/en/technologies/cloud-computing/openshift[Red Hat OpenShift,window='_blank'], the industry's leading hybrid cloud application platform powered by Kubernetes, brings together tested and trusted services to reduce the friction of developing, modernizing, deploying, running, and managing applications. OpenShift delivers a consistent experience across public cloud, on-premise, hybrid cloud, or edge architecture.
+
+image:openshift-dashboard.png[]
 
 == What is GitOps
 
