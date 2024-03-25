@@ -14,7 +14,6 @@ image::demo-architecture.png[Architecture]
 
 This workshop's demo application is a simple app that allows users to vote for their favorite option, currently a cat or dog, and view the results. In this lab, you will work with two main components: the `vote-api` (Go) and the `vote-ui` (Python).
 
-.Vote App
 image::vote-app.png[Vote App]
 
 This lab aims to demonstrate how to create a seamless CI/CD pipeline using OpenShift, Tekton, Argo CD, and OpenShift Dev Spaces. By the end of this lab, you will have a better understanding of GitOps and have learned how to:
